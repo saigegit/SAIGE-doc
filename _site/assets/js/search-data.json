@@ -1,0 +1,194 @@
+{"0": {
+    "doc": "Frequently asked questions",
+    "title": "Frequently asked questions",
+    "content": " ",
+    "url": "http://localhost:4000/docs/FAQ.html",
+    "relUrl": "/docs/FAQ.html"
+  },"1": {
+    "doc": "Installation",
+    "title": "Install SAIGE/SAIGE-GENE",
+    "content": "List of dependencies: . | R-3.6.1, gcc &gt;= 5.4.0, cmake 3.14.1, cget | R packages: “R.utils”, “Rcpp”, “RcppParallel”, “RcppArmadillo”, “data.table”, “RcppEigen”, “Matrix”, “methods”, “BH”, “optparse”, “SPAtest”, “SKAT”,”MetaSKAT” | /extdata/install_packages.R can be used to install the R packages | SAIGE v0.39.2 depends on the SPAtest v3.1.2 | MetaSKAT is currently not available on CRAN. Please install it from github using R devtools::install_github(\"leeshawn/MetaSKAT\") . | . Install SAIGE from conda . Warning: please do not use this bioconda version for bgen input. We are working on the issue. To install saige from conda simply create environment with latest version of R and saige: . conda create -n saige -c conda-forge -c bioconda \"r-base&gt;=4.0\" r-saige conda activate saige . More info on r-saige conda package and available versions can be found in the issue #272. Install SAIGE using the conda environment . | Create a conda environment using (conda environment file) Here is a link to download the conda environment file . After downloading environment-RSAIGE.yml, run following command . conda env create -f environment-RSAIGE.yml . | Activate the conda environment RSAIGE . conda activate RSAIGE FLAGPATH=`which python | sed 's|/bin/python$||'` export LDFLAGS=\"-L${FLAGPATH}/lib\" export CPPFLAGS=\"-I${FLAGPATH}/include\" . Please make sure to set up the LDFLAGS and CPPFLAGS using export (the last two command lines), so libraries can be linked correctly when the SAIGE source code is compiled. Note: Here are the steps to create the conda environment file . | Open R, run following script to install the MetaSKAT R library. devtools::install_github(\"leeshawn/MetaSKAT\") . | Install SAIGE from the source code. Method 1: . src_branch=master repo_src_url=https://github.com/weizhouUMICH/SAIGE git clone --depth 1 -b $src_branch $repo_src_url R CMD INSTALL --library=path_to_final_SAIGE_library SAIGE . When call SAIGE in R, set lib.loc=path_to_final_SAIGE_library . library(SAIGE, lib.loc=path_to_final_SAIGE_library) . Method 2: . Open R. Run . devtools::install_github(\"weizhouUMICH/SAIGE\") . | . ",
+    "url": "http://localhost:4000/docs/Installation.html#install-saigesaige-gene",
+    "relUrl": "/docs/Installation.html#install-saigesaige-gene"
+  },"2": {
+    "doc": "Installation",
+    "title": "Installation",
+    "content": "How to install and run SAIGE and SAIGE-GENE . ",
+    "url": "http://localhost:4000/docs/Installation.html",
+    "relUrl": "/docs/Installation.html"
+  },"3": {
+    "doc": "Bioconda",
+    "title": "Bioconda",
+    "content": " ",
+    "url": "http://localhost:4000/docs/Installation_bioconda.html",
+    "relUrl": "/docs/Installation_bioconda.html"
+  },"4": {
+    "doc": "Conda",
+    "title": "Conda",
+    "content": " ",
+    "url": "http://localhost:4000/docs/Installation_conda.html",
+    "relUrl": "/docs/Installation_conda.html"
+  },"5": {
+    "doc": "Docker",
+    "title": "Docker",
+    "content": " ",
+    "url": "http://localhost:4000/docs/Installation_docker.html",
+    "relUrl": "/docs/Installation_docker.html"
+  },"6": {
+    "doc": "About",
+    "title": "About",
+    "content": "This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at jekyllrb.com . You can find the source code for Minima at GitHub: jekyll / minima . You can find the source code for Jekyll at GitHub: jekyll / jekyll . ",
+    "url": "http://localhost:4000/about/",
+    "relUrl": "/about/"
+  },"7": {
+    "doc": "Home",
+    "title": "Citation",
+    "content": "SAIGE: . | Wei Zhou, Jonas B. Nielsen, Lars G. Fritsche, Maiken B. Elvestad, Brooke Wolford, Maoxuan Lin, Kristian Hveem, Hyun Min Kang, Goncalo R. Abecasis, Cristen J. Willer, Seunggeun Lee “Efficiently controlling for case-control imbalance and sample relatedness in large-scale genetic association studies.” Nature Genetics 50, 1335–1341 (2018) | . SAIGE-GENE: . - . SAIGE-GENE+: . - . ",
+    "url": "http://localhost:4000/#citation",
+    "relUrl": "/#citation"
+  },"8": {
+    "doc": "Home",
+    "title": "License",
+    "content": "SAIGE is distributed under an MIT license. ",
+    "url": "http://localhost:4000/#license",
+    "relUrl": "/#license"
+  },"9": {
+    "doc": "Home",
+    "title": "Contact",
+    "content": "If you have any questions about SAIGE please contact . ",
+    "url": "http://localhost:4000/#contact",
+    "relUrl": "/#contact"
+  },"10": {
+    "doc": "Home",
+    "title": "Home",
+    "content": "SAIGE is an R package developed with Rcpp for genome-wide association tests in large-scale data sets and biobanks. The method . | accounts for sample relatedness based on the generalized mixed models | allows for model fitting with either full or sparse genetic relationship matrix (GRM) | works for quantitative and binary traits | handles case-control imbalance of binary traits | computationally efficient for large data sets | performs single-variant association tests | provides effect size estimation more accurate than estimation with score tests | . SAIGE-GENE and SAIGE-GENE+ are new method extension in the R package for testing rare variant in set-based tests. | performs BURDEN, SKAT, and SKAT-O tests | allows for tests on multiple minor allele frequencies cutoffs and functional annotations | performs conditional analysis to identify associations independent from nearly GWAS signals | . The package take genotype file input in the following formats . | PLINK (bed, bim, fam), BGEN, VCF, BCF, SAV | . ",
+    "url": "http://localhost:4000/",
+    "relUrl": "/"
+  },"11": {
+    "doc": "Set-based test",
+    "title": "Set-based test",
+    "content": " ",
+    "url": "http://localhost:4000/docs/set.html",
+    "relUrl": "/docs/set.html"
+  },"12": {
+    "doc": "Step 1",
+    "title": "Step 1: fitting the null logistic/linear mixed model",
+    "content": "Step 1 for set-based tests are the same as for single-variant tests, except that . | Multiple variance ratios need to be estimated based on different minor allele count categories with –isCateVarianceRatio=TRUE . | By default, two variance ratios are estiamted for 10 &lt;= MAC &lt; 20 and MAC &gt;= 20. Use –cateVarRatioMinMACVecExclude and –cateVarRatioMaxMACVecInclude to modify the MAC categories | Note that the PLINK file need to contain at least 1000 variants whose MAC fall in these categories | . | . 2.1. When a full GRM is used to fit the null model (–useSparseGRMtoFitNULL=FALSE), variance ratios are estiamted based on both a full GRM (to be constrcuted using genotypes in the PLINK file) and a sparse GRM with –useSparseGRMforVarRatio=TRUE . | Use –sparseGRMFile for the file containing the sparse GRM | Use –sparseGRMSampleIDFile for the file containing the IDs for samples in the sparse GRM | . 2.2. When a sparse GRM is used to fit the null model (–useSparseGRMtoFitNULL=TRUE), variance ratios are estiamted based on a sparse GRM and NULL (leave –useSparseGRMforVarRatio=FALSE) . #Estimate categorical variance ratios (*--isCateVarianceRatio=TRUE*) #Use a full GRM to fit the null model(by default, *--useSparseGRMtoFitNULL=FALSE*) #Use an additional sparse GRM to estimate the variance ratio (*--useSparseGRMforVarRatio=TRUE*) Rscript step1_fitNULLGLMM.R \\ --plinkFile=./input/nfam_100_nindep_0_step1_includeMoreRareVariants_poly_22chr \\ --sparseGRMFile=output/sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx \\ --sparseGRMSampleIDFile=output/sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx.sampleIDs.txt \\ --useSparseGRMtoFitNULL=FALSE \\ --phenoFile=./input/pheno_1000samples.txt_withdosages_withBothTraitTypes.txt \\ --phenoCol=y_binary \\ --covarColList=x1,x2,a9,a10 \\ --qCovarColList=a9,a10 \\ --sampleIDColinphenoFile=IID \\ --traitType=binary \\ --outputPrefix=./output/example_binary \\ --nThreads=4 \\ --noEstFixedEff=TRUE \\ --isCateVarianceRatio=TRUE \\ --useSparseGRMforVarRatio=TRUE \\ --IsOverwriteVarianceRatioFile=TRUE . #Fit the null model using a sparse GRM (*--useSparseGRMtoFitNULL=TRUE*) #Do not estiamte variance ratios (*--skipVarianceRatioEstimation=TRUE*), so in Step 2, the sparse GRM will be used directly in the tests Rscript step1_fitNULLGLMM.R \\ --sparseGRMFile=output/sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx \\ --sparseGRMSampleIDFile=output/sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx.sampleIDs.txt \\ --useSparseGRMtoFitNULL=TRUE \\ --phenoFile=./input/pheno_1000samples.txt_withdosages_withBothTraitTypes.txt \\ --phenoCol=y_binary \\ --covarColList=x1,x2,a9,a10 \\ --qCovarColList=a9,a10 \\ --sampleIDColinphenoFile=IID \\ --traitType=binary \\ --outputPrefix=./output/example_binary \\ --nThreads=2 \\ --noEstFixedEff=TRUE \\ --skipVarianceRatioEstimation=TRUE . ",
+    "url": "http://localhost:4000/docs/set_step1.html#step-1-fitting-the-null-logisticlinear-mixed-model",
+    "relUrl": "/docs/set_step1.html#step-1-fitting-the-null-logisticlinear-mixed-model"
+  },"13": {
+    "doc": "Step 1",
+    "title": "Input files",
+    "content": ". | (same as step 1 for single-variant assoc tests and step 0) Genotype file for constructing the genetic relationship matrix in the plink format . | a file storing the sparse GRM (optional, output by step 0) . sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx . The sparse GRM file can be opened using the readMM function in the R library Matrix . | a file storing IDs of the samples in the sparse GRM (optional, output by step 0) . sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx.sampleIDs.txt . | . ",
+    "url": "http://localhost:4000/docs/set_step1.html#input-files",
+    "relUrl": "/docs/set_step1.html#input-files"
+  },"14": {
+    "doc": "Step 1",
+    "title": "Output files",
+    "content": ". | same as the step 1 output by SAIGE for single-variant association tests | . | model file | association result file for the subset of randomly selected markers | variance ratio file | . | specific to SAIGE-GENE | . | sparse Sigma file . sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseSigma.mtx . NOTE: the file contains the sparse Sigma matrix, which is ** NOT ** the sparse GRM. The sparse Sigma matrix is computed based on the sparse GRM and the results of step 1. | . ",
+    "url": "http://localhost:4000/docs/set_step1.html#output-files",
+    "relUrl": "/docs/set_step1.html#output-files"
+  },"15": {
+    "doc": "Step 1",
+    "title": "Step 1",
+    "content": " ",
+    "url": "http://localhost:4000/docs/set_step1.html",
+    "relUrl": "/docs/set_step1.html"
+  },"16": {
+    "doc": "Step 2",
+    "title": "Step 2: performing the region- or gene-based association tests",
+    "content": ". | The command line is the same as the step 2 for single-variant assoc tests, except that a group file is specified (–groupFile) | Each line is for one gene/set of variants. The first element is for gene/set name. | The rest of the line is for variant ids included in this gene/set. For vcf/sav, the genetic marker ids are in the format chr:pos_ref/alt. For bgen, the genetic marker ids should match the ids in the bgen file. Each element in the line is separated by tab. The marker ids in the group file for vcf/sav need to be sorted by chr and pos. | IsSingleVarinGroupTest=TRUE is to perform single-variant association tests as well for markers included in the gene-based tests | –IsOutputBETASEinBurdenTest is to output effect sizes for burden tests (this option is still under development) | Same as the single-variant association tests, conditional analysis based summary stats can be performed (–condition) can be performed in step 2 with dosage/genotype input file formats VCF, BGEN and SAV. | Use –function_group_test to list different annotations | Use –maxMAFforGroupTest for different max MAF cutoffs | By default, SKAT-O, SKAT, and BURDEN tests are performed . Rscript step2_SPAtests.R \\ --bgenFile=./input/genotype_100markers.bgen \\ --bgenFileIndex=./input/genotype_100markers.bgen.bgi \\ --SAIGEOutputFile=./genotype_100markers_bgen_groupTest_out.txt \\ --chrom=1 \\ --LOCO=TRUE \\ --AlleleOrder=ref-first \\ --minMAF=0 \\ --minMAC=0.5 \\ --sampleFile=./input/samplelist.txt \\ --GMMATmodelFile=./output/example_binary_fullGRM.rda \\ --varianceRatioFile=./output/example_binary_fullGRM_sparseGRM_categorical_varRatio.varianceRatio.txt \\ --numLinesOutput=10 \\ --groupFile=./input/group_new_snpid.txt \\ --sparseSigmaFile=./output/example_binary_fullGRM_sparseGRM_categorical_varRatio.varianceRatio.txt_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseSigma.mtx \\ --function_group_test=\"lof,missense;lof,missense;lof;synonymous\" \\ --maxMAFforGroupTest=0.0001,0.001,0.01 . | Specify –r.corr=1 to only perform BURDEN test . Rscript step2_SPAtests.R \\ --bgenFile=./input/genotype_100markers.bgen \\ --bgenFileIndex=./input/genotype_100markers.bgen.bgi \\ --SAIGEOutputFile=./output/genotype_100markers_bgen_groupTest_onlyBURDEN.out.txt \\ --chrom=1 \\ --LOCO=TRUE \\ --AlleleOrder=ref-first \\ --minMAF=0 \\ --minMAC=0.5 \\ --sampleFile=./input/samplelist.txt \\ --GMMATmodelFile=./output/example_binary_fullGRM.rda \\ --varianceRatioFile=./output/example_binary_fullGRM_sparseGRM_categorical_varRatio.varianceRatio.txt \\ --numLinesOutput=10 \\ --groupFile=./input/group_new_snpid.txt \\ --sparseSigmaFile=./output/example_binary_fullGRM_sparseGRM_categorical_varRatio.varianceRatio.txt_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseSigma.mtx \\ --function_group_test=\"lof,missense;lof,missense;lof;synonymous\" \\ --maxMAFforGroupTest=0.0001,0.001,0.01 \\ --r.corr=1 . | Use –condition= to perform conditioning analysis . Rscript step2_SPAtests.R \\ --bgenFile=./input/genotype_100markers.bgen \\ --bgenFileIndex=./input/genotype_100markers.bgen.bgi \\ --SAIGEOutputFile=./genotype_100markers_bgen_groupTest_conditional.out.txt \\ --chrom=1 \\ --LOCO=TRUE \\ --AlleleOrder=ref-first \\ --minMAF=0 \\ --minMAC=0.5 \\ --sampleFile=./input/samplelist.txt \\ --GMMATmodelFile=./output/example_binary_fullGRM.rda \\ --varianceRatioFile=./output/example_binary_fullGRM_sparseGRM_categorical_varRatio.varianceRatio.txt \\ --numLinesOutput=10 \\ --groupFile=./input/group_new_snpid.txt \\ --sparseSigmaFile=./output/example_binary_fullGRM_sparseGRM_categorical_varRatio.varianceRatio.txt_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseSigma.mtx \\ --function_group_test=\"lof,missense;lof,missense;lof;synonymous\" \\ --maxMAFforGroupTest=0.0001,0.001,0.01 \\ --condition=rs30,rs79 . | PLINK file as input . Rscript step2_SPAtests.R \\ --bedFile=./input/genotype_100markers.bed \\ --bimFile=./input/genotype_100markers.bim \\ --famFile=./input/genotype_100markers.fam \\ --SAIGEOutputFile=./output/genotype_100markers_plink_groupTest_out.txt \\ --chrom=1 \\ --LOCO=TRUE \\ --AlleleOrder=alt-first \\ --minMAF=0 \\ --minMAC=0.5 \\ --sampleFile=./input/samplelist.txt \\ --GMMATmodelFile=./output/example_binary_fullGRM.rda \\ --varianceRatioFile=./output/example_binary_fullGRM_sparseGRM_categorical_varRatio.varianceRatio.txt \\ --numLinesOutput=10 \\ --groupFile=./input/group_new_snpid.txt \\ --sparseSigmaFile=./output/example_binary_fullGRM_sparseGRM_categorical_varRatio.varianceRatio.txt_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseSigma.mtx \\ --function_group_test=\"lof,missense;lof,missense;lof;synonymous\" \\ --maxMAFforGroupTest=0.0001,0.001,0.01 . | VCF file as input . Rscript step2_SPAtests.R \\ --vcfFile=./input/genotype_100markers.vcf.gz \\ --vcfFileIndex=./input/genotype_100markers.vcf.gz.csi \\ --vcfField=GT \\ --SAIGEOutputFile=./output/genotype_100markers_vcf_groupTest_out.txt \\ --chrom=1 \\ --LOCO=TRUE \\ --AlleleOrder=alt-first \\ --minMAF=0 \\ --minMAC=0.5 \\ --sampleFile=./input/samplelist.txt \\ --GMMATmodelFile=./output/example_binary_fullGRM.rda \\ --varianceRatioFile=./output/example_binary_fullGRM_sparseGRM_categorical_varRatio.varianceRatio.txt \\ --numLinesOutput=10 \\ --groupFile=./input/group_new_chrposa1a2.txt \\ --sparseSigmaFile=./output/example_binary_fullGRM_sparseGRM_categorical_varRatio.varianceRatio.txt_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseSigma.mtx \\ --function_group_test=\"lof,missense;lof,missense;lof;synonymous\" \\ --maxMAFforGroupTest=0.0001,0.001,0.01 . | . ",
+    "url": "http://localhost:4000/docs/set_step2.html#step-2-performing-the-region--or-gene-based-association-tests",
+    "relUrl": "/docs/set_step2.html#step-2-performing-the-region--or-gene-based-association-tests"
+  },"17": {
+    "doc": "Step 2",
+    "title": "Step 2",
+    "content": " ",
+    "url": "http://localhost:4000/docs/set_step2.html",
+    "relUrl": "/docs/set_step2.html"
+  },"18": {
+    "doc": "Single-variant test",
+    "title": "Step 1: fitting the null logistic/linear mixed model",
+    "content": " ",
+    "url": "http://localhost:4000/docs/single.html#step-1-fitting-the-null-logisticlinear-mixed-model",
+    "relUrl": "/docs/single.html#step-1-fitting-the-null-logisticlinear-mixed-model"
+  },"19": {
+    "doc": "Single-variant test",
+    "title": "Single-variant test",
+    "content": "For single-variant association tests, sparse GRM and categorical variance ratios are NOT needed. Randomly selected markers with MAC &gt;= 20 are used to estimate the variance ratio . ",
+    "url": "http://localhost:4000/docs/single.html",
+    "relUrl": "/docs/single.html"
+  },"20": {
+    "doc": "Step 1",
+    "title": "Step 1: fitting the null logistic/linear mixed model",
+    "content": ". | For binary traits, a null logistic mixed model will be fitted (–traitType=binary). | For quantitative traits, a null linear mixed model will be fitted (–traitType=quantitative) and needs to be inverse normalized (–invNormalize=TRUE) | . #check the help info for step 1 Rscript step1_fitNULLGLMM.R --help . ",
+    "url": "http://localhost:4000/docs/single_step1.html#step-1-fitting-the-null-logisticlinear-mixed-model",
+    "relUrl": "/docs/single_step1.html#step-1-fitting-the-null-logisticlinear-mixed-model"
+  },"21": {
+    "doc": "Step 1",
+    "title": "Fit the null model using a full GRM",
+    "content": "For binary traits, a null logistic mixed model will be fitted (–traitType=binary). | Use –qCovarColList to list categorical covariates. Dummy variables will be created for difference levels. | Use –nThreads for number of CPUs to use | Use –noEstFixedEff=TRUE to set all fixed effects as offset. The step 1 will be faster. | . Rscript step1_fitNULLGLMM.R \\ --plinkFile=./input/nfam_100_nindep_0_step1_includeMoreRareVariants_poly_22chr \\ --phenoFile=./input/pheno_1000samples.txt_withdosages_withBothTraitTypes.txt \\ --phenoCol=y_binary \\ --covarColList=x1,x2,a9,a10 \\ --qCovarColList=a9,a10 \\ --sampleIDColinphenoFile=IID \\ --traitType=binary \\ --outputPrefix=./output/example_binary \\ --nThreads=2 \\ --noEstFixedEff=TRUE . For quantitative traits, a null linear mixed model will be fitted (–traitType=quantitative) and needs to be inverse normalized (–invNormalize=TRUE) . Rscript step1_fitNULLGLMM.R \\ --plinkFile=./input/nfam_100_nindep_0_step1_includeMoreRareVariants_poly_22chr \\ --useSparseGRMtoFitNULL=FALSE \\ --phenoFile=./input/pheno_1000samples.txt_withdosages_withBothTraitTypes.txt \\ --phenoCol=y_quantitative \\ --covarColList=x1,x2,a9,a10 \\ --qCovarColList=a9,a10 \\ --sampleIDColinphenoFile=IID \\ --invNormalize=TRUE \\ --traitType=quantitative \\ --outputPrefix=./output/example_quantitative \\ --nThreads=2 \\ --noEstFixedEff=TRUE \\ . ",
+    "url": "http://localhost:4000/docs/single_step1.html#fit-the-null-model-using-a-full-grm",
+    "relUrl": "/docs/single_step1.html#fit-the-null-model-using-a-full-grm"
+  },"22": {
+    "doc": "Step 1",
+    "title": "Fit the null model using a sparse GRM",
+    "content": ". | Use –useSparseGRMtoFitNULL=TRUE | Use –sparseGRMFile for the file containing the sparse GRM | Use –sparseGRMSampleIDFile for the file containing the IDs for samples in the sparse GRM Note: When a sparse GRM is used for fitting the null model, the markers in the plink file will be used for estimating the variance ratio and not for constructing a full GRM. | . Rscript step1_fitNULLGLMM.R \\ --plinkFile=./input/nfam_100_nindep_0_step1_includeMoreRareVariants_poly_22chr \\ --sparseGRMFile=output/sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx \\ --sparseGRMSampleIDFile=output/sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx.sampleIDs.txt \\ --useSparseGRMtoFitNULL=TRUE \\ --phenoFile=./input/pheno_1000samples.txt_withdosages_withBothTraitTypes.txt \\ --phenoCol=y_binary \\ --covarColList=x1,x2,a9,a10 \\ --qCovarColList=a9,a10 \\ --sampleIDColinphenoFile=IID \\ --traitType=binary \\ --outputPrefix=./output/example_binary \\ --nThreads=2 \\ --noEstFixedEff=TRUE . ",
+    "url": "http://localhost:4000/docs/single_step1.html#fit-the-null-model-using-a-sparse-grm",
+    "relUrl": "/docs/single_step1.html#fit-the-null-model-using-a-sparse-grm"
+  },"23": {
+    "doc": "Step 1",
+    "title": "Input files",
+    "content": ". | (Required) Genotype file for constructing the full genetic relationship matrix (GRM) and estimating the variance ratio SAIGE takes the PLINK binary file for the genotypes and assumes the file prefix is the same one for .bed, .bim. and .fam | ./input/nfam_100_nindep_0_step1_includeMoreRareVariants_poly.bed ./input/nfam_100_nindep_0_step1_includeMoreRareVariants_poly.bim ./input/nfam_100_nindep_0_step1_includeMoreRareVariants_poly.fam . | (Required) Phenotype file (contains covariates if any, such as gender and age) The file can be either space or tab-delimited with a header. It is required that the file contains one column for sample IDs and one column for the phenotype. It may contain columns for covariates. | . less -S ./input/pheno_1000samples.txt_withdosages_withBothTraitTypes.txt . | (Optional) sparse GRM file and the sample ID file for the sparse GRM | ./output/sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx ./output/sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx.sampleIDs.txt . ",
+    "url": "http://localhost:4000/docs/single_step1.html#input-files",
+    "relUrl": "/docs/single_step1.html#input-files"
+  },"24": {
+    "doc": "Step 1",
+    "title": "Output files",
+    "content": ". | model file (input for Step 2) ./output/example_quantitative.rda #load the model file in R load(\"./output/example_quantitative.rda\") names(modglmm) modglmm$theta #theta: a vector of length 2. The first element is the dispersion parameter estimate and the second one is the variance component parameter estimate #coefficients: fixed effect parameter estimates #linear.predictors: a vector of length N (N is the sample size) containing linear predictors #fitted.values: a vector of length N (N is the sample size) containing fitted mean values on the original scale #Y: a vector of length N (N is the sample size) containing final working vector #residuals: a vector of length N (N is the sample size) containing residuals on the original scale #sampleID: a vector of length N (N is the sample size) containing sample IDs used to fit the null model . | variance ratio file (input for Step 2) . less -S ./output/example_quantitative.varianceRatio.txt . | association result file for the subset of randomly selected markers . less -S ./output/example_quantitative_30markers.SAIGE.results.txt . | . ",
+    "url": "http://localhost:4000/docs/single_step1.html#output-files",
+    "relUrl": "/docs/single_step1.html#output-files"
+  },"25": {
+    "doc": "Step 1",
+    "title": "Step 1",
+    "content": " ",
+    "url": "http://localhost:4000/docs/single_step1.html",
+    "relUrl": "/docs/single_step1.html"
+  },"26": {
+    "doc": "Step 2",
+    "title": "Step 2: performing single-variant association tests",
+    "content": ". | For binary traits, saddle point approximation is used to account for case-control imbalance. | File formats for dosages/genotypes of genetic variants to be tested can be used: PLINK, VCF, BGEN, SAV | Conditional analysis based summary stats can be performed (–condition) can be performed in Step 2 | To query and test a subset of markers | . | both variant IDs and range of chromosome positions can be specified for BGEN input (–idstoIncludeFile, –rangestoIncludeFile) | . | If LOCO=TRUE, –chrom MUST be specified | For VCF/BCF/SAV input, –vcfField=DS to test dosages and –vcfField=GT to test genotypes | Samples with missing genotypes/dosages can be imputed with the mean dosages (–impute_method=mean) or as minor allele homozygotes (–impute_method=minor). Note that currently dropping samples with missing genotypes/dosages is not supported | –sampleFile is used specify a file with sample IDs for bgen file. Please DO NOT include a header in the file. | . #check the help info for step 2 Rscript step2_SPAtests.R --help . ",
+    "url": "http://localhost:4000/docs/single_step2.html#step-2-performing-single-variant-association-tests",
+    "relUrl": "/docs/single_step2.html#step-2-performing-single-variant-association-tests"
+  },"27": {
+    "doc": "Step 2",
+    "title": "Single-variant association tests",
+    "content": ". | For binary traits, use –is_output_moreDetails=TRUE to output heterozygous and homozygous counts in cases and controls . | Using –bgenFile, –bgenFileIndex, –AlleleOrder, –sampleFile for bgen input . | . Rscript step2_SPAtests.R \\ --bgenFile=./input/genotype_100markers.bgen \\ --bgenFileIndex=./input/genotype_100markers.bgen.bgi \\ --sampleFile=./input/samplelist.txt \\ --AlleleOrder=ref-first \\ --SAIGEOutputFile=./genotype_100markers_single_out.txt \\ --chrom=1 \\ --LOCO=TRUE \\ --minMAF=0 \\ --minMAC=20 \\ --GMMATmodelFile=./output/example_binary.rda \\ --varianceRatioFile=./output/example_binary.varianceRatio.txt \\ --numLinesOutput=10 \\ . | Using –bedFile, –bimFile, –famFile, –AlleleOrder for PLINK input | . Rscript step2_SPAtests.R \\ --bedFile=./input/genotype_100markers.bed \\ --bimFile=./input/genotype_100markers.bim \\ --famFile=./input/genotype_100markers.fam \\ --AlleleOrder=alt-first \\ --SAIGEOutputFile=./output/new_single_plink.txt \\ --chrom=1 \\ --LOCO=TRUE \\ --minMAF=0 \\ --minMAC=20 \\ --GMMATmodelFile=./output/example_binary.rda \\ --varianceRatioFile=./output/example_binary.varianceRatio.txt \\ --is_output_moreDetails=TRUE \\ . | Using –vcfFile， –vcfFileIndex， –vcfField for VCF, BCF, and SAV input | . Rscript step2_SPAtests.R \\ --vcfFile=./input/genotype_100markers.vcf.gz \\ --vcfFileIndex=./input/genotype_100markers.vcf.gz.csi \\ --vcfField=GT \\ --SAIGEOutputFile=./output/new_single_vcf.txt \\ --chrom=1 \\ --LOCO=TRUE \\ --minMAF=0 \\ --minMAC=20 \\ --GMMATmodelFile=./output/example_binary.rda \\ --varianceRatioFile=./output/example_binary.varianceRatio.txt \\ --is_output_moreDetails=TRUE . ",
+    "url": "http://localhost:4000/docs/single_step2.html#single-variant-association-tests",
+    "relUrl": "/docs/single_step2.html#single-variant-association-tests"
+  },"28": {
+    "doc": "Step 2",
+    "title": "Conditional analysis",
+    "content": ". | –condition = Genetic marker ids (chr:pos_ref/alt for VCF,BCF,SAV or marker id for PLINK and BGEN) separated by comma. e.g.chr3:101651171_C/T,chr3:101651186_G/A | . Rscript step2_SPAtests.R \\ --vcfFile=./input/genotype_100markers.vcf.gz \\ --vcfFileIndex=./input/genotype_100markers.vcf.gz.csi \\ --vcfField=GT \\ --SAIGEOutputFile=./output/new_single_vcf.txt \\ --chrom=1 \\ --LOCO=TRUE \\ --minMAF=0 \\ --minMAC=20 \\ --GMMATmodelFile=./output/example_binary.rda \\ --varianceRatioFile=./output/example_binary.varianceRatio.txt \\ --is_output_moreDetails=TRUE \\ --condition=1:13_A/C,1:79_A/C . Rscript step2_SPAtests.R \\ --bgenFile=./input/genotype_100markers.bgen \\ --bgenFileIndex=./input/genotype_100markers.bgen.bgi \\ --SAIGEOutputFile=./genotype_100markers_single_out.txt \\ --chrom=1 \\ --LOCO=TRUE \\ --AlleleOrder=ref-first \\ --minMAF=0 \\ --minMAC=1 \\ --sampleFile=./input/samplelist.txt \\ --GMMATmodelFile=./output/example_binary.rda \\ --varianceRatioFile=./output/example_binary.varianceRatio.txt \\ --numLinesOutput=10 \\ --condition=rs13,rs79 . ",
+    "url": "http://localhost:4000/docs/single_step2.html#conditional-analysis",
+    "relUrl": "/docs/single_step2.html#conditional-analysis"
+  },"29": {
+    "doc": "Step 2",
+    "title": "Input files",
+    "content": ". | Dosage file SAIGE supports different formats for dosages: PLINK, VCF, BCF, BGEN and SAV. | PLINK | ./input/genotype_100markers.bed ./input/genotype_100markers.bim ./input/genotype_100markers.fam . | . | BGEN . genotype_100markers.bgen genotype_100markers.bgen.bgi . | VCF containing genotypes . zcat genotype_10markers.vcf.gz | less -S genotype_10markers.vcf.gz.tbi . | VCF containing dosages . zcat dosage_10markers.vcf.gz | less -S dosage_10markers.vcf.gz.tbi . | SAV . dosage_10markers.sav dosage_10markers.sav.s1r . | . | Sample file &lt;br&gt; This file contains one column for sample IDs corresponding to the sample order in the dosage file. No header is included. The option was originally for BGEN file that does not contain sample information. less -S sampleIDindosage.txt . | Model file from step 1 ./output/example.rda . | Variance ratio file from step 1 ./output/example.varianceRatio.txt . | . ",
+    "url": "http://localhost:4000/docs/single_step2.html#input-files",
+    "relUrl": "/docs/single_step2.html#input-files"
+  },"30": {
+    "doc": "Step 2",
+    "title": "Output file",
+    "content": "A file with association test results . ``` less -S ./output/example.SAIGE.vcf.dosage.txt ``` NOTE: * Association results are with regard to Allele2. * For binary traits, the header of the output file: ``` CHR POS SNPID Allele1 Allele2 AC_Allele2 AF_Allele2 imputationInfo N BETA SE Tstat p.value p.value.NA Is.SPA.converge varT varTstar AF.Cases AF.Controls ``` * For quantitative traits, the header of the output file: ``` CHR POS SNPID Allele1 Allele2 AC_Allele2 AF_Allele2 imputationInfo N BETA SE Tstat p.value varT varTstar``` . CHR: chromosome POS: genome position SNPID: variant ID Allele1: allele 1 Allele2: allele 2 AC_Allele2: allele count of allele 2 AF_Allele2: allele frequency of allele 2 imputationInfo: imputation info. If not in dosage/genotype input file, will output 1 N: sample size BETA: effect size of allele 2 SE: standard error of BETA Tstat: score statistic of allele 2 p.value: p value (with SPA applied for binary traits) p.value.NA: p value when SPA is not applied (only for binary traits) Is.SPA.converge: whether SPA is converged or not (only for binary traits) varT: estimated variance of score statistic with sample relatedness incorporated varTstar: variance of score statistic without sample relatedness incorporated AF.Cases: allele frequency of allele 2 in cases (only for binary traits and if --IsOutputAFinCaseCtrl=TRUE) AF.Controls: allele frequency of allele 2 in controls (only for binary traits and if --IsOutputAFinCaseCtrl=TRUE) Tstat_cond, p.value_cond, varT_cond, BETA_cond, SE_cond: summary stats for conditional analysis . An example with a signal . | p.value in Step 2 for the marker is ~4.16 x 10^-7 | . Rscript step1_fitNULLGLMM.R \\ --plinkFile=./input/nfam_100_nindep_0_step1_includeMoreRareVariants_poly \\ --phenoFile=./input/Prev_0.1_nfam_1000.pheno_positive_pheno.txt \\ --phenoCol=y \\ --covarColList=x1,x2 \\ --sampleIDColinphenoFile=IID \\ --traitType=binary \\ --outputPrefix=./output/example_binary_positive_signal \\ --nThreads=4 \\ --LOCO=FALSE \\ --minMAFforGRM=0.01 Rscript step2_SPAtests.R \\ --vcfFile=./input/nfam_1000_MAF0.2_nMarker1_nseed200.vcf.gz \\ --vcfFileIndex=./input/nfam_1000_MAF0.2_nMarker1_nseed200.vcf.gz.tbi \\ --vcfField=GT \\ --chrom=1 \\ --minMAF=0.0001 \\ --minMAC=1 \\ --GMMATmodelFile=./output/example_binary_positive_signal.rda \\ --varianceRatioFile=./output/example_binary_positive_signal.varianceRatio.txt \\ --SAIGEOutputFile=./output/example_binary_positive_signal.assoc.step2.txt \\ --numLinesOutput=2 \\ --IsOutputAFinCaseCtrl=TRUE \\ . ",
+    "url": "http://localhost:4000/docs/single_step2.html#output-file",
+    "relUrl": "/docs/single_step2.html#output-file"
+  },"31": {
+    "doc": "Step 2",
+    "title": "Step 2",
+    "content": " ",
+    "url": "http://localhost:4000/docs/single_step2.html",
+    "relUrl": "/docs/single_step2.html"
+  }
+}
