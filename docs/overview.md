@@ -7,4 +7,4 @@ has_children: true
 has_toc: false
 ---
 
-![Alt Text](/assets/img/saige-siage-gene-outline.png)
+<img src="{{site.baseurl | prepend: site.url}}assets/img/saige-siage-gene-outline.png">
