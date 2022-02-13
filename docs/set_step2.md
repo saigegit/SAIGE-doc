@@ -9,25 +9,46 @@ parent: Set-based test
 
 ## Step 2: performing the region- or gene-based association tests
 
-* The command line is the same as the step 2 for single-variant assoc tests, except that a group file is specified (--groupFile)
-* Each line is for one gene/set of variants. The first element is for gene/set name. 
-* The rest of the line is for variant ids included in this gene/set. For vcf/sav, the genetic marker ids are in the format chr:pos_ref/alt. For bgen, the genetic marker ids should match the ids in the bgen file. Each element in the line is separated by tab.
-**The marker ids in the group file for vcf/sav need to be sorted by chr and pos.**
-* IsSingleVarinGroupTest=TRUE is to perform single-variant association tests as well for markers included in the gene-based tests
-* --IsOutputBETASEinBurdenTest is to output effect sizes for burden tests (this option is still under development)
-* Same as the single-variant association tests, conditional analysis based summary stats can be performed (--condition) can be performed in step 2 with dosage/genotype input file formats VCF, BGEN and SAV.
+* The commands are the same as the step 2 for single-variant assoc tests, except that 
+    * A group file is specified (--groupFile), which contains the genetic marker IDs, annotations and weights (if any) for each set to be tested
+* Allow for multiple maskes for each set (gene or region)
+    * Use --function_group_test to list different annotations, seperated by comma. Within each annotation combination, annotations are seperated by ;
+        * e.g. "lof,missense;lof,missense;lof;synonymous" is to test lof only, missense+lof, and missense+lof+synonymous
+        * Use double quotation marks (“”) around the argument
+    * Use --maxMAFforGroupTest for different max MAF cutoffs seperated by comma 
+        * e.g. 0.0001,0.001,0.01
+    * In the example, there will be 9 masks applied to each set and the 9 p-values will be combined based on the Cauchy combination
+* By default, SKAT-O test will performed (with BURDEN and SKAT test results output too). Use **--r.corr=1** to only perform BUTDEN test 
+* Same as the single-variant association tests, conditional analysis based summary stats can be performed (**--condition**)
 
 
-
-* Use *--function_group_test* to list different annotations
-* Use *--maxMAFforGroupTest* for different max MAF cutoffs
-* By default, SKAT-O, SKAT, and BURDEN tests are performed
+1. In Step 1, if a sparse GRM was used for fitting the null model and no variance ratios were estimated, in Step 2, use the same sparse GRM (--sparseGRMFile, --sparseGRMSampleIDFile) as input
 
     ```
-Rscript step2_SPAtests.R        \
+    Rscript step2_SPAtests.R        \
         --bgenFile=./input/genotype_100markers.bgen    \
         --bgenFileIndex=./input/genotype_100markers.bgen.bgi \
-        --SAIGEOutputFile=./genotype_100markers_bgen_groupTest_out.txt \
+        --SAIGEOutputFile=./output/genotype_100markers_bgen_groupTest_out_sparseGRMforStep1.txt \
+        --chrom=1 \
+        --AlleleOrder=ref-first \
+        --minMAF=0 \
+        --minMAC=0.5 \
+        --sampleFile=./input/samplelist.txt \
+        --GMMATmodelFile=./output/example_binary_sparseGRM.rda \
+        --sparseGRMFile=output/sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx   \
+        --sparseGRMSampleIDFile=output/sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx.sampleIDs.txt     \
+        --groupFile=./input/group_new_chrposa1a2.txt    \
+        --function_group_test="lof,missense;lof,missense;lof;synonymous"        \
+        --maxMAFforGroupTest=0.0001,0.001,0.01
+    ```
+
+2. In Step 1, if a full GRM was used for fitting the null model and variance ratios were estimated with full and sparse GRMs, in Step 2, the sparse GRM (--sparseGRMFile, --sparseGRMSampleIDFile) and variance ratios (--varianceRatioFile) are used as input
+
+    ```
+    Rscript step2_SPAtests.R        \
+        --bgenFile=./input/genotype_100markers.bgen    \
+        --bgenFileIndex=./input/genotype_100markers.bgen.bgi \
+        --SAIGEOutputFile=./output/genotype_100markers_bgen_groupTest_out.txt \
         --chrom=1 \
         --LOCO=TRUE    \
         --AlleleOrder=ref-first \
@@ -35,22 +56,22 @@ Rscript step2_SPAtests.R        \
         --minMAC=0.5 \
         --sampleFile=./input/samplelist.txt \
         --GMMATmodelFile=./output/example_binary_fullGRM.rda \
-        --varianceRatioFile=./output/example_binary_fullGRM_sparseGRM_categorical_varRatio.varianceRatio.txt   \
-        --numLinesOutput=10     \
-        --groupFile=./input/group_new_snpid.txt \
-        --sparseSigmaFile=./output/example_binary_fullGRM_sparseGRM_categorical_varRatio.varianceRatio.txt_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseSigma.mtx       \
+        --varianceRatioFile=./output/example_binary_cate.varianceRatio.txt	\
+	--sparseGRMFile=output/sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx   \
+        --sparseGRMSampleIDFile=output/sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx.sampleIDs.txt     \	
+        --groupFile=./input/group_new_chrposa1a2.txt	\
         --function_group_test="lof,missense;lof,missense;lof;synonymous"        \
         --maxMAFforGroupTest=0.0001,0.001,0.01
     ```
 
 
-* Specify *--r.corr=1* to only perform BURDEN test
+3. Only perform BURDEN test with --r.corr=1
 
     ```
-Rscript step2_SPAtests.R        \
+    Rscript step2_SPAtests.R        \
         --bgenFile=./input/genotype_100markers.bgen    \
         --bgenFileIndex=./input/genotype_100markers.bgen.bgi \
-        --SAIGEOutputFile=./output/genotype_100markers_bgen_groupTest_onlyBURDEN.out.txt \
+        --SAIGEOutputFile=./output/genotype_100markers_bgen_groupTest_out_onlyBURDEN.txt \
         --chrom=1 \
         --LOCO=TRUE    \
         --AlleleOrder=ref-first \
@@ -58,23 +79,23 @@ Rscript step2_SPAtests.R        \
         --minMAC=0.5 \
         --sampleFile=./input/samplelist.txt \
         --GMMATmodelFile=./output/example_binary_fullGRM.rda \
-        --varianceRatioFile=./output/example_binary_fullGRM_sparseGRM_categorical_varRatio.varianceRatio.txt   \
-        --numLinesOutput=10     \
-        --groupFile=./input/group_new_snpid.txt \
-        --sparseSigmaFile=./output/example_binary_fullGRM_sparseGRM_categorical_varRatio.varianceRatio.txt_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseSigma.mtx       \
+        --varianceRatioFile=./output/example_binary_cate.varianceRatio.txt      \
+        --sparseGRMFile=output/sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx   \
+        --sparseGRMSampleIDFile=output/sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx.sampleIDs.txt     \
+        --groupFile=./input/group_new_chrposa1a2.txt    \
         --function_group_test="lof,missense;lof,missense;lof;synonymous"        \
-        --maxMAFforGroupTest=0.0001,0.001,0.01  \
-        --r.corr=1
+        --maxMAFforGroupTest=0.0001,0.001,0.01	\
+	--r.corr=1
     ```
 
-* Use --condition= to perform conditioning analysis
+4. Use --condition= to perform conditioning analysis
 
 
     ```
-Rscript step2_SPAtests.R        \
+    Rscript step2_SPAtests.R        \
         --bgenFile=./input/genotype_100markers.bgen    \
         --bgenFileIndex=./input/genotype_100markers.bgen.bgi \
-        --SAIGEOutputFile=./genotype_100markers_bgen_groupTest_conditional.out.txt \
+        --SAIGEOutputFile=./output/genotype_100markers_bgen_groupTest_out_cond.txt \
         --chrom=1 \
         --LOCO=TRUE    \
         --AlleleOrder=ref-first \
@@ -82,21 +103,22 @@ Rscript step2_SPAtests.R        \
         --minMAC=0.5 \
         --sampleFile=./input/samplelist.txt \
         --GMMATmodelFile=./output/example_binary_fullGRM.rda \
-        --varianceRatioFile=./output/example_binary_fullGRM_sparseGRM_categorical_varRatio.varianceRatio.txt   \
-        --numLinesOutput=10     \
-        --groupFile=./input/group_new_snpid.txt \
-        --sparseSigmaFile=./output/example_binary_fullGRM_sparseGRM_categorical_varRatio.varianceRatio.txt_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseSigma.mtx       \
+        --varianceRatioFile=./output/example_binary_cate.varianceRatio.txt      \
+        --sparseGRMFile=output/sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx   \
+        --sparseGRMSampleIDFile=output/sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx.sampleIDs.txt     \
+        --groupFile=./input/group_new_chrposa1a2.txt    \
         --function_group_test="lof,missense;lof,missense;lof;synonymous"        \
-        --maxMAFforGroupTest=0.0001,0.001,0.01  \
-        --condition=rs30,rs79
+        --maxMAFforGroupTest=0.0001,0.001,0.01	\
+	--condition=1:30_A/C,1:79_A/C
     ```
 
 
-* PLINK file as input
+5. Use PLINK file as input for genotypes/dosages (--bedFile=, --bimFile=, --famFile=, --AlleleOrder=)
+    * --AlleleOrder can be alt-first or ref-first. It has to be correctly specified, otherwise, the variants in the PLINK file will not be matched with the markers in the groupFile
 
 
     ```
-Rscript step2_SPAtests.R        \
+    Rscript step2_SPAtests.R        \
         --bedFile=./input/genotype_100markers.bed       \
         --bimFile=./input/genotype_100markers.bim       \
         --famFile=./input/genotype_100markers.fam       \
@@ -108,34 +130,103 @@ Rscript step2_SPAtests.R        \
         --minMAC=0.5 \
         --sampleFile=./input/samplelist.txt \
         --GMMATmodelFile=./output/example_binary_fullGRM.rda \
-        --varianceRatioFile=./output/example_binary_fullGRM_sparseGRM_categorical_varRatio.varianceRatio.txt   \
-        --numLinesOutput=10     \
-        --groupFile=./input/group_new_snpid.txt \
-        --sparseSigmaFile=./output/example_binary_fullGRM_sparseGRM_categorical_varRatio.varianceRatio.txt_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseSigma.mtx       \
+        --varianceRatioFile=./output/example_binary_cate.varianceRatio.txt      \
+        --sparseGRMFile=output/sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx   \
+        --sparseGRMSampleIDFile=output/sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx.sampleIDs.txt     \
+        --groupFile=./input/group_new_chrposa1a2.txt    \
         --function_group_test="lof,missense;lof,missense;lof;synonymous"        \
         --maxMAFforGroupTest=0.0001,0.001,0.01
     ```
 
-* VCF file as input
-
+6.  VCF file as input
+    * --vcfFileIndex takes .csi index file as input, which can be generated using **tabix --csi -p vcf ./input/genotype_100markers.vcf.gz**
+    * --vcfField is GT or DS
+    * --chrom has to be specified for VCF files. --chrom must be the same as the CHROM string in the VCF file
 
     ```
-Rscript step2_SPAtests.R        \
+    Rscript step2_SPAtests.R        \
         --vcfFile=./input/genotype_100markers.vcf.gz    \
         --vcfFileIndex=./input/genotype_100markers.vcf.gz.csi     \
         --vcfField=GT   \
         --SAIGEOutputFile=./output/genotype_100markers_vcf_groupTest_out.txt \
-        --chrom=1 \
-        --LOCO=TRUE    \
-        --AlleleOrder=alt-first \
+        --LOCO=FALSE    \
+        --chrom=1	\
         --minMAF=0 \
         --minMAC=0.5 \
         --sampleFile=./input/samplelist.txt \
         --GMMATmodelFile=./output/example_binary_fullGRM.rda \
-        --varianceRatioFile=./output/example_binary_fullGRM_sparseGRM_categorical_varRatio.varianceRatio.txt   \
-        --numLinesOutput=10     \
-        --groupFile=./input/group_new_chrposa1a2.txt \
-        --sparseSigmaFile=./output/example_binary_fullGRM_sparseGRM_categorical_varRatio.varianceRatio.txt_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseSigma.mtx       \
+        --varianceRatioFile=./output/example_binary_cate.varianceRatio.txt      \
+        --sparseGRMFile=output/sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx   \
+        --sparseGRMSampleIDFile=output/sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx.sampleIDs.txt     \
+        --groupFile=./input/group_new_chrposa1a2.txt    \
         --function_group_test="lof,missense;lof,missense;lof;synonymous"        \
         --maxMAFforGroupTest=0.0001,0.001,0.01
+    ```
+
+## Input files
+
+    * Please Refer to the SAIGE (Single-variant test) Step 2 input files for details. In addition, there are additonal input files required for the set-based tests
+  
+1.  **(Required. Specific for set-based tests)** Group file containing marker IDs, annotations, and/or weights for each set (gene or region). 
+        * The first column contains the set name.
+        * Group file has 2 or 3 lines for each set. 
+        * marker IDs and annotations are required and weights are optional. 
+        * The second column has var (indicating the line is for marker IDs), anno (indicating the line is for annotations), and weight (indicating the line is for weights of markers used in the set-based tests)    
+        * If weights are not included in the group file, the weights will be calcuated as **beta(MAF, 1, 25)** by default
+
+    * group file without weights
+
+    ```
+    less -S ./input/group_new_chrposa1a2.txt
+    ``` 
+    
+    <img src="/assets/img/group_file_woweights.png" width="500">
+
+    * group file with weights 
+
+    ```
+    less -S ./input/group_new_chrposa1a2_withWeights.txt
+    ```
+    <img src="/assets/img/group_file_withweights.png" width="500">
+
+
+## Output files
+
+* A file with region- or gene-based association test results
+
+    ```
+    head -n 1  ./output/genotype_100markers_bgen_groupTest_out_cond.txt
+    ```
+    <img src="/assets/img/SAIGE-GENE-step2-output-header.png" width="700">
+
+
+```
+Region: set name
+Group: annotation mask
+max_MAF: maximum MAF cutoff
+Pvalue: p value for SKAT-O test
+Pvalue_Burden: p value for BURDEN test
+Pvalue_SKAT: p value for SKAT test
+BETA_Burden: effect size of BURDEN test
+SE_Burden: standard error of BETA_Burden
+
+#if --condition= is used for conditioning analysis, the conditional analysis results will be output
+Pvalue_cond, Pvalue_Burden_cond, Pvalue_SKAT_cond, BETA_Burden_cond, SE_Burden_cond
+
+MAC: minor allele count in the set
+MAC_case: minor allele count in cases
+MAC_control: minor allele count in controls
+Number_rare: number of markers that are not ultra-rare with MAC > MACCutoff_to_CollapseUltraRare (=10 by default)
+Number_ultra_rare: number of markers that are ultra-rare with MAC <= MACCutoff_to_CollapseUltraRare (=10 by default)
+
+```
+
+* A file with association test results for single markers in the set-based tests
+    ** Please Refer to the SAIGE (Single-variant test) Step 2 output files for details.
+    ** For binary traits, effect sizes of single variants can be estimated more accurately through Firth's Bias-Reduced Logistic Regression by setting
+        * --is_Firth_beta=TRUE and --pCutoffforFirth=0.01
+        * NOTE: This option is under evaluation and only in the single-variant assoc tests.  
+
+    ```
+    less -S ./output/genotype_100markers_bgen_groupTest_out_cond.txt.markerInfo
     ```
