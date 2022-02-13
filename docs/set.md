@@ -14,4 +14,4 @@ SAIGE-GENE (now called SAIGE-GENE+) takes two steps to perform set-based associa
 - Multiple max MAF cutoffs, e.g. 0.0001, 0.001, and 0.01
 - For each gene, multiple p-values corresponding to different annotations and max MAF cutoffs are combined based on Cauchy ditribution
 
-<img src=https://saigegit.github.io/SAIGE/assets/img/SAIGE-GENE-pie.png width="300">
+<img src="https://github.com/saigegit/SAIGE/blob/saige-pages/img/SAIGE-GENE-pie.png" width="300">
