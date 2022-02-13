@@ -91,7 +91,7 @@ Rscript step1_fitNULLGLMM.R --help
 1. **(Required)** Phenotype file (contains covariates if any, such as gender and age)
 The file can be either space or tab-delimited with a header. It is required that the file contains one column for sample IDs and one column for the phenotype. It may contain columns for covariates. <br/>
 
-<img src="/assets/img/pheno_head.png" width="300">
+<img src="{{site.baseurl | prepend: site.url}}/assets/img/pheno_head.png" width="300">
 
     ```
     less -S ./input/pheno_1000samples.txt_withdosages_withBothTraitTypes.txt
@@ -133,7 +133,7 @@ SAIGE takes the PLINK binary file for the genotypes and assumes the file prefix 
     modglmm$theta
 
     ```
-<img src="/assets/img/SAIGE-step1-output.png" width="500">
+<img src="{{site.baseurl | prepend: site.url}}/assets/img/SAIGE-step1-output.png" width="500">
 
 2. variance ratio file (**if variance ratio is estiamted in Step 1, this will be input for Step 2**)
 

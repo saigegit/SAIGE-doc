@@ -180,14 +180,14 @@ parent: Set-based test
     less -S ./input/group_new_chrposa1a2.txt
     ``` 
     
-    <img src="/assets/img/group_file_woweights.png" width="500">
+    <img src="{{site.baseurl | prepend: site.url}}/assets/img/group_file_woweights.png" width="500">
 
     * group file with weights 
 
     ```
     less -S ./input/group_new_chrposa1a2_withWeights.txt
     ```
-    <img src="/assets/img/group_file_withweights.png" width="500">
+    <img src="{{site.baseurl | prepend: site.url}}/assets/img/group_file_withweights.png" width="500">
 
 
 ## Output files
@@ -197,7 +197,7 @@ parent: Set-based test
     ```
     head -n 1  ./output/genotype_100markers_bgen_groupTest_out_cond.txt
     ```
-    <img src="/assets/img/SAIGE-GENE-step2-output-header.png" width="700">
+    <img src="{{site.baseurl | prepend: site.url}}/assets/img/SAIGE-GENE-step2-output-header.png" width="700">
 
 
 ```

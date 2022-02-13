@@ -11,4 +11,4 @@ SAIGE takes two steps to perform single-variant association tests
 - We recommend conducting single-variant association tests for variants with MAC>= 20
 - For rare variant association, please use SAIGE-GENE+ to conduct set-based association tests 
 
-<img src="/assets/img/SAIGE-pie.png" width="300">
+<img src="{{site.baseurl | prepend: site.url}}/assets/img/SAIGE-pie.png" width="300">
