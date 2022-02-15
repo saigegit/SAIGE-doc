@@ -63,11 +63,9 @@ Please make sure to set up the LDFLAGS and CPPFLAGS using export (the last two c
 
 3. Install SAIGE from the source code.
 
-     Method 1:
-
      ```
-       src_branch=new_dev2
-       repo_src_url=https://github.com/weizhouUMICH/SAIGE
+       src_branch=main
+       repo_src_url=https://github.com/saigegit/SAIGE
        git clone --depth 1 -b $src_branch $repo_src_url
        Rscript ./SAIGE/extdata/install_packages.R
        R CMD INSTALL --library=path_to_final_SAIGE_library SAIGE
