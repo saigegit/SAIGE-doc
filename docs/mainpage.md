@@ -36,7 +36,7 @@ The package takes genotype file input in the following formats
 - Zhou W*, Zhao Z*, Nielsen JB, Fritsche LG, LeFaive J, Gagliano Taliun SA, Bi W, Gabrielsen ME, Daly MJ, Neale BM, Hveem K, Abecasis GR, Willer CJ, Lee S. Scalable generalized linear mixed model for region-based association tests in large biobanks and cohorts. Nat Genet. 2020 Jun;52(6):634-639. doi: 10.1038/s41588-020-0621-6. Epub 2020 May 18. PMID: 32424355; PMCID: PMC7871731.
 
 ### SAIGE-GENE+:
-- Wei Zhou*, Wenjian Bi*, Zhangchen Zhao*, Kushal K. Dey, Karthik A. Jagadeesh, Konrad J. Karczewski, Mark J. Daly, Benjamin M. Neale, Seunggeun Lee. Set-based rare variant association tests for biobank scale sequencing data sets. medRxiv 2021.07.12.21260400; doi: https://doi.org/10.1101/2021.07.12.21260400 
+- Wei Zhou\*, Wenjian Bi\*, Zhangchen Zhao\*, Kushal K. Dey, Karthik A. Jagadeesh, Konrad J. Karczewski, Mark J. Daly, Benjamin M. Neale, Seunggeun Lee. Set-based rare variant association tests for biobank scale sequencing data sets. medRxiv 2021.07.12.21260400; doi: https://doi.org/10.1101/2021.07.12.21260400 
 
 ## License
 SAIGE is distributed under an MIT license.
