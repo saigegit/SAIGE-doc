@@ -46,7 +46,7 @@ parent: Single-variant test
 * Do not estimate the variance ratio in Step 1.
 * Only one CPU is used when a sparse GRM is used for fitting the null model and LOCO won't be applied
 * Use PLINK input for the genotypes/dosages in Step 2
-* The effect sizes of markers with p-value <= pCutoffforFirth will be estimated through the Firth's Bias-Reduced Logistic Regression --is_Firth_beta=TRUE and --pCutoffforFirth=0.01 
+* The effect sizes of markers with p-value <= pCutoffforFirth will be estimated through the Firth's Bias-Reduced Logistic Regression --is_Firth_beta=TRUE and --pCutoffforFirth=0.01 (NOTE this option is under evaluation) 
 
 ```
     Rscript step1_fitNULLGLMM.R     \
