@@ -10,7 +10,7 @@ has_toc: false
 How to install and run SAIGE and SAIGE-GENE
 
 
-## Install SAIGE/SAIGE-GENE (current version 0.93)
+## Install SAIGE/SAIGE-GENE (current version 0.94 (updated on Feb 18 2022))
 
 ### List of dependencies:
 
@@ -86,7 +86,7 @@ Thanks to Juha Karjalainen for sharing the Dockerfile.
 * The docker image can be pulled
 
     ```
-    docker pull wzhou88/saige:0.93
+    docker pull wzhou88/saige:0.94
     ```
 
 Functions can be called
