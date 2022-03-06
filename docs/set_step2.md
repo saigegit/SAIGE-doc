@@ -17,7 +17,7 @@ parent: Set-based test
     * Use --maxMAF_in_groupTest for different max MAF cutoffs seperated by comma 
         * e.g. 0.0001,0.001,0.01
     * In the example, there will be 9 masks applied to each set and the 9 p-values will be combined based on the Cauchy combination
-* By default, SKAT-O test will performed (with BURDEN and SKAT test results output too). Use **--r.corr=1** to only perform BUTDEN test
+* By default, SKAT-O test will performed (with BURDEN and SKAT test results output too). Use **--r.corr=1** to only perform BURDEN test
 	* If SKAT-O tests are performed (--r.corr=0), the single-variant assoc tests results are also output
 	* If only BURDEN tests are performed (--r.corr=1), the single-variant assoc tests are not performed by default. Use --is_single_in_groupTest=TRUE to output the single-variant assoc tests results.
 * Use --is_output_markerList_in_groupTest=TRUE to output marker list included in each test.
@@ -111,7 +111,7 @@ parent: Set-based test
         --sparseGRMFile=output/sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx   \
         --sparseGRMSampleIDFile=output/sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx.sampleIDs.txt     \
         --groupFile=./input/group_new_chrposa1a2.txt    \
-        --annotation_in_groupTest="lof,missense;lof,missense;lof;synonymous"        \
+        --annotation_in_groupTest=lof,missense:lof,missense:lof:synonymous        \
         --maxMAF_in_groupTest=0.0001,0.001,0.01	\
 	--condition=1:30_A/C,1:79_A/C
     ```
@@ -138,7 +138,7 @@ parent: Set-based test
         --sparseGRMFile=output/sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx   \
         --sparseGRMSampleIDFile=output/sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx.sampleIDs.txt     \
         --groupFile=./input/group_new_chrposa1a2.txt    \
-        --annotation_in_groupTest="lof,missense;lof,missense;lof;synonymous"        \
+        --annotation_in_groupTest=lof,missense:lof,missense:lof:synonymous        \
         --maxMAF_in_groupTest=0.0001,0.001,0.01
     ```
 
