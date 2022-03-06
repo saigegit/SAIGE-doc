@@ -12,7 +12,7 @@ parent: Set-based test
 * a9 and a10 are cateogorical covariats and will be re-write for different levels (--qCovarColList)
 * The same sparse GRM files needs to be used in Step 1 and Step 2 (for variance ratio approach)
 * Use multiple maskes for each set (gene or region)
-    * Three annotation maskes are applied: lof only, missense+lof, and missense+lof+synonymous (--function_group_test)
+    * Three annotation maskes are applied: lof only, missense+lof, and missense+lof+synonymous (--annotation_in_groupTest)
     * Three max MAF cutoffs are applied: 0.0001,0.001,0.01
     * p-values for the 3x3 tests for each set are combined based on Cauchy combination 
  
@@ -43,8 +43,8 @@ parent: Set-based test
         --sparseGRMFile=output/sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx   \
         --sparseGRMSampleIDFile=output/sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx.sampleIDs.txt     \
         --groupFile=./input/group_new_chrposa1a2.txt    \
-        --function_group_test="lof,missense;lof,missense;lof;synonymous"        \
-        --maxMAFforGroupTest=0.0001,0.001,0.01
+        --annotation_in_groupTest=lof,missense:lof,missense:lof:synonymous        \
+        --maxMAF_in_groupTest=0.0001,0.001,0.01
     ```
 
 
@@ -60,7 +60,7 @@ parent: Set-based test
     ** Note that the PLINK file need to contain at least 1000 variants whose MAC fall in these categories
     ** Different from Step 1 in SAIGE for single-variant tests in SAIGE, in which only a single variance ratio is estiamted
 * The same sparse GRM files needs to be used in Step 1 and Step 2 (for variance ratio approach) 
-
+* Output the marker lists for tests --is_output_markerList_in_groupTest=TRUE
 ```
     Rscript step1_fitNULLGLMM.R     \
         --plinkFile=./input/nfam_100_nindep_0_step1_includeMoreRareVariants_poly_22chr  \
@@ -95,7 +95,8 @@ parent: Set-based test
         --sparseGRMFile=output/sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx   \
         --sparseGRMSampleIDFile=output/sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx.sampleIDs.txt     \
         --groupFile=./input/group_new_chrposa1a2.txt    \
-        --function_group_test="lof,missense;lof,missense;lof;synonymous"        \
-        --maxMAFforGroupTest=0.0001,0.001,0.01
+        --annotation_in_groupTest=lof,missense:lof,missense:lof:synonymous        \
+        --maxMAF_in_groupTest=0.0001,0.001,0.01	\
+	--is_output_markerList_in_groupTest=TRUE
 
 ```

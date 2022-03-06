@@ -65,7 +65,8 @@ parent: Set-based test
         --sparseGRMSampleIDFile=output/sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx.sampleIDs.txt     \	
         --groupFile=./input/group_new_chrposa1a2.txt	\
         --annotation_in_groupTest="lof,missense:lof,missense:lof:synonymous"        \
-        --maxMAF_in_groupTest=0.0001,0.001,0.01
+        --maxMAF_in_groupTest=0.0001,0.001,0.01	\
+	--is_output_markerList_in_groupTest=TRUE
     ```
 
 
@@ -163,7 +164,7 @@ parent: Set-based test
         --sparseGRMFile=output/sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx   \
         --sparseGRMSampleIDFile=output/sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx.sampleIDs.txt     \
         --groupFile=./input/group_new_chrposa1a2.txt    \
-        --annotation_in_groupTest="lof,missense;lof,missense;lof;synonymous"        \
+        --annotation_in_groupTest=lof,missense:lof,missense:lof:synonymous        \
         --maxMAF_in_groupTest=0.0001,0.001,0.01
     ```
 
@@ -230,7 +231,15 @@ Number_ultra_rare: number of markers that are ultra-rare with MAC <= MACCutoff_t
     ** For binary traits, effect sizes of single variants can be estimated more accurately through Firth's Bias-Reduced Logistic Regression by setting
         * --is_Firth_beta=TRUE and --pCutoffforFirth=0.01
         * NOTE: This option is under evaluation and only in the single-variant assoc tests.  
+    ** If only Burden tests are performed (--r.corr=1), please use --is_single_in_groupTest=TRUE to output the single-variant assoc tests
 
     ```
-    less -S ./output/genotype_100markers_bgen_groupTest_out_cond.txt.markerInfo
+    less -S ./output/genotype_100markers_bgen_groupTest_out_cond.txt.singleAssoc.txt
     ```
+
+* A file with marker lists for region/set-based tests (--is_output_markerList_in_groupTest=TRUE)
+    ```
+    less -S ./output/genotype_100markers_bgen_groupTest_out.txt.markerList.txt
+    ```
+
+
