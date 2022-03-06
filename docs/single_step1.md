@@ -42,8 +42,7 @@ Rscript step1_fitNULLGLMM.R --help
         --traitType=binary        \
         --outputPrefix=./output/example_binary \
         --nThreads=24	\
-	--IsOverwriteVarianceRatioFile=TRUE	\
-	--isCovariateOffset=FALSE
+	--IsOverwriteVarianceRatioFile=TRUE
 ```
 
 #### For **quantitative traits**, a null linear mixed model will be fitted (*--traitType=quantitative*) and needs to be inverse normalized (*--invNormalize=TRUE*) <br/>
@@ -60,7 +59,8 @@ Rscript step1_fitNULLGLMM.R --help
         --invNormalize=TRUE     \
         --traitType=quantitative        \
         --outputPrefix=./output/example_quantitative \
-        --nThreads=24
+        --nThreads=24	\
+	--IsOverwriteVarianceRatioFile=TRUE
 ```
 
 
@@ -69,7 +69,9 @@ Rscript step1_fitNULLGLMM.R --help
 * Use --sparseGRMFile for the file containing the sparse GRM
 * Use --sparseGRMSampleIDFile for the file containing the IDs for samples in the sparse GRM
 * If no plink file is specified with --plinkFile, variance ratios won't be estimated and please make sure to specify --sparseSigmaFile (output by Step 1) in Step 2 for association tests
-* To estimate variance ratios and use in Step 2, specify the plink file containing markers that will be used for variance ratio estimation with --plinkFile. e.g. --plinkFile=./input/nfam_100_nindep_0_step1_includeMoreRareVariants_poly_22chr. NOTE: This will speed up Step 2 
+* To estimate variance ratios and use in Step 2, specify the plink file containing markers that will be used for variance ratio estimation with --plinkFile. e.g. **--plinkFile=./input/nfam_100_nindep_0_step1_includeMoreRareVariants_poly_22chr** and **--skipVarianceRatioEstimation=FALSE** NOTE: This will speed up Step 2 
+* To only include a subset of samples to fit the null model, use **--SampleIDIncludeFile**
+
 * Only one CPU will be used and LOCO won't be applied
 
 

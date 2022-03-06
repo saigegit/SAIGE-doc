@@ -81,12 +81,13 @@ parent: Single-variant test
 ### Example 3
 * Quantitative trait (--traitType=quantitative) and needs inverse normalization (--invNormalize=TRUE)
 * Fitting the null model using a sparse GRM  (--useSparseGRMtoFitNULL=TRUE, --sparseGRMFile, --sparseGRMSampleIDFile)
-* Do not estimate the variance ratio in Step 1. 
+* Estimate the variance ratio in Step 1 (--plinkFile=./input/nfam_100_nindep_0_step1_includeMoreRareVariants_poly_22chr) 
 * Only one CPU is used when a sparse GRM is used for fitting the null model and LOCO won't be applied
 * --chrom needs to be specified for VCF input
 
 ```
     Rscript step1_fitNULLGLMM.R     \
+        --plinkFile=./input/nfam_100_nindep_0_step1_includeMoreRareVariants_poly_22chr  \
         --sparseGRMFile=output/sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx   \
         --sparseGRMSampleIDFile=output/sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx.sampleIDs.txt     \
         --useSparseGRMtoFitNULL=TRUE    \
@@ -110,8 +111,7 @@ parent: Single-variant test
         --minMAC=20 \
         --GMMATmodelFile=./output/example_quantitative_sparseGRM.rda \
         --is_output_moreDetails=TRUE	\
-	--sparseGRMFile=output/sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx   \
-        --sparseGRMSampleIDFile=output/sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx.sampleIDs.txt	
+        --varianceRatioFile=./output/example_quantitative_sparseGRM.varianceRatio.txt
 
 ```
 

@@ -30,7 +30,7 @@ parent: Set-based test
 2. When a full GRM is used to fit the null model (GRM is constructed on-the-fly using genotypes in the PLINK file, **--plinkfile=**)
    
    * Use a full GRM to fit the null model(by default, *--useSparseGRMtoFitNULL=FALSE*)
-   * Use both a full GRM (to be constrcuted using genotypes in the PLINK file) and a sparse GRM with *--useSparseGRMforVarRatio=TRUE*
+   * Use both a full GRM (to be constrcuted using genotypes in the PLINK file) and a sparse GRM with *--useSparseGRMforVarRatio=TRUE* to estimate the variance ratio(s)
        ** Use *--sparseGRMFile* for the file containing the sparse GRM
        ** Use *--sparseGRMSampleIDFile* for the file containing the IDs for samples in the sparse GRM
    * Multiple variance ratios need to be estimated based on different minor allele count categories with *--isCateVarianceRatio=TRUE*

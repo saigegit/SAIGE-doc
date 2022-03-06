@@ -13,7 +13,7 @@ parent: Single-variant test
 * Conditional analysis based summary stats can be performed (--condition) can be performed in Step 2 
 * To query and test a subset of markers 
 * * both variant IDs (chr:pos_ref/alt) and range of chromosome positions (chr start end) can be specified for BGEN input (--idstoIncludeFile, --rangestoIncludeFile)
-* --numLinesOutput can be used to specify the number of markers to test and output as one chunk. default=1000. 
+* --markers_per_chunk can be used to specify the number of markers to test and output as one chunk. default=10000. Note that a small number may slow down the job. It is required that this number is >= 1000.  
 * If LOCO=TRUE (by default), --chrom MUST be specified, so only genotype/dosage file should only contain one chromosome 
 * For VCF/BCF/SAV input, --vcfField=DS to test dosages and  --vcfField=GT to test genotypes
 * By default, Missing genotypes/dosages will be imputed as the best guessed gentoypes/dosages (as round(2*freq) with --impute_method=best_guess). Note that currently dropping samples with missing genotypes/dosages is not supported
@@ -38,12 +38,12 @@ Rscript step2_SPAtests.R        \
         --sampleFile=./input/samplelist.txt \
         --AlleleOrder=ref-first \
         --SAIGEOutputFile=./output/genotype_100markers_marker_bgen_Firth.txt	\
-	--chrom=1	\
+        --chrom=1	\
         --minMAF=0 \
         --minMAC=20 \
         --GMMATmodelFile=./output/example_binary.rda \
         --varianceRatioFile=./output/example_binary.varianceRatio.txt  \
-                --is_Firth_beta=TRUE    \
+        --is_Firth_beta=TRUE    \
         --pCutoffforFirth=0.1
 	
 ```

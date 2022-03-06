@@ -12,13 +12,17 @@ parent: Set-based test
 * The commands are the same as the step 2 for single-variant assoc tests, except that 
     * A group file is specified (--groupFile), which contains the genetic marker IDs, annotations and weights (if any) for each set to be tested
 * Allow for multiple maskes for each set (gene or region)
-    * Use --function_group_test to list different annotations, seperated by comma. Within each annotation combination, annotations are seperated by ;
-        * e.g. "lof,missense;lof,missense;lof;synonymous" is to test lof only, missense+lof, and missense+lof+synonymous
-        * Use double quotation marks (“”) around the argument
-    * Use --maxMAFforGroupTest for different max MAF cutoffs seperated by comma 
+    * Use --annotation_in_groupTest to list different annotations, seperated by comma. Within each annotation combination, annotations are seperated by ':'
+        * e.g. "lof,missense:lof,missense:lof:synonymous" is to test lof only, missense+lof, and missense+lof+synonymous
+    * Use --maxMAF_in_groupTest for different max MAF cutoffs seperated by comma 
         * e.g. 0.0001,0.001,0.01
     * In the example, there will be 9 masks applied to each set and the 9 p-values will be combined based on the Cauchy combination
-* By default, SKAT-O test will performed (with BURDEN and SKAT test results output too). Use **--r.corr=1** to only perform BUTDEN test 
+* By default, SKAT-O test will performed (with BURDEN and SKAT test results output too). Use **--r.corr=1** to only perform BUTDEN test
+	* If SKAT-O tests are performed (--r.corr=0), the single-variant assoc tests results are also output
+	* If only BURDEN tests are performed (--r.corr=1), the single-variant assoc tests are not performed by default. Use --is_single_in_groupTest=TRUE to output the single-variant assoc tests results.
+* Use --is_output_markerList_in_groupTest=TRUE to output marker list included in each test.
+* By default, the program first check if per-marker-weight is provided in the group file. If not, the program calcuates weights based on MAF from the Beta distribution with paraemters weights.beta. Use --is_no_weight_in_groupTest=TRUE to not use any weights in the tests.
+* The cutoffs for single markers specified using --minMAF, --minMAC, and --minInfo are also applied in the region/set-based tests
 * Same as the single-variant association tests, conditional analysis based summary stats can be performed (**--condition**)
 
 
@@ -38,8 +42,8 @@ parent: Set-based test
         --sparseGRMFile=output/sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx   \
         --sparseGRMSampleIDFile=output/sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx.sampleIDs.txt     \
         --groupFile=./input/group_new_chrposa1a2.txt    \
-        --function_group_test="lof,missense;lof,missense;lof;synonymous"        \
-        --maxMAFforGroupTest=0.0001,0.001,0.01
+        --annotation_in_groupTest=lof,missense:lof,missense:lof:synonymous        \
+        --maxMAF_in_groupTest=0.0001,0.001,0.01
     ```
 
 2. In Step 1, if a full GRM was used for fitting the null model and variance ratios were estimated with full and sparse GRMs, in Step 2, the sparse GRM (--sparseGRMFile, --sparseGRMSampleIDFile) and variance ratios (--varianceRatioFile) are used as input
@@ -60,8 +64,8 @@ parent: Set-based test
 	--sparseGRMFile=output/sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx   \
         --sparseGRMSampleIDFile=output/sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx.sampleIDs.txt     \	
         --groupFile=./input/group_new_chrposa1a2.txt	\
-        --function_group_test="lof,missense;lof,missense;lof;synonymous"        \
-        --maxMAFforGroupTest=0.0001,0.001,0.01
+        --annotation_in_groupTest="lof,missense:lof,missense:lof:synonymous"        \
+        --maxMAF_in_groupTest=0.0001,0.001,0.01
     ```
 
 
@@ -83,8 +87,8 @@ parent: Set-based test
         --sparseGRMFile=output/sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx   \
         --sparseGRMSampleIDFile=output/sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx.sampleIDs.txt     \
         --groupFile=./input/group_new_chrposa1a2.txt    \
-        --function_group_test="lof,missense;lof,missense;lof;synonymous"        \
-        --maxMAFforGroupTest=0.0001,0.001,0.01	\
+        --annotation_in_groupTest="lof,missense;lof,missense;lof;synonymous"        \
+        --maxMAF_in_groupTest=0.0001,0.001,0.01	\
 	--r.corr=1
     ```
 
@@ -107,8 +111,8 @@ parent: Set-based test
         --sparseGRMFile=output/sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx   \
         --sparseGRMSampleIDFile=output/sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx.sampleIDs.txt     \
         --groupFile=./input/group_new_chrposa1a2.txt    \
-        --function_group_test="lof,missense;lof,missense;lof;synonymous"        \
-        --maxMAFforGroupTest=0.0001,0.001,0.01	\
+        --annotation_in_groupTest="lof,missense;lof,missense;lof;synonymous"        \
+        --maxMAF_in_groupTest=0.0001,0.001,0.01	\
 	--condition=1:30_A/C,1:79_A/C
     ```
 
@@ -134,8 +138,8 @@ parent: Set-based test
         --sparseGRMFile=output/sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx   \
         --sparseGRMSampleIDFile=output/sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx.sampleIDs.txt     \
         --groupFile=./input/group_new_chrposa1a2.txt    \
-        --function_group_test="lof,missense;lof,missense;lof;synonymous"        \
-        --maxMAFforGroupTest=0.0001,0.001,0.01
+        --annotation_in_groupTest="lof,missense;lof,missense;lof;synonymous"        \
+        --maxMAF_in_groupTest=0.0001,0.001,0.01
     ```
 
 6.  VCF file as input
@@ -159,8 +163,8 @@ parent: Set-based test
         --sparseGRMFile=output/sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx   \
         --sparseGRMSampleIDFile=output/sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx.sampleIDs.txt     \
         --groupFile=./input/group_new_chrposa1a2.txt    \
-        --function_group_test="lof,missense;lof,missense;lof;synonymous"        \
-        --maxMAFforGroupTest=0.0001,0.001,0.01
+        --annotation_in_groupTest="lof,missense;lof,missense;lof;synonymous"        \
+        --maxMAF_in_groupTest=0.0001,0.001,0.01
     ```
 
 ## Input files
