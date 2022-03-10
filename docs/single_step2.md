@@ -94,8 +94,8 @@ Rscript step2_SPAtests.R        \
         --minMAF=0 \
         --minMAC=20 \
         --GMMATmodelFile=./output/example_binary_sparseGRM.rda \
-        --is_output_moreDetails=TRUE	\
-	--sparseGRMFile=output/sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx   \
+        --is_output_moreDetails=TRUE \
+        --sparseGRMFile=output/sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx   \
         --sparseGRMSampleIDFile=output/sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx.sampleIDs.txt
 ```
 
