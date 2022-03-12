@@ -124,7 +124,7 @@ Rscript step2_SPAtests.R        \
 
 ## Conditional analysis
 
-* --condition = Genetic marker ids (**chr:pos_ref/alt**) separated by comma. e.g.chr3:101651171_C/T,chr3:101651186_G/A
+* --condition = Genetic marker ids (**chr:pos:ref:alt**) separated by comma. e.g.chr3:101651171:C:T,chr3:101651186:G:A
 
 ```
 Rscript step2_SPAtests.R        \
@@ -138,7 +138,7 @@ Rscript step2_SPAtests.R        \
         --GMMATmodelFile=./output/example_binary.rda \
         --varianceRatioFile=./output/example_binary.varianceRatio.txt   \
         --is_output_moreDetails=TRUE    \
-        --condition=1:13_A/C,1:79_A/C
+        --condition=1:13:A:C,1:79:A:C
 ```
 
 
