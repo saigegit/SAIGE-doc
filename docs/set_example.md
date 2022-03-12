@@ -61,7 +61,8 @@ parent: Set-based test
     ** Different from Step 1 in SAIGE for single-variant tests in SAIGE, in which only a single variance ratio is estiamted
 * The same sparse GRM files needs to be used in Step 1 and Step 2 (for variance ratio approach) 
 * Output the marker lists for tests --is_output_markerList_in_groupTest=TRUE
-```
+
+    ```
     Rscript step1_fitNULLGLMM.R     \
         --plinkFile=./input/nfam_100_nindep_0_step1_includeMoreRareVariants_poly_22chr  \
         --sparseGRMFile=output/sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx   \
@@ -99,4 +100,4 @@ parent: Set-based test
         --maxMAF_in_groupTest=0.0001,0.001,0.01	\
 	--is_output_markerList_in_groupTest=TRUE
 
-```
+    ```
