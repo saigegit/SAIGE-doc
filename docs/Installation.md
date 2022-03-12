@@ -10,7 +10,7 @@ has_toc: false
 How to install and run SAIGE and SAIGE-GENE
 
 
-## Install SAIGE/SAIGE-GENE (current version 0.99.2 (updated on March 6 2022))
+## Install SAIGE/SAIGE-GENE (current version 0.99.3 (updated on March 12 2022))
 
 ### List of dependencies:
 
@@ -22,3 +22,6 @@ How to install and run SAIGE and SAIGE-GENE
 * Two libraries for reading VCF files. Will be automatically installed during the SAIGE installation
 -  [cget](https://cget.readthedocs.io/en/latest/src/intro.html#installing-cget), [savvy](https://github.com/statgen/savvy)
 
+### Logs:
+
+v0.99.3 (March 12, 2022): all marker IDs used with --condition and in the group file for set-based tests need to use the format chr:pos:ref:alt
