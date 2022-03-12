@@ -61,7 +61,7 @@ parent: Set-based test
         --sampleFile=./input/samplelist.txt \
         --GMMATmodelFile=./output/example_binary_fullGRM.rda \
         --varianceRatioFile=./output/example_binary_cate.varianceRatio.txt	\
-	--sparseGRMFile=output/sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx   \
+        --sparseGRMFile=output/sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx   \
         --sparseGRMSampleIDFile=output/sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx.sampleIDs.txt     \	
         --groupFile=./input/group_new_chrposa1a2.txt	\
         --annotation_in_groupTest="lof,missense:lof,missense:lof:synonymous"        \
