@@ -46,7 +46,7 @@ parent: Set-based test
         --maxMAF_in_groupTest=0.0001,0.001,0.01
     ```
 
-2. In Step 1, if a full GRM was used for fitting the null model and variance ratios were estimated with full and sparse GRMs, in Step 2, the sparse GRM (--sparseGRMFile, --sparseGRMSampleIDFile) and variance ratios (--varianceRatioFile) are used as input
+2. If a full GRM was used in Step 1 for fitting the null model and variance ratios were estimated with full and sparse GRMs, in Step 2, the sparse GRM (--sparseGRMFile, --sparseGRMSampleIDFile) and variance ratios (--varianceRatioFile) are used as input. Use --is_output_markerList_in_groupTest=TRUE to output the markers used for each test. 
 
     ```
     Rscript step2_SPAtests.R        \
@@ -66,7 +66,7 @@ parent: Set-based test
         --groupFile=./input/group_new_chrposa1a2.txt	\
         --annotation_in_groupTest="lof,missense:lof,missense:lof:synonymous"        \
         --maxMAF_in_groupTest=0.0001,0.001,0.01	\
-	--is_output_markerList_in_groupTest=TRUE
+        --is_output_markerList_in_groupTest=TRUE
     ```
 
 

@@ -118,7 +118,7 @@ Rscript step2_SPAtests.R        \
         --sparseGRMFile=output/sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx   \
         --sparseGRMSampleIDFile=output/sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx.sampleIDs.txt	\
 	--is_Firth_beta=TRUE	\
-	--pCutoffforFirth=0.01
+        --pCutoffforFirth=0.01
 ```
 
 
