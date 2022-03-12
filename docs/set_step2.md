@@ -15,7 +15,11 @@ parent: Set-based test
     * Use --annotation_in_groupTest to list different annotations, seperated by comma. Within each annotation combination, annotations are seperated by ':'
         * e.g. "lof,missense:lof,missense:lof:synonymous" is to test lof only, missense+lof, and missense+lof+synonymous
     * Use --maxMAF_in_groupTest for different max MAF cutoffs seperated by comma 
-        * e.g. 0.0001,0.001,0.01
+        * e.g. 0.0001,0.001,0.01 (default)
+    * Use --maxMAC_in_groupTest for different max MAC cutoffs seperated by comma
+        * e.g. 1,2 for singletons and doubletons
+        * by default, this option is not applied 
+        * the max MAC will be converted to max MAF and merged to --maxMAF_in_groupTest in the analysis
     * In the example, there will be 9 masks applied to each set and the 9 p-values will be combined based on the Cauchy combination
 * By default, SKAT-O test will performed (with BURDEN and SKAT test results output too). Use **--r.corr=1** to only perform BURDEN test
 	* If SKAT-O tests are performed (--r.corr=0), the single-variant assoc tests results are also output
@@ -70,7 +74,7 @@ parent: Set-based test
     ```
 
 
-3. Only perform BURDEN test with --r.corr=1
+3. Only perform BURDEN test with --r.corr=1. Use --minGroupMAC_in_BurdenTest for the minimum MAC of the testing "burden marker" in the Burden test. 
 
     ```
     Rscript step2_SPAtests.R        \
@@ -114,7 +118,7 @@ parent: Set-based test
         --groupFile=./input/group_new_chrposa1a2.txt    \
         --annotation_in_groupTest=lof,missense:lof,missense:lof:synonymous        \
         --maxMAF_in_groupTest=0.0001,0.001,0.01	\
-	--condition=1:30_A/C,1:79_A/C
+        --condition=1:30:A:C,1:79:A:C
     ```
 
 
@@ -185,14 +189,14 @@ parent: Set-based test
     less -S ./input/group_new_chrposa1a2.txt
     ``` 
     
-    <img src="{{site.baseurl | prepend: site.url}}/assets/img/group_file_woweights.png" width="500">
+    <img src="{{site.baseurl | prepend: site.url}}/assets/img/groupfilewithWeights.png" width="500">
 
     * group file with weights 
 
     ```
     less -S ./input/group_new_chrposa1a2_withWeights.txt
     ```
-    <img src="{{site.baseurl | prepend: site.url}}/assets/img/group_file_withweights.png" width="500">
+    <img src="{{site.baseurl | prepend: site.url}}/assets/img/groupfilewithnoWeights.png" width="500">
 
 
 ## Output files
