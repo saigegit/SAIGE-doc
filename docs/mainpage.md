@@ -44,3 +44,4 @@ SAIGE is distributed under an MIT license.
 
 ## Contact
 If you have any questions about SAIGE please contact
+saige.genetics@gmail.com

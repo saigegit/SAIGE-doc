@@ -6,7 +6,7 @@ description: "Just the Docs is a responsive Jekyll theme with built-in search th
 parent: Installation
 ---
 
-### Intall SAIGE using source code
+### Intall SAIGE using source code https://github.com/saigegit/SAIGE
 
 1. Install dependcies 
 
