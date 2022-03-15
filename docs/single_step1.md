@@ -42,7 +42,7 @@ Rscript step1_fitNULLGLMM.R --help
         --traitType=binary        \
         --outputPrefix=./output/example_binary \
         --nThreads=24	\
-	--IsOverwriteVarianceRatioFile=TRUE
+        --IsOverwriteVarianceRatioFile=TRUE
 ```
 
 #### For **quantitative traits**, a null linear mixed model will be fitted (*--traitType=quantitative*) and needs to be inverse normalized (*--invNormalize=TRUE*) <br/>

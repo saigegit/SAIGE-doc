@@ -36,7 +36,7 @@ parent: Set-based test
    * Multiple variance ratios need to be estimated based on different minor allele count categories with *--isCateVarianceRatio=TRUE*
        ** By default, two variance ratios are estiamted for 10 <= MAC < 20 and MAC >= 20.
        ** Use *--cateVarRatioMinMACVecExclude* and *--cateVarRatioMaxMACVecInclude* to modify the MAC categories
-       ** Note that the PLINK file need to contain at least 1000 variants whose MAC fall in these categories
+       ** Note that the PLINK file need to contain at least 200 variants whose MAC fall in these categories
        ** Different from Step 1 in SAIGE for single-variant tests in SAIGE, in which only a single variance ratio is estiamted
 
     ```
