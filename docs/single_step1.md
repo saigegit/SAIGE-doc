@@ -60,7 +60,7 @@ Rscript step1_fitNULLGLMM.R --help
         --traitType=quantitative        \
         --outputPrefix=./output/example_quantitative \
         --nThreads=24	\
-	--IsOverwriteVarianceRatioFile=TRUE
+        --IsOverwriteVarianceRatioFile=TRUE
 ```
 
 

@@ -39,7 +39,7 @@ The package takes genotype file input in the following formats
 - Wei Zhou\*, Wenjian Bi\*, Zhangchen Zhao\*, Kushal K. Dey, Karthik A. Jagadeesh, Konrad J. Karczewski, Mark J. Daly, Benjamin M. Neale, Seunggeun Lee. Set-based rare variant association tests for biobank scale sequencing data sets. medRxiv 2021.07.12.21260400; doi: https://doi.org/10.1101/2021.07.12.21260400 
 
 ## License
-SAIGE is distributed under an MIT license.
+SAIGE is distributed under an GPL license.
 
 
 ## Contact

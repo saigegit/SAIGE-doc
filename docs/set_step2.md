@@ -66,7 +66,7 @@ parent: Set-based test
         --GMMATmodelFile=./output/example_binary_fullGRM.rda \
         --varianceRatioFile=./output/example_binary_cate.varianceRatio.txt	\
         --sparseGRMFile=output/sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx   \
-        --sparseGRMSampleIDFile=output/sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx.sampleIDs.txt     \	
+        --sparseGRMSampleIDFile=output/sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx.sampleIDs.txt  \
         --groupFile=./input/group_new_chrposa1a2.txt	\
         --annotation_in_groupTest="lof,missense:lof,missense:lof:synonymous"        \
         --maxMAF_in_groupTest=0.0001,0.001,0.01	\
@@ -90,7 +90,7 @@ parent: Set-based test
         --GMMATmodelFile=./output/example_binary_fullGRM.rda \
         --varianceRatioFile=./output/example_binary_cate.varianceRatio.txt      \
         --sparseGRMFile=output/sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx   \
-        --sparseGRMSampleIDFile=output/sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx.sampleIDs.txt     \
+        --sparseGRMSampleIDFile=output/sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx.sampleIDs.txt \
         --groupFile=./input/group_new_chrposa1a2.txt    \
         --annotation_in_groupTest="lof,missense;lof,missense;lof;synonymous"        \
         --maxMAF_in_groupTest=0.0001,0.001,0.01	\
