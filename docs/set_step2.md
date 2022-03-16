@@ -234,8 +234,9 @@ Number_ultra_rare: number of markers that are ultra-rare with MAC <= MACCutoff_t
     ** Please Refer to the SAIGE (Single-variant test) Step 2 output files for details.
     ** For binary traits, effect sizes of single variants can be estimated more accurately through Firth's Bias-Reduced Logistic Regression by setting
         * --is_Firth_beta=TRUE and --pCutoffforFirth=0.01
-        * NOTE: This option is under evaluation and only in the single-variant assoc tests.  
+        * NOTE: This option is currently only for the single-variant assoc tests and for Burden test (when the only Burden test is conducted (--r.corr=1)). When the SKAT-O test is conducted (--r.corr=0), the Firth's Bias-Reduced Logistic Regression is not applied.    
     ** If only Burden tests are performed (--r.corr=1), please use --is_single_in_groupTest=TRUE to output the single-variant assoc tests
+    ** If the SKAT-O tests are performed (--r.corr=0), single-variant assoc test results are automatically output.  
 
     ```
     less -S ./output/genotype_100markers_bgen_groupTest_out_cond.txt.singleAssoc.txt
