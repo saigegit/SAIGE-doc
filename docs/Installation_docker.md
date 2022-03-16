@@ -16,7 +16,7 @@ Thanks to Juha Karjalainen for sharing the Dockerfile.
 * The docker image can be pulled
 
     ```
-    docker pull wzhou88/saige:0.99.3
+    docker pull wzhou88/saige:1.0.0
     ```
 
 Functions can be called
