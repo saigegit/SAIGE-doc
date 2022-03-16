@@ -25,3 +25,5 @@ How to install and run SAIGE and SAIGE-GENE
 ### Logs:
 
 v0.99.3 (March 12, 2022): all marker IDs used with --condition and in the group file for set-based tests need to use the format chr:pos:ref:alt
+
+v1.0.0 (March 15, 2022): First stable version
