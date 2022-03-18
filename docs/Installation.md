@@ -24,6 +24,16 @@ How to install and run SAIGE and SAIGE-GENE
 
 ### Logs:
 
-v0.99.3 (March 12, 2022): all marker IDs used with --condition and in the group file for set-based tests need to use the format chr:pos:ref:alt
+## v1.0.1 (March 18, 2022): 
+Bugs fixed:
+--AlleleOrder for bgen input
+Header of the single-variant assoc test output
 
-v1.0.0 (March 15, 2022): First stable version
+Improvements:
+change PI to M_PI in CCT.cpp
+add flag in Makevar for installation on Centos 8
+
+## v1.0.0 (March 15, 2022): First stable version
+
+## v0.99.3 (March 12, 2022): all marker IDs used with --condition and in the group file for set-based tests need to use the format chr:pos:ref:alt
+
