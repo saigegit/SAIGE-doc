@@ -38,7 +38,6 @@ parent: Installation
      * **--library=path_to_final_SAIGE_library** can be used for specifying the directory where SAIGE is installed 
      ```
 	R CMD INSTALL --library=path_to_final_SAIGE_library SAIGE
-
      ```
 
 5. Run SAIGE
