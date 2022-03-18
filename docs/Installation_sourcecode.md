@@ -22,7 +22,6 @@ parent: Installation
 
 3. Install dependencies: R packages
 
-
      ```
 	Rscript ./SAIGE/extdata/install_packages.R
         
@@ -38,7 +37,6 @@ parent: Installation
      * **--library=path_to_final_SAIGE_library** can be used for specifying the directory where SAIGE is installed 
      ```
 	R CMD INSTALL --library=path_to_final_SAIGE_library SAIGE
-
      ```
 
 5. Run SAIGE
@@ -47,9 +45,7 @@ parent: Installation
      ```
         library(SAIGE)
      ```
-
-     to 
-      
+     to      
      ```
         library(SAIGE, lib.loc="path_to_final_SAIGE_library")
      ```
