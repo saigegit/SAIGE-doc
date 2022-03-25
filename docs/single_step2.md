@@ -190,13 +190,21 @@ SAIGE supports different formats for dosages: PLINK, VCF, BCF, [BGEN](http://www
     ```
 
 2. (Optional. Only for BGEN file not containing sample IDs) Sample file <br\>
-This file contains one column for sample IDs corresponding to the sample order in the dosage file. **No header is included.** 
 The option was originally for BGEN file that does not contain sample information. 
 
-
+The file can be in two different formats: 
+contains one column for sample IDs corresponding to the sample order in the dosage file. **No header is included.** 
     ```
     less -S ./input/samplelist.txt
     ```
+or
+
+in the default bgen .sample format
+
+    ```
+    less -S ./input/genotype_100markers_2chr.sample
+    ```
+
 
 3. (Required. Output in Step 1) Model file from step 1
 
