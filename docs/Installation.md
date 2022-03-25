@@ -25,6 +25,7 @@ How to install and run SAIGE and SAIGE-GENE
 ### Logs:
 ## v1.0.2 (March 25, 2022):
 Bugs fixed:
+
 if LOCO = FALSE, --chrom is 
 - not required for set-based tests for VCF, BGEN or PLINK input 
 - not required for single-variant assoc tests for BGEN or PLINK input
@@ -33,6 +34,7 @@ if LOCO = FALSE, --chrom is
 if LOCO = TRUE, --chrom is always required 
 
 Improvements:
+
 Sample file for bgen input now can either contain one column without header or be in the format of the bgenix (UKBB provided)  
 
 ## v1.0.1 (March 18, 2022): 

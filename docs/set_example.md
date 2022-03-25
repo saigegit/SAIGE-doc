@@ -11,7 +11,7 @@ parent: Set-based test
 * Fitting the null model using a sparse GRM (--useSparseGRMtoFitNULL=TRUE) and no variance ratios are estiamted (--skipVarianceRatioEstimation=TRUE)
 * a9 and a10 are cateogorical covariats and will be re-write for different levels (--qCovarColList)
 * The same sparse GRM files needs to be used in Step 1 and Step 2 (for variance ratio approach)
-* Use multiple maskes for each set (gene or region)
+* Use multiple masks for each set (gene or region)
     * Three annotation maskes are applied: lof only, missense+lof, and missense+lof+synonymous (--annotation_in_groupTest)
     * Three max MAF cutoffs are applied: 0.0001,0.001,0.01
     * p-values for the 3x3 tests for each set are combined based on Cauchy combination 
@@ -101,3 +101,41 @@ parent: Set-based test
 	--is_output_markerList_in_groupTest=TRUE
 
     ```
+
+### Example 3 (Burden test only)
+
+* Fitting the null model using a full GRM that will be calculated on-the-fly using genotypes in the plink file (*--plinkFile=*, *--useSparseGRMtoFitNULL=FALSE*)
+* Estimating categorical variance ratios using the full GRM and null GRM, --isCateVarianceRatio=TRUE 
+
+```
+    Rscript step1_fitNULLGLMM.R     \
+        --plinkFile=./input/nfam_100_nindep_0_step1_includeMoreRareVariants_poly_22chr  \
+        --phenoFile=./input/pheno_1000samples.txt_withdosages_withBothTraitTypes.txt \
+        --phenoCol=y_binary \
+        --covarColList=x1,x2,a9,a10 \
+        --qCovarColList=a9,a10  \
+        --sampleIDColinphenoFile=IID \
+        --traitType=binary        \
+        --outputPrefix=./output/example_binary_cate \
+        --isCateVarianceRatio=TRUE      \
+        --nThreads=24   \
+        --IsOverwriteVarianceRatioFile=TRUE
+
+    Rscript step2_SPAtests.R        \
+        --bgenFile=./input/genotype_100markers.bgen    \
+        --bgenFileIndex=./input/genotype_100markers.bgen.bgi \
+        --SAIGEOutputFile=./output/genotype_100markers_bgen_groupTest_out_onlyBURDEN.txt \
+        --chrom=1 \
+        --LOCO=TRUE    \
+        --AlleleOrder=ref-first \
+        --minMAF=0 \
+        --minMAC=0.5 \
+        --sampleFile=./input/samplelist.txt \
+        --GMMATmodelFile=./output/example_binary_cate.rda \
+        --varianceRatioFile=./output/example_binary_cate.varianceRatio.txt      \
+        --groupFile=./input/group_new_chrposa1a2.txt    \
+        --annotation_in_groupTest="lof,missense;lof,missense;lof;synonymous"        \
+        --maxMAF_in_groupTest=0.0001,0.001,0.01 \
+        --r.corr=1
+
+```

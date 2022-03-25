@@ -74,7 +74,7 @@ parent: Set-based test
     ```
 
 
-3. Only perform BURDEN test with --r.corr=1. Use --minGroupMAC_in_BurdenTest for the minimum MAC of the testing "burden marker" in the Burden test. 
+3. Only perform BURDEN test with --r.corr=1. Use --minGroupMAC_in_BurdenTest for the minimum MAC of the testing "burden marker" in the Burden test. NOTE: the sparse GRM is not required. If inly perform BURDEN tests, the Step 1 output used for the single-variant assoc tests can be used for faster computation (See example). 
 
     ```
     Rscript step2_SPAtests.R        \
@@ -89,8 +89,6 @@ parent: Set-based test
         --sampleFile=./input/samplelist.txt \
         --GMMATmodelFile=./output/example_binary_fullGRM.rda \
         --varianceRatioFile=./output/example_binary_cate.varianceRatio.txt      \
-        --sparseGRMFile=output/sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx   \
-        --sparseGRMSampleIDFile=output/sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx.sampleIDs.txt \
         --groupFile=./input/group_new_chrposa1a2.txt    \
         --annotation_in_groupTest="lof,missense;lof,missense;lof;synonymous"        \
         --maxMAF_in_groupTest=0.0001,0.001,0.01	\

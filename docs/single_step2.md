@@ -12,7 +12,7 @@ parent: Single-variant test
 * File formats for dosages/genotypes of genetic variants to be tested can be used: PLINK, VCF, [BGEN](https://bitbucket.org/gavinband/bgen/overview), [SAV](https://github.com/statgen/savvy)
 * Conditional analysis based summary stats can be performed (--condition) can be performed in Step 2 
 * To query and test a subset of markers 
-* * both variant IDs (chr:pos_ref/alt) and range of chromosome positions (chr start end) can be specified for BGEN input (--idstoIncludeFile, --rangestoIncludeFile)
+* * both variant IDs (chr:pos:ref:alt) and range of chromosome positions (chr start end) can be specified for BGEN input (--idstoIncludeFile, --rangestoIncludeFile)
 * --markers_per_chunk can be used to specify the number of markers to test and output as one chunk. default=10000. Note that a small number may slow down the job. It is required that this number is >= 1000.  
 * If LOCO=TRUE (by default), --chrom MUST be specified, so only genotype/dosage file should only contain one chromosome 
 * For VCF/BCF/SAV input, --vcfField=DS to test dosages and  --vcfField=GT to test genotypes
