@@ -10,7 +10,7 @@ has_toc: false
 How to install and run SAIGE and SAIGE-GENE
 
 
-## Install SAIGE/SAIGE-GENE (current version 1.0.2 (updated on March 25 2022))
+## Install SAIGE/SAIGE-GENE (current version 1.0.3 (updated on March 30 2022))
 
 ### List of dependencies:
 
@@ -23,6 +23,16 @@ How to install and run SAIGE and SAIGE-GENE
 -  [cget](https://cget.readthedocs.io/en/latest/src/intro.html#installing-cget), [savvy](https://github.com/statgen/savvy)
 
 ### Logs:
+## v1.0.3 (March 30, 2022)
+Bugs fixed:
+
+Fixed the annolist issue.
+
+Improvements:
+
+Codes added to avoid using markers selected for variance ratio estimation in the GRM construction.
+
+
 ## v1.0.2 (March 25, 2022):
 Bugs fixed:
 
