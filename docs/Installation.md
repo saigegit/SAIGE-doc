@@ -10,7 +10,7 @@ has_toc: false
 How to install and run SAIGE and SAIGE-GENE
 
 
-## Install SAIGE/SAIGE-GENE (current version 1.0.3 (updated on March 30 2022))
+## Install SAIGE/SAIGE-GENE (current version 1.0.4 (updated on March 30 2022))
 
 ### List of dependencies:
 
@@ -23,6 +23,14 @@ How to install and run SAIGE and SAIGE-GENE
 -  [cget](https://cget.readthedocs.io/en/latest/src/intro.html#installing-cget), [savvy](https://github.com/statgen/savvy)
 
 ### Logs:
+
+## v1.0.4 (March 30, 2022)
+Bugs fixed:
+
+Fix the issue when SKAT-O is performed with no weights applied to markers and one or more groups have no markers. error message "Error in if (abs(q - m1)/sqrt(var1) < Cutoff) { :"
+
+
+
 ## v1.0.3 (March 30, 2022)
 Bugs fixed:
 
