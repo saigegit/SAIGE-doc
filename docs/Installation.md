@@ -10,7 +10,7 @@ has_toc: false
 How to install and run SAIGE and SAIGE-GENE
 
 
-## Install SAIGE/SAIGE-GENE (current version 1.0.4 (updated on March 30 2022))
+## Install SAIGE/SAIGE-GENE (current version 1.0.5 (updated on April 1 2022))
 
 ### List of dependencies:
 
@@ -24,10 +24,20 @@ How to install and run SAIGE and SAIGE-GENE
 
 ### Logs:
 
+## v1.0.5 (April 1, 2022)
+Bugs fixed:
+
+Removed the two extra header columns from the header line in the single assoc results when conducting the set-based tests
+
+Improvements:
+
+Updated and cleaned the dockerfile (Ubuntu 20.04 with system R, OpenBLAS) and docker readme (Thanks to Alex Petty!) 
+
+
 ## v1.0.4 (March 30, 2022)
 Bugs fixed:
 
-Fix the issue when SKAT-O is performed with no weights applied to markers and one or more groups have no markers. error message "Error in if (abs(q - m1)/sqrt(var1) < Cutoff) { :"
+Fixed the issue when SKAT-O is performed with no weights applied to markers and one or more groups have no markers. error message "Error in if (abs(q - m1)/sqrt(var1) < Cutoff) { :"
 
 
 
