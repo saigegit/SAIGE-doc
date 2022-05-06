@@ -24,8 +24,26 @@ How to install and run SAIGE and SAIGE-GENE
 
 ### Logs:
 
-## v1.0.6 (May 6, 2022)
+## v1.1 (May 6, 2022)
 Bugs fixed: 
+
+for vcf input, the largest chromosome position is 250000000. In the previouse version, it is 2000000000, which leads to missing Chr 1 and Chr 2 markers 
+
+Fixed the issue to read the group file separated by tab. Thanks to yonas-yuh!
+
+When the markers are not ordered by chromosome position in the group file, reading genotypes from VCF files have issues. It has been fixed and now the markers do not need to be ordered by chromosome position within each set in the group file.  
+
+Improvements: 
+
+Added an option --is_fastTest for single and set-based tests to further improve the computation efficiency 
+
+Allow for different prefix (--bimFile, --bedFile, --famFile) for plink files in Step 0 and Step 1
+
+Further improved the randomness of marker selection for variance ratio estimation
+
+
+
+
 
 ## v1.0.5 (April 1, 2022)
 Bugs fixed:
