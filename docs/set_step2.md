@@ -62,7 +62,6 @@ parent: Set-based test
         --bgenFileIndex=./input/genotype_100markers.bgen.bgi \
         --SAIGEOutputFile=./output/genotype_100markers_bgen_groupTest_out.txt \
         --chrom=1 \
-        --LOCO=TRUE    \
         --AlleleOrder=ref-first \
         --minMAF=0 \
         --minMAC=0.5 \

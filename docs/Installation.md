@@ -24,6 +24,9 @@ How to install and run SAIGE and SAIGE-GENE
 
 ### Logs:
 
+## v1.0.6 (May 6, 2022)
+Bugs fixed: 
+
 ## v1.0.5 (April 1, 2022)
 Bugs fixed:
 
