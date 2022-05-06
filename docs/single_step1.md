@@ -36,8 +36,8 @@ Rscript step1_fitNULLGLMM.R --help
         --plinkFile=./input/nfam_100_nindep_0_step1_includeMoreRareVariants_poly_22chr  \
         --phenoFile=./input/pheno_1000samples.txt_withdosages_withBothTraitTypes.txt \
         --phenoCol=y_binary \
-        --covarColList=x1,x2,a9,a10 \
-        --qCovarColList=a9,a10  \
+        --covarColList=x1,x2 \
+        --qCovarColList=x2  \
         --sampleIDColinphenoFile=IID \
         --traitType=binary        \
         --outputPrefix=./output/example_binary \
@@ -53,8 +53,8 @@ Rscript step1_fitNULLGLMM.R --help
         --useSparseGRMtoFitNULL=FALSE    \
         --phenoFile=./input/pheno_1000samples.txt_withdosages_withBothTraitTypes.txt \
         --phenoCol=y_quantitative \
-        --covarColList=x1,x2,a9,a10 \
-        --qCovarColList=a9,a10  \
+        --covarColList=x1,x2 \
+        --qCovarColList=x2  \
         --sampleIDColinphenoFile=IID \
         --invNormalize=TRUE     \
         --traitType=quantitative        \
@@ -68,12 +68,41 @@ Rscript step1_fitNULLGLMM.R --help
 * Use --useSparseGRMtoFitNULL=TRUE
 * Use --sparseGRMFile for the file containing the sparse GRM
 * Use --sparseGRMSampleIDFile for the file containing the IDs for samples in the sparse GRM
-* If no plink file is specified with --plinkFile, variance ratios won't be estimated and please make sure to specify --sparseSigmaFile (output by Step 1) in Step 2 for association tests
-* To estimate variance ratios and use in Step 2, specify the plink file containing markers that will be used for variance ratio estimation with --plinkFile. e.g. **--plinkFile=./input/nfam_100_nindep_0_step1_includeMoreRareVariants_poly_22chr** and **--skipVarianceRatioEstimation=FALSE** NOTE: This will speed up Step 2 
 * To only include a subset of samples to fit the null model, use **--SampleIDIncludeFile**
-
 * Only one CPU will be used and LOCO won't be applied
 
+
+####Estimating variance ratio with random markers. This will speed up Step 2 with a fast test (set is_fastTest=TRUE in Step 2)
+* Use --skipVarianceRatioEstimation=FALSE
+* Specify the plink file containing markers that will be used for variance ratio estimation with --plinkFile. e.g. **--plinkFile=./input/nfam_100_nindep_0_step1_includeMoreRareVariants_poly_22chr**
+* Only a small subset of randomly selected markers are needed in the plink file. e.g. **--plinkFile=./input/nfam_100_nindep_0_step1_includeMoreRareVariants_poly_22chr_random1000**. This can reduce the memory usage for reading in plink file.
+
+```
+
+    #(Optional) get ids for 1000 random markers
+    shuf -n 1000 ./input/nfam_100_nindep_0_step1_includeMoreRareVariants_poly_22chr.bim | awk '{print $2}' > ./input/nfam_100_nindep_0_step1_includeMoreRareVariants_poly_22chr.1000Markers.list
+   
+    #(Optional)make a new plink file containing those 1000 markers
+    plink2 --bfile ./input/nfam_100_nindep_0_step1_includeMoreRareVariants_poly_22chr --extract ./input/nfam_100_nindep_0_step1_includeMoreRareVariants_poly_22chr.1000Markers.list --make-bed --out ./input/nfam_100_nindep_0_step1_includeMoreRareVariants_poly_22chr_random1000
+
+    #Fit the null model and estimate a variance ratio
+    Rscript step1_fitNULLGLMM.R     \
+        --sparseGRMFile=output/sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx   \
+        --sparseGRMSampleIDFile=output/sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx.sampleIDs.txt     \
+        --useSparseGRMtoFitNULL=TRUE    \
+        --plinkFile=./input/nfam_100_nindep_0_step1_includeMoreRareVariants_poly_22chr_random1000 \
+        --phenoFile=./input/pheno_1000samples.txt_withdosages_withBothTraitTypes.txt \
+        --skipVarianceRatioEstimation=FALSE \
+        --phenoCol=y_binary \
+        --covarColList=x1,x2 \
+        --qCovarColList=x2  \
+        --sampleIDColinphenoFile=IID \
+        --traitType=binary        \
+        --outputPrefix=./output/example_binary_sparseGRM_vr \
+        --IsOverwriteVarianceRatioFile=TRUE
+```
+
+####Do not estiamte the variance ratio. --plinkFile is not specified 
 
 ```
     Rscript step1_fitNULLGLMM.R     \
@@ -82,11 +111,12 @@ Rscript step1_fitNULLGLMM.R --help
         --useSparseGRMtoFitNULL=TRUE    \
         --phenoFile=./input/pheno_1000samples.txt_withdosages_withBothTraitTypes.txt \
         --phenoCol=y_binary \
-        --covarColList=x1,x2,a9,a10 \
-        --qCovarColList=a9,a10  \
+        --covarColList=x1,x2 \
+        --qCovarColList=x2  \
         --sampleIDColinphenoFile=IID \
         --traitType=binary        \
-        --outputPrefix=./output/example_binary_sparseGRM
+        --outputPrefix=./output/example_binary_sparseGRMforNull_no_vr \
+	--IsOverwriteVarianceRatioFile=TRUE
 ```
 
 ### Input files
@@ -141,11 +171,4 @@ SAIGE takes the PLINK binary file for the genotypes and assumes the file prefix 
 
     ```
     less -S ./output/example_quantitative.varianceRatio.txt
-    ```
-
-
-3. association result file for the subset of randomly selected markers (**This file will be generated if variance ratio is estiamted in Step 1. It is an intermediate file and won't be needed for next steps.**)
-
-    ```
-    less -S ./output/example_quantitative_30markers.SAIGE.results.txt
     ```

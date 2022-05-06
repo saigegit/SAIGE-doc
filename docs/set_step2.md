@@ -30,7 +30,7 @@ parent: Set-based test
 * Same as the single-variant association tests, conditional analysis based summary stats can be performed (**--condition**)
 
 
-1. In Step 1, if a sparse GRM was used for fitting the null model and no variance ratios were estimated, in Step 2, use the same sparse GRM (--sparseGRMFile, --sparseGRMSampleIDFile) as input
+1. If a sparse GRM was used for fitting the null model and no variance ratios were estimated, in Step 2, use the same sparse GRM (--sparseGRMFile, --sparseGRMSampleIDFile) as input
 
     ```
     Rscript step2_SPAtests.R        \
@@ -47,10 +47,44 @@ parent: Set-based test
         --sparseGRMSampleIDFile=output/sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx.sampleIDs.txt     \
         --groupFile=./input/group_new_chrposa1a2.txt    \
         --annotation_in_groupTest=lof,missense:lof,missense:lof:synonymous        \
-        --maxMAF_in_groupTest=0.0001,0.001,0.01
+        --maxMAF_in_groupTest=0.0001,0.001,0.01	\
+	--LOCO=FALSE
     ```
 
-2. If a full GRM was used in Step 1 for fitting the null model and variance ratios were estimated with full and sparse GRMs, in Step 2, the sparse GRM (--sparseGRMFile, --sparseGRMSampleIDFile) and variance ratios (--varianceRatioFile) are used as input. Use --is_output_markerList_in_groupTest=TRUE to output the markers used for each test. 
+
+2a. If a  a sparse GRM was used for fitting the null model and variance ratios were estimated with sparse and null GRMs, in Step 2, the sparse GRM (--sparseGRMFile, --sparseGRMSampleIDFile) and variance ratios (--varianceRatioFile) are used as input. Use --is_output_markerList_in_groupTest=TRUE to output the markers used for each test.
+    * --LOCO=FALSE
+    * If step 1 was generated with version >= 1.0.6. Use --is_fastTest=TRUE for the fast test
+
+    ```
+    Rscript step2_SPAtests.R        \
+        --bgenFile=./input/genotype_100markers.bgen    \
+        --bgenFileIndex=./input/genotype_100markers.bgen.bgi \
+        --SAIGEOutputFile=./output/genotype_100markers_bgen_groupTest_out.txt \
+        --chrom=1 \
+        --LOCO=TRUE    \
+        --AlleleOrder=ref-first \
+        --minMAF=0 \
+        --minMAC=0.5 \
+        --sampleFile=./input/samplelist.txt \
+        --GMMATmodelFile=./output/example_binary_sparseGRM.rda \
+        --varianceRatioFile=./output/example_binary_sparseGRM.varianceRatio.txt      \
+        --sparseGRMFile=output/sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx   \
+        --sparseGRMSampleIDFile=output/sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx.sampleIDs.txt  \
+        --groupFile=./input/group_new_chrposa1a2.txt    \
+        --annotation_in_groupTest="lof,missense:lof,missense:lof:synonymous"        \
+        --maxMAF_in_groupTest=0.0001,0.001,0.01 \
+        --is_output_markerList_in_groupTest=TRUE \
+	--LOCO=FALSE \
+        --is_fastTest=TRUE
+    ```
+
+
+
+
+2b. If a full GRM was used in Step 1 for fitting the null model and variance ratios were estimated with full and sparse GRMs, in Step 2, the sparse GRM (--sparseGRMFile, --sparseGRMSampleIDFile) and variance ratios (--varianceRatioFile) are used as input. Use --is_output_markerList_in_groupTest=TRUE to output the markers used for each test. 
+    * --LOCO=TRUE
+    * If step 1 was generated with version >= 1.0.6. Use --is_fastTest=TRUE for the fast test
 
     ```
     Rscript step2_SPAtests.R        \
@@ -64,17 +98,18 @@ parent: Set-based test
         --minMAC=0.5 \
         --sampleFile=./input/samplelist.txt \
         --GMMATmodelFile=./output/example_binary_fullGRM.rda \
-        --varianceRatioFile=./output/example_binary_cate.varianceRatio.txt	\
+        --varianceRatioFile=./output/example_binary_fullGRM.varianceRatio.txt	\
         --sparseGRMFile=output/sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx   \
         --sparseGRMSampleIDFile=output/sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx.sampleIDs.txt  \
         --groupFile=./input/group_new_chrposa1a2.txt	\
         --annotation_in_groupTest="lof,missense:lof,missense:lof:synonymous"        \
         --maxMAF_in_groupTest=0.0001,0.001,0.01	\
-        --is_output_markerList_in_groupTest=TRUE
+        --is_output_markerList_in_groupTest=TRUE \
+	--is_fastTest=TRUE
     ```
 
 
-3. Only perform BURDEN test with --r.corr=1. Use --minGroupMAC_in_BurdenTest for the minimum MAC of the testing "burden marker" in the Burden test. NOTE: the sparse GRM is not required. If inly perform BURDEN tests, the Step 1 output used for the single-variant assoc tests can be used for faster computation (See example). 
+3. Only perform BURDEN test with --r.corr=1. Use --minGroupMAC_in_BurdenTest for the minimum MAC of the testing "burden marker" in the Burden test. NOTE: the sparse GRM is not required. If only perform BURDEN tests, the Step 1 output generated for the single-variant assoc tests can be re-used for BURDEN tests
 
     ```
     Rscript step2_SPAtests.R        \
@@ -87,8 +122,8 @@ parent: Set-based test
         --minMAF=0 \
         --minMAC=0.5 \
         --sampleFile=./input/samplelist.txt \
-        --GMMATmodelFile=./output/example_binary_fullGRM.rda \
-        --varianceRatioFile=./output/example_binary_cate.varianceRatio.txt      \
+        --GMMATmodelFile=./output/example_binary.rda \
+        --varianceRatioFile=./output/example_binary.varianceRatio.txt	\
         --groupFile=./input/group_new_chrposa1a2.txt    \
         --annotation_in_groupTest="lof,missense;lof,missense;lof;synonymous"        \
         --maxMAF_in_groupTest=0.0001,0.001,0.01	\
@@ -110,7 +145,7 @@ parent: Set-based test
         --minMAC=0.5 \
         --sampleFile=./input/samplelist.txt \
         --GMMATmodelFile=./output/example_binary_fullGRM.rda \
-        --varianceRatioFile=./output/example_binary_cate.varianceRatio.txt      \
+        --varianceRatioFile=./output/example_binary_fullGRM.varianceRatio.txt      \
         --sparseGRMFile=output/sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx   \
         --sparseGRMSampleIDFile=output/sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx.sampleIDs.txt     \
         --groupFile=./input/group_new_chrposa1a2.txt    \
@@ -186,15 +221,15 @@ parent: Set-based test
     ```
     less -S ./input/group_new_chrposa1a2.txt
     ``` 
-    
-    <img src="{{site.baseurl | prepend: site.url}}/assets/img/groupfilewithWeights.png" width="500">
+    <img src="{{site.baseurl | prepend: site.url}}/assets/img/groupfilewithWeights.png" width="600">
 
     * group file with weights 
 
     ```
     less -S ./input/group_new_chrposa1a2_withWeights.txt
     ```
-    <img src="{{site.baseurl | prepend: site.url}}/assets/img/groupfilewithnoWeights.png" width="500">
+
+    <img src="{{site.baseurl | prepend: site.url}}/assets/img/groupfilewithnoWeights.png" width="600">
 
 
 ## Output files

@@ -24,12 +24,15 @@ parent: Single-variant test
 #check the help info for step 2
 Rscript step2_SPAtests.R --help
 ```
-
 * For binary traits, use *--is_output_moreDetails=TRUE* to output heterozygous and homozygous counts in cases and controls 
+* For binary traits,, effect sizes can be estimated more accurately through Firth's Bias-Reduced Logistic Regression by setting
+--is_Firth_beta=TRUE and --pCutoffforFirth=0.05. The effect sizes of markers with p-value <= pCutoffforFirth will be estimated through the Firth's Bias-Reduced Logistic Regression. 
 
-### If the variance ratio has been estimated in Step 1 (--varianceRatioFile=) 
 
-* Using *--bgenFile, --bgenFileIndex, --AlleleOrder, --sampleFile* for bgen input
+### full GRM was used for fitting the model in Step 1. Variance ratio MUST be estimated.
+
+* --LOCO=TRUE is highly recommended to avoid proximal contamination
+* Using **--bgenFile, --bgenFileIndex, --AlleleOrder, --sampleFile** for bgen input
 
 ```
 Rscript step2_SPAtests.R        \
@@ -37,16 +40,66 @@ Rscript step2_SPAtests.R        \
         --bgenFileIndex=./input/genotype_100markers.bgen.bgi \
         --sampleFile=./input/samplelist.txt \
         --AlleleOrder=ref-first \
-        --SAIGEOutputFile=./output/genotype_100markers_marker_bgen_Firth.txt	\
-        --chrom=1	\
+        --SAIGEOutputFile=./output/genotype_100markers_marker_bgen_fullGRMforNull_with_vr.txt    \
+        --chrom=1       \
         --minMAF=0 \
         --minMAC=20 \
         --GMMATmodelFile=./output/example_binary.rda \
-        --varianceRatioFile=./output/example_binary.varianceRatio.txt  \
+        --varianceRatioFile=./output/example_binary.varianceRatio.txt \
         --is_Firth_beta=TRUE    \
-        --pCutoffforFirth=0.1
-	
+        --pCutoffforFirth=0.1 \
+        --is_output_moreDetails=TRUE    \
+        --LOCO=TRUE
 ```
+
+### Sparse GRM was used for fitting the model in Step 1. Variance ratio is estimated
+* For Step 1 generated with version < 1.0.6, DO NOT specify --sparseGRMFile and --sparseGRMSampleIDFile
+* For Step 1 generated with version >= 1.0.6. Please specify --sparseGRMFile and --sparseGRMSampleIDFile. Specify --is_fastTest=TRUE for fast run
+
+
+```
+Rscript step2_SPAtests.R        \
+        --bgenFile=./input/genotype_100markers.bgen    \
+        --bgenFileIndex=./input/genotype_100markers.bgen.bgi \
+        --sampleFile=./input/samplelist.txt \
+        --AlleleOrder=ref-first \
+        --SAIGEOutputFile=./output/genotype_100markers_marker_bgen_Firth.txt    \
+        --chrom=1       \
+        --minMAF=0 \
+        --minMAC=20 \
+        --GMMATmodelFile=./output/example_binary_sparseGRM_vr.rda \
+        --varianceRatioFile=./output/example_binary_sparseGRM_vr.varianceRatio.txt  \
+        --LOCO=FALSE \
+        --is_Firth_beta=TRUE    \
+        --pCutoffforFirth=0.1 \
+        --is_output_moreDetails=TRUE \
+        --sparseGRMFile=output/sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx   \
+        --sparseGRMSampleIDFile=output/sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx.sampleIDs.txt
+        --is_fastTest=TRUE
+```
+
+### Sparse GRM was used for fitting the model in Step 1. Variance ratio was not estiamted in Step 1. Please specify --sparseGRMFile and --sparseGRMSampleIDFile. 
+
+```
+Rscript step2_SPAtests.R        \
+        --bgenFile=./input/genotype_100markers.bgen    \
+        --bgenFileIndex=./input/genotype_100markers.bgen.bgi \
+        --sampleFile=./input/samplelist.txt \
+        --AlleleOrder=ref-first \
+        --SAIGEOutputFile=./output/genotype_100markers_marker_bgen_sparseGRMforNull_no_vr.txt    \
+        --chrom=1       \
+        --minMAF=0 \
+        --minMAC=20 \
+        --GMMATmodelFile=./output/example_binary_sparseGRMforNull_no_vr.rda \
+        --LOCO=FALSE \
+        --is_Firth_beta=TRUE    \
+        --pCutoffforFirth=0.1 \
+        --is_output_moreDetails=TRUE	\
+	--sparseGRMFile=output/sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx   \
+        --sparseGRMSampleIDFile=output/sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx.sampleIDs.txt
+```
+
+### More input file formats are supported: PLINK, VCF, and BCF
 
 * Using *--bedFile, --bimFile, --famFile, --AlleleOrder* for PLINK input
 
@@ -62,11 +115,12 @@ Rscript step2_SPAtests.R        \
         --minMAC=20 \
         --GMMATmodelFile=./output/example_binary.rda \
         --varianceRatioFile=./output/example_binary.varianceRatio.txt   \
+        --LOCO=TRUE \
         --is_output_moreDetails=TRUE
 ```
 
 
-* Using *--vcfFile， --vcfFileIndex， --vcfField* for VCF, BCF, and SAV input
+* Using *--vcfFile， --vcfFileIndex， --vcfField, --chrom* for VCF, BCF, and SAV input
 
 ```
 Rscript step2_SPAtests.R        \
@@ -77,55 +131,17 @@ Rscript step2_SPAtests.R        \
         --chrom=1       \
         --minMAF=0 \
         --minMAC=20 \
+        --LOCO=FALSE \
         --GMMATmodelFile=./output/example_binary.rda \
         --varianceRatioFile=./output/example_binary.varianceRatio.txt   \
         --is_output_moreDetails=TRUE
-```
-
-### If the variance ratio was not estimated in Step 1 because sparse GRM was used to fit the null model (Same as in Step 1, --sparseGRMFile and --sparseGRMSampleIDFile are used to specify the sparse GRM and sample IDs)
-
-```
-Rscript step2_SPAtests.R        \
-        --vcfFile=./input/genotype_100markers.vcf.gz    \
-        --vcfFileIndex=./input/genotype_100markers.vcf.gz.csi     \
-        --vcfField=GT   \
-        --SAIGEOutputFile=./output/genotype_100markers_marker_vcf_step1withSparseGRM.txt \
-        --chrom=1       \
-        --minMAF=0 \
-        --minMAC=20 \
-        --GMMATmodelFile=./output/example_binary_sparseGRM.rda \
-        --is_output_moreDetails=TRUE \
-        --sparseGRMFile=output/sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx   \
-        --sparseGRMSampleIDFile=output/sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx.sampleIDs.txt
-```
-
-### For binary traits, effect sizes can be estimated more accurately through Firth's Bias-Reduced Logistic Regression by setting
---is_Firth_beta=TRUE and --pCutoffforFirth=0.01
-
-*  The effect sizes of markers with p-value <= pCutoffforFirth will be estimated through the Firth's Bias-Reduced Logistic Regression
-
-```
-Rscript step2_SPAtests.R        \
-        --vcfFile=./input/genotype_100markers.vcf.gz    \
-        --vcfFileIndex=./input/genotype_100markers.vcf.gz.csi     \
-        --vcfField=GT   \
-        --SAIGEOutputFile=./output/genotype_100markers_marker_vcf_step1withSparseGRM.txt \
-        --chrom=1       \
-        --minMAF=0 \
-        --minMAC=20 \
-        --GMMATmodelFile=./output/example_binary_sparseGRM.rda \
-        --is_output_moreDetails=TRUE	\
-        --sparseGRMFile=output/sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx   \
-        --sparseGRMSampleIDFile=output/sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx.sampleIDs.txt	\
-	--is_Firth_beta=TRUE	\
-        --pCutoffforFirth=0.01
 ```
 
 
 ## Conditional analysis
 
 * --condition = Genetic marker ids (**chr:pos:ref:alt**) separated by comma. e.g.chr3:101651171:C:T,chr3:101651186:G:A
-
+* conditioning markers MUST be specified in the same order as stored in the dosage file (e.g. in the VCF file)
 ```
 Rscript step2_SPAtests.R        \
         --vcfFile=./input/genotype_100markers.vcf.gz    \

@@ -18,8 +18,8 @@ parent: Single-variant test
         --plinkFile=./input/nfam_100_nindep_0_step1_includeMoreRareVariants_poly_22chr  \
         --phenoFile=./input/pheno_1000samples.txt_withdosages_withBothTraitTypes.txt \
         --phenoCol=y_binary \
-        --covarColList=x1,x2,a9,a10 \
-        --qCovarColList=a9,a10  \
+        --covarColList=x1,x2 \
+        --qCovarColList=x2  \
         --sampleIDColinphenoFile=IID \
         --traitType=binary        \
         --outputPrefix=./output/example_binary \
@@ -36,30 +36,38 @@ parent: Single-variant test
         --minMAF=0 \
         --minMAC=20 \
         --GMMATmodelFile=./output/example_binary.rda \
-        --varianceRatioFile=./output/example_binary.varianceRatio.txt
+        --varianceRatioFile=./output/example_binary.varianceRatio.txt	\
+	--is_Firth_beta=TRUE    \
+        --pCutoffforFirth=0.05 \
+        --is_output_moreDetails=TRUE    \
+        --LOCO=TRUE
 
 ```
 
 ### Example 2
 * Binary trait (--traitType=binary)
 * Fitting the null model using a sparse GRM  (--useSparseGRMtoFitNULL=TRUE, --sparseGRMFile, --sparseGRMSampleIDFile)
-* Do not estimate the variance ratio in Step 1.
+* Estimate the variance ratio in Step 1 with markers with MAC >= 20 randomly selected from --plinkFile. Only a small subset of randomly selected markers are needed in the plink file. e.g. **--plinkFile=./input/nfam_100_nindep_0_step1_includeMoreRareVariants_poly_22chr_random1000**. This file contains 1000 markers from the large plink file containing 100,000s markers for full GRM. This can reduce the memory usage for reading in plink file.
 * Only one CPU is used when a sparse GRM is used for fitting the null model and LOCO won't be applied
+* When the sparse GRM was used for fitting the null model, set --LOCO=FASLE in Step 2
 * Use PLINK input for the genotypes/dosages in Step 2
 * The effect sizes of markers with p-value <= pCutoffforFirth will be estimated through the Firth's Bias-Reduced Logistic Regression --is_Firth_beta=TRUE and --pCutoffforFirth=0.01 (NOTE this option is under evaluation) 
+* --is_fastTest=TRUE to run a fast test
 
 ```
     Rscript step1_fitNULLGLMM.R     \
         --sparseGRMFile=output/sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx   \
         --sparseGRMSampleIDFile=output/sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx.sampleIDs.txt     \
         --useSparseGRMtoFitNULL=TRUE    \
+	--plinkFile=./input/nfam_100_nindep_0_step1_includeMoreRareVariants_poly_22chr_random1000 \
         --phenoFile=./input/pheno_1000samples.txt_withdosages_withBothTraitTypes.txt \
         --phenoCol=y_binary \
-        --covarColList=x1,x2,a9,a10 \
-        --qCovarColList=a9,a10  \
+        --covarColList=x1,x2 \
+        --qCovarColList=x2  \
         --sampleIDColinphenoFile=IID \
         --traitType=binary        \
-        --outputPrefix=./output/example_binary_sparseGRM
+        --outputPrefix=./output/example_binary_sparseGRM \
+	--IsOverwriteVarianceRatioFile=TRUE
 
     Rscript step2_SPAtests.R        \
         --bedFile=./input/genotype_100markers.bed       \
@@ -70,11 +78,14 @@ parent: Single-variant test
         --minMAF=0 \
         --minMAC=20 \
         --GMMATmodelFile=./output/example_binary_sparseGRM.rda \
+        --varianceRatioFile=./output/example_binary_sparseGRM.varianceRatio.txt   \
         --is_output_moreDetails=TRUE    \
         --sparseGRMFile=output/sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx   \
         --sparseGRMSampleIDFile=output/sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx.sampleIDs.txt	\
         --is_Firth_beta=TRUE	\
-        --pCutoffforFirth=0.01 
+        --pCutoffforFirth=0.05	\
+	--LOCO=FALSE	\
+	--is_fastTest=TRUE 
 
 ```
 
@@ -93,8 +104,8 @@ parent: Single-variant test
         --useSparseGRMtoFitNULL=TRUE    \
         --phenoFile=./input/pheno_1000samples.txt_withdosages_withBothTraitTypes.txt \
         --phenoCol=y_quantitative \
-        --covarColList=x1,x2,a9,a10 \
-        --qCovarColList=a9,a10  \
+        --covarColList=x1,x2 \
+        --qCovarColList=x2  \
         --sampleIDColinphenoFile=IID \
         --traitType=quantitative        \
 	--invNormalize=TRUE	\
@@ -109,6 +120,7 @@ parent: Single-variant test
         --SAIGEOutputFile=./output/genotype_100markers_marker_vcf_step1withSparseGRM.txt \
         --minMAF=0 \
         --minMAC=20 \
+	--LOCO=FALSE	\
         --GMMATmodelFile=./output/example_quantitative_sparseGRM.rda \
         --is_output_moreDetails=TRUE	\
         --varianceRatioFile=./output/example_quantitative_sparseGRM.varianceRatio.txt
@@ -124,7 +136,7 @@ parent: Single-variant test
 
 ```
 Rscript step1_fitNULLGLMM.R     \
-        --plinkFile=./input/nfam_100_nindep_0_step1_includeMoreRareVariants_poly \
+        --plinkFile=./input/nfam_100_nindep_0_step1_includeMoreRareVariants_poly_22chr	\
         --phenoFile=./input/Prev_0.1_nfam_1000.pheno_positive_pheno.txt \
         --phenoCol=y \
         --covarColList=x1,x2 \
@@ -143,5 +155,8 @@ Rscript step2_SPAtests.R        \
         --minMAC=1 \
         --GMMATmodelFile=./output/example_binary_positive_signal.rda \
         --varianceRatioFile=./output/example_binary_positive_signal.varianceRatio.txt \
-        --SAIGEOutputFile=./output/example_binary_positive_signal.assoc.step2.txt
+        --SAIGEOutputFile=./output/example_binary_positive_signal.assoc.step2.txt	\
+	--is_Firth_beta=TRUE    \
+        --pCutoffforFirth=0.05  \
+        --LOCO=TRUE
 ```

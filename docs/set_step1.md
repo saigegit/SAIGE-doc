@@ -9,13 +9,34 @@ parent: Set-based test
 
 ## Step 1: fitting the null logistic/linear mixed model
 
-1.  When a sparse GRM is used to fit the null model (--useSparseGRMtoFitNULL=TRUE) and no variance ratios are estiamted (--skipVarianceRatioEstimation=TRUE), Step 1 for set-based tests are the same as for single-variant tests in SAIGE
+1.  When a sparse GRM is used to fit the null model (--useSparseGRMtoFitNULL=TRUE)
 
+   * Multiple variance ratios need to be estimated based on different minor allele count categories with *--isCateVarianceRatio=TRUE*
+       ** Different from Step 1 in SAIGE for single-variant tests in SAIGE, in which only a single variance ratio is estiamted
+       ** By default, two variance ratios are estiamted for 10 <= MAC < 20 and MAC >= 20.
+       ** Use *--cateVarRatioMinMACVecExclude* and *--cateVarRatioMaxMACVecInclude* to modify the MAC categories
+       ** Note that the PLINK file need to contain at least 200 variants whose MAC fall in these categories. 
+       ** This PLINK file is ONLY used for variance ratio estimation and contains random markers extracted from the PLINK file that is LD pruned and used for GRM and variance ratio estimation  
 
     ```
+    #(Optional) get ids for 1000 random markers for each MAC category
+    ## calcuate allele counts for each marker in the large plink file
+    plink2 --bfile ./input/nfam_100_nindep_0_step1_includeMoreRareVariants_poly_22chr --freq count --out ./input/nfam_100_nindep_0_step1_includeMoreRareVariants_poly_22chr
+
+    ## randomly extract IDs for markers falling in the two MAC categories
+    cat <(tail -n +2 ./input/nfam_100_nindep_0_step1_includeMoreRareVariants_poly_22chr.acount | awk '((2*$6-$5) < 20 && (2*$6-$5) >= 10) || ($5 < 20 && $5 >= 10) {print $2}' | shuf -n 1000) \
+    <(tail -n +2 ./input/nfam_100_nindep_0_step1_includeMoreRareVariants_poly_22chr.acount | awk ' $5 >= 20 && (2*$6-$5)>= 20 {print $2}' | shuf -n 1000) > ./input/nfam_100_nindep_0_step1_includeMoreRareVariants_poly_22chr.forCate_vr.markerid.list
+
+
+    ## extract markers from the large plink file
+    plink2 --bfile ./input/nfam_100_nindep_0_step1_includeMoreRareVariants_poly_22chr --extract ./input/nfam_100_nindep_0_step1_includeMoreRareVariants_poly_22chr.forCate_vr.markerid.list --make-bed --out ./input/nfam_100_nindep_0_step1_includeMoreRareVariants_poly_22chr.forCate_vr
+
+
+    #run step 1
     Rscript step1_fitNULLGLMM.R     \
         --sparseGRMFile=output/sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx   \
         --sparseGRMSampleIDFile=output/sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx.sampleIDs.txt     \
+	--plinkFile=./input/nfam_100_nindep_0_step1_includeMoreRareVariants_poly_22chr.forCate_vr	\
         --useSparseGRMtoFitNULL=TRUE    \
         --phenoFile=./input/pheno_1000samples.txt_withdosages_withBothTraitTypes.txt \
         --phenoCol=y_binary \
@@ -23,8 +44,9 @@ parent: Set-based test
         --qCovarColList=a9,a10  \
         --sampleIDColinphenoFile=IID \
         --traitType=binary        \
-        --skipVarianceRatioEstimation=TRUE	\
-        --outputPrefix=./output/example_binary_sparseGRM
+        --isCateVarianceRatio=TRUE	\
+        --outputPrefix=./output/example_binary_sparseGRM	\
+	--IsOverwriteVarianceRatioFile=TRUE	
     ```
 
 2. When a full GRM is used to fit the null model (GRM is constructed on-the-fly using genotypes in the PLINK file, **--plinkfile=**)
@@ -54,7 +76,6 @@ parent: Set-based test
         --nThreads=64    \
         --useSparseGRMtoFitNULL=FALSE    \
         --isCateVarianceRatio=TRUE      \
-        --outputPrefix_varRatio=./output/example_binary_cate \
         --useSparseGRMforVarRatio=TRUE  \
         --IsOverwriteVarianceRatioFile=TRUE
     ```
