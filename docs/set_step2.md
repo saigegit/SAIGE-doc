@@ -172,6 +172,8 @@ __*WARNING*__
             *** if sparse GRM was used for variance ratio estimation, do specify --sparseGRMFile and --sparseGRMSampleIDFile in step 2, otherwise, do NOT specify --sparseGRMFile and --sparseGRMSampleIDFile in step 2
         ** If step 1 was generated with version >=  1.0.6
             *** if sparse GRM was used in step 1, do specify --sparseGRMFile and --sparseGRMSampleIDFile in step 2 
+
+
     ```
     Rscript step2_SPAtests.R        \
      --bgenFile=./input/genotype_100markers.bgen    \
@@ -229,6 +231,7 @@ __*WARNING*__
 
 
     ```
+
     #CHROM in VCF is 1
 
     Rscript step2_SPAtests.R        \
@@ -287,8 +290,7 @@ __*WARNING*__
         --maxMAF_in_groupTest=0.0001,0.001,0.01 \
         --chrom=chr1
 
-
-   ```
+    ```
 
 ## Input files
 
