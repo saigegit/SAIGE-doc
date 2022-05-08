@@ -36,17 +36,18 @@ parent: Set-based test
     Rscript step1_fitNULLGLMM.R     \
         --sparseGRMFile=output/sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx   \
         --sparseGRMSampleIDFile=output/sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx.sampleIDs.txt     \
-	--plinkFile=./input/nfam_100_nindep_0_step1_includeMoreRareVariants_poly_22chr.forCate_vr	\
+        --plinkFile=./input/nfam_100_nindep_0_step1_includeMoreRareVariants_poly_22chr.forCate_vr \
         --useSparseGRMtoFitNULL=TRUE    \
         --phenoFile=./input/pheno_1000samples.txt_withdosages_withBothTraitTypes.txt \
         --phenoCol=y_binary \
-        --covarColList=x1,x2,a9,a10 \
-        --qCovarColList=a9,a10  \
+        --covarColList=x1,x2 \
+        --qCovarColList=x2  \
         --sampleIDColinphenoFile=IID \
         --traitType=binary        \
         --isCateVarianceRatio=TRUE	\
         --outputPrefix=./output/example_binary_sparseGRM	\
 	--IsOverwriteVarianceRatioFile=TRUE	
+
     ```
 
 2. When a full GRM is used to fit the null model (GRM is constructed on-the-fly using genotypes in the PLINK file, **--plinkfile=**)
