@@ -30,6 +30,16 @@ parent: Set-based test
 * Same as the single-variant association tests, conditional analysis based summary stats can be performed (**--condition**)
 
 
+* WARNING 
+** For step 1 with version <  1.0.6
+  1. If the variance ratios were estimated using a full GRM and a sparse GRM,specify --sparseGRMFile and --sparseGRMSampleIDFile in step 2
+  2. If the variance ratios were estimated using a sparse GRM and null GRM, do not specify --sparseGRMFile and --sparseGRMSampleIDFile in step 2
+  3. If no variance ratios were estimated and a spare GRM was used for fitting the null model, do not specify --sparseGRMFile and --sparseGRMSampleIDFile in step 2
+
+** For step 1 with version >= 1.0.6
+  *** if sparse GRM was used in step 1, do specify --sparseGRMFile and --sparseGRMSampleIDFile in step 2
+
+
 1. If a sparse GRM was used for fitting the null model and no variance ratios were estimated, in Step 2, use the same sparse GRM (--sparseGRMFile, --sparseGRMSampleIDFile) as input
 
     ```
@@ -54,7 +64,10 @@ parent: Set-based test
 
 2a. If a  a sparse GRM was used for fitting the null model and variance ratios were estimated with sparse and null GRMs, in Step 2, the sparse GRM (--sparseGRMFile, --sparseGRMSampleIDFile) and variance ratios (--varianceRatioFile) are used as input. Use --is_output_markerList_in_groupTest=TRUE to output the markers used for each test.
     * --LOCO=FALSE
-    * If step 1 was generated with version >= 1.0.6. Use --is_fastTest=TRUE for the fast test
+      * WARNING
+        ** If step 1 was generated with version <  1.0.6, DO NOT specify --sparseGRMFile and --sparseGRMFile
+        ** If step 1 was generated with version >= 1.0.6. Use --is_fastTest=TRUE for the fast test and specify --sparseGRMFile and --sparseGRMFile
+
 
     ```
     Rscript step2_SPAtests.R        \
@@ -84,7 +97,7 @@ parent: Set-based test
 2b. If a full GRM was used in Step 1 for fitting the null model and variance ratios were estimated with full and sparse GRMs, in Step 2, the sparse GRM (--sparseGRMFile, --sparseGRMSampleIDFile) and variance ratios (--varianceRatioFile) are used as input. Use --is_output_markerList_in_groupTest=TRUE to output the markers used for each test. 
     * --LOCO=TRUE
     * If step 1 was generated with version >= 1.0.6. Use --is_fastTest=TRUE for the fast test
-
+   
     ```
     Rscript step2_SPAtests.R        \
         --bgenFile=./input/genotype_100markers.bgen    \
@@ -108,7 +121,7 @@ parent: Set-based test
     ```
 
 
-3. Only perform BURDEN test with --r.corr=1. Use --minGroupMAC_in_BurdenTest for the minimum MAC of the testing "burden marker" in the Burden test. NOTE: the sparse GRM is not required. If only perform BURDEN tests, the Step 1 output generated for the single-variant assoc tests can be re-used for BURDEN tests
+3. Only perform BURDEN test with --r.corr=1. Use --minGroupMAC_in_BurdenTest for the minimum MAC of the testing "burden marker" in the Burden test. NOTE: the sparse GRM is not required. If only perform BURDEN tests, the Step 1 output generated for the single-variant assoc tests can be re-used for BURDEN tests as the variance ratios are estimated using full GRM and null GRM
 
     ```
     Rscript step2_SPAtests.R        \
@@ -153,6 +166,31 @@ parent: Set-based test
         --condition=1:30:A:C,1:79:A:C
     ```
 
+5. Per-marker weights are included in the group file **--groupFile=./input/group_new_chrposa1a2_withWeights.txt** 
+      * WARNING
+        ** If step 1 was generated with version <  1.0.6 
+            *** if sparse GRM was used for variance ratio estimation, do specify --sparseGRMFile and --sparseGRMSampleIDFile in step 2, otherwise, do NOT specify --sparseGRMFile and --sparseGRMSampleIDFile in step 2
+        ** If step 1 was generated with version >=  1.0.6
+            *** if sparse GRM was used in step 1, do specify --sparseGRMFile and --sparseGRMSampleIDFile in step 2 
+
+ Rscript step2_SPAtests.R        \
+     --bgenFile=./input/genotype_100markers.bgen    \
+     --bgenFileIndex=./input/genotype_100markers.bgen.bgi \
+     --SAIGEOutputFile=./output/genotype_100markers_bgen_groupTest_out_sparseGRMforStep1_withWeights.txt \
+     --chrom=1 \
+     --AlleleOrder=ref-first \
+     --minMAF=0 \
+     --minMAC=0.5 \
+     --sampleFile=./input/samplelist.txt \
+     --GMMATmodelFile=./output/example_binary_sparseGRM.rda \
+     --sparseGRMFile=output/sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx   \
+     --sparseGRMSampleIDFile=output/sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx.sampleIDs.txt     \
+     --groupFile=./input/group_new_chrposa1a2_withWeights.txt    \
+     --annotation_in_groupTest=lof,missense:lof,missense:lof:synonymous        \
+     --maxMAF_in_groupTest=0.0001,0.001,0.01    \
+     --LOCO=FALSE       \
+     --varianceRatioFile=./output/example_binary_sparseGRM.varianceRatio.txt    \
+     --is_fastTest=TRUE
 
 5. Use PLINK file as input for genotypes/dosages (--bedFile=, --bimFile=, --famFile=, --AlleleOrder=)
     * --AlleleOrder can be alt-first or ref-first. It has to be correctly specified, otherwise, the variants in the PLINK file will not be matched with the markers in the groupFile
@@ -182,9 +220,14 @@ parent: Set-based test
 6.  VCF file as input
     * --vcfFileIndex takes .csi index file as input, which can be generated using **tabix --csi -p vcf ./input/genotype_100markers.vcf.gz**
     * --vcfField is GT or DS
-    * --chrom has to be specified for VCF files. --chrom must be the same as the CHROM string in the VCF file
+    * --chrom doe not need to be specified for VCF files for set-based tests. But it must be specified if LOCO=TRUE. --chrom must be the same as the CHROM string in the VCF file
+    * chr in marker IDs needs to be matched the CHROM string, e.g. ./input/group_new_chrposa1a2_withchr.txt
+
+
 
     ```
+    #CHROM in VCF is 1
+
     Rscript step2_SPAtests.R        \
         --vcfFile=./input/genotype_100markers.vcf.gz    \
         --vcfFileIndex=./input/genotype_100markers.vcf.gz.csi     \
@@ -202,7 +245,47 @@ parent: Set-based test
         --groupFile=./input/group_new_chrposa1a2.txt    \
         --annotation_in_groupTest=lof,missense:lof,missense:lof:synonymous        \
         --maxMAF_in_groupTest=0.0001,0.001,0.01
-    ```
+   
+     ##CHROM in VCF is chr1, --LOCO=FALSE so no --chrom is needed. 
+    
+     Rscript step2_SPAtests.R        \
+        --vcfFile=./input/genotype_100markers_missGT.withchr.vcf.gz    \
+        --vcfFileIndex=./input/genotype_100markers_missGT.withchr.vcf.gz.csi     \
+        --vcfField=GT   \
+        --SAIGEOutputFile=./output/genotype_100markers_vcf_groupTest_out.txt \
+        --LOCO=FALSE    \
+        --minMAF=0 \
+        --minMAC=0.5 \
+        --sampleFile=./input/samplelist.txt \
+        --GMMATmodelFile=./output/example_binary_fullGRM.rda \
+        --varianceRatioFile=./output/example_binary_cate.varianceRatio.txt      \
+        --sparseGRMFile=output/sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx   \
+        --sparseGRMSampleIDFile=output/sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx.sampleIDs.txt     \
+        --groupFile=./input/group_new_chrposa1a2_withchr.txt    \
+        --annotation_in_groupTest=lof,missense:lof,missense:lof:synonymous        \
+        --maxMAF_in_groupTest=0.0001,0.001,0.01
+   
+        ##CHROM in VCF is chr1, --LOCO=TRUE so --chrom=chr1
+        Rscript step2_SPAtests.R        \
+        --vcfFile=./input/genotype_100markers_missGT.withchr.vcf.gz    \
+        --vcfFileIndex=./input/genotype_100markers_missGT.withchr.vcf.gz.csi     \
+        --vcfField=GT   \
+        --SAIGEOutputFile=./output/genotype_100markers_vcf_groupTest_out.txt \
+        --LOCO=TRUE    \
+        --minMAF=0 \
+        --minMAC=0.5 \
+        --sampleFile=./input/samplelist.txt \
+        --GMMATmodelFile=./output/example_binary_fullGRM.rda \
+        --varianceRatioFile=./output/example_binary_cate.varianceRatio.txt      \
+        --sparseGRMFile=output/sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx   \
+        --sparseGRMSampleIDFile=output/sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx.sampleIDs.txt     \
+        --groupFile=./input/group_new_chrposa1a2_withchr.txt    \
+        --annotation_in_groupTest=lof,missense:lof,missense:lof:synonymous        \
+        --maxMAF_in_groupTest=0.0001,0.001,0.01 \
+        --chrom=chr1
+
+
+   ```
 
 ## Input files
 

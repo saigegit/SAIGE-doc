@@ -24,6 +24,15 @@ How to install and run SAIGE and SAIGE-GENE
 
 ### Logs:
 
+## v1.0.7 (May 8, 2022)
+
+Bugs fixed:
+
+Fixed the error when reading in per-marker weights from the gorup file
+
+Fixed the issue when the CRHOM column contains string, e.g. "chr1", in the VCF file and the matching with marker IDs in the group file and --chrom. 
+
+
 ## v1.0.6 (May 6, 2022)
 
 Bugs fixed: 
