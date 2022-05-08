@@ -62,7 +62,7 @@ __*WARNING*__
     ```
 
 
-2a. If a  a sparse GRM was used for fitting the null model and variance ratios were estimated with sparse and null GRMs, in Step 2, the sparse GRM (--sparseGRMFile, --sparseGRMSampleIDFile) and variance ratios (--varianceRatioFile) are used as input. Use --is_output_markerList_in_groupTest=TRUE to output the markers used for each test.
+2. If a  a sparse GRM was used for fitting the null model and variance ratios were estimated with sparse and null GRMs, in Step 2, the sparse GRM (--sparseGRMFile, --sparseGRMSampleIDFile) and variance ratios (--varianceRatioFile) are used as input. Use --is_output_markerList_in_groupTest=TRUE to output the markers used for each test.
     * --LOCO=FALSE
     * WARNING
         ** If step 1 was generated with version <  1.0.6, DO NOT specify --sparseGRMFile and --sparseGRMFile
@@ -94,7 +94,7 @@ __*WARNING*__
 
 
 
-2b. If a full GRM was used in Step 1 for fitting the null model and variance ratios were estimated with full and sparse GRMs, in Step 2, the sparse GRM (--sparseGRMFile, --sparseGRMSampleIDFile) and variance ratios (--varianceRatioFile) are used as input. Use --is_output_markerList_in_groupTest=TRUE to output the markers used for each test. 
+3. If a full GRM was used in Step 1 for fitting the null model and variance ratios were estimated with full and sparse GRMs, in Step 2, the sparse GRM (--sparseGRMFile, --sparseGRMSampleIDFile) and variance ratios (--varianceRatioFile) are used as input. Use --is_output_markerList_in_groupTest=TRUE to output the markers used for each test. 
     * --LOCO=TRUE
     * If step 1 was generated with version >= 1.0.6. Use --is_fastTest=TRUE for the fast test
    
@@ -121,7 +121,7 @@ __*WARNING*__
     ```
 
 
-3. Only perform BURDEN test with --r.corr=1. Use --minGroupMAC_in_BurdenTest for the minimum MAC of the testing "burden marker" in the Burden test. NOTE: the sparse GRM is not required. If only perform BURDEN tests, the Step 1 output generated for the single-variant assoc tests can be re-used for BURDEN tests as the variance ratios are estimated using full GRM and null GRM
+4. Only perform BURDEN test with --r.corr=1. Use --minGroupMAC_in_BurdenTest for the minimum MAC of the testing "burden marker" in the Burden test. NOTE: the sparse GRM is not required. If only perform BURDEN tests, the Step 1 output generated for the single-variant assoc tests can be re-used for BURDEN tests as the variance ratios are estimated using full GRM and null GRM
 
     ```
     Rscript step2_SPAtests.R        \
@@ -142,7 +142,7 @@ __*WARNING*__
 	--r.corr=1
     ```
 
-4. Use --condition= to perform conditioning analysis
+5. Use --condition= to perform conditioning analysis
 
 
     ```
@@ -166,7 +166,7 @@ __*WARNING*__
         --condition=1:30:A:C,1:79:A:C
     ```
 
-5. Per-marker weights are included in the group file **--groupFile=./input/group_new_chrposa1a2_withWeights.txt** 
+6. Per-marker weights are included in the group file **--groupFile=./input/group_new_chrposa1a2_withWeights.txt** 
       * WARNING
         ** If step 1 was generated with version <  1.0.6 
             *** if sparse GRM was used for variance ratio estimation, do specify --sparseGRMFile and --sparseGRMSampleIDFile in step 2, otherwise, do NOT specify --sparseGRMFile and --sparseGRMSampleIDFile in step 2
@@ -192,7 +192,7 @@ __*WARNING*__
      --varianceRatioFile=./output/example_binary_sparseGRM.varianceRatio.txt    \
      --is_fastTest=TRUE
 
-5. Use PLINK file as input for genotypes/dosages (--bedFile=, --bimFile=, --famFile=, --AlleleOrder=)
+7. Use PLINK file as input for genotypes/dosages (--bedFile=, --bimFile=, --famFile=, --AlleleOrder=)
     * --AlleleOrder can be alt-first or ref-first. It has to be correctly specified, otherwise, the variants in the PLINK file will not be matched with the markers in the groupFile
 
 
@@ -217,7 +217,7 @@ __*WARNING*__
         --maxMAF_in_groupTest=0.0001,0.001,0.01
     ```
 
-6.  VCF file as input
+8.  VCF file as input
     * --vcfFileIndex takes .csi index file as input, which can be generated using **tabix --csi -p vcf ./input/genotype_100markers.vcf.gz**
     * --vcfField is GT or DS
     * --chrom doe not need to be specified for VCF files for set-based tests. But it must be specified if LOCO=TRUE. --chrom must be the same as the CHROM string in the VCF file
