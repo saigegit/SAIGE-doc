@@ -30,8 +30,8 @@ parent: Set-based test
 * Same as the single-variant association tests, conditional analysis based summary stats can be performed (**--condition**)
 
 
-* WARNING 
-** For step 1 with version <  1.0.6
+** WARNING** 
+* For step 1 with version <  1.0.6
   1. If the variance ratios were estimated using a full GRM and a sparse GRM,specify --sparseGRMFile and --sparseGRMSampleIDFile in step 2
   2. If the variance ratios were estimated using a sparse GRM and null GRM, do not specify --sparseGRMFile and --sparseGRMSampleIDFile in step 2
   3. If no variance ratios were estimated and a spare GRM was used for fitting the null model, do not specify --sparseGRMFile and --sparseGRMSampleIDFile in step 2
