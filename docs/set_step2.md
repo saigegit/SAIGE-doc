@@ -31,13 +31,13 @@ parent: Set-based test
 
 
 __*WARNING*__
-* For step 1 with version <  1.0.6
+- __*For step 1 with version < 1.0.6*__
   1. If the variance ratios were estimated using a full GRM and a sparse GRM,specify --sparseGRMFile and --sparseGRMSampleIDFile in step 2
   2. If the variance ratios were estimated using a sparse GRM and null GRM, do not specify --sparseGRMFile and --sparseGRMSampleIDFile in step 2
   3. If no variance ratios were estimated and a spare GRM was used for fitting the null model, do not specify --sparseGRMFile and --sparseGRMSampleIDFile in step 2
 
-** For step 1 with version >= 1.0.6
-  *** if sparse GRM was used in step 1, do specify --sparseGRMFile and --sparseGRMSampleIDFile in step 2
+- __*For step 1 with version >= 1.0.6*__
+  - if sparse GRM was used in step 1, do specify --sparseGRMFile and --sparseGRMSampleIDFile in step 2
 
 
 1. If a sparse GRM was used for fitting the null model and no variance ratios were estimated, in Step 2, use the same sparse GRM (--sparseGRMFile, --sparseGRMSampleIDFile) as input
@@ -64,7 +64,7 @@ __*WARNING*__
 
 2a. If a  a sparse GRM was used for fitting the null model and variance ratios were estimated with sparse and null GRMs, in Step 2, the sparse GRM (--sparseGRMFile, --sparseGRMSampleIDFile) and variance ratios (--varianceRatioFile) are used as input. Use --is_output_markerList_in_groupTest=TRUE to output the markers used for each test.
     * --LOCO=FALSE
-      * WARNING
+    * WARNING
         ** If step 1 was generated with version <  1.0.6, DO NOT specify --sparseGRMFile and --sparseGRMFile
         ** If step 1 was generated with version >= 1.0.6. Use --is_fastTest=TRUE for the fast test and specify --sparseGRMFile and --sparseGRMFile
 
