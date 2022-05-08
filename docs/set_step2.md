@@ -167,13 +167,13 @@ __*WARNING*__
     ```
 
 6. Per-marker weights are included in the group file **--groupFile=./input/group_new_chrposa1a2_withWeights.txt** 
-      * WARNING
+     * WARNING
         ** If step 1 was generated with version <  1.0.6 
             *** if sparse GRM was used for variance ratio estimation, do specify --sparseGRMFile and --sparseGRMSampleIDFile in step 2, otherwise, do NOT specify --sparseGRMFile and --sparseGRMSampleIDFile in step 2
         ** If step 1 was generated with version >=  1.0.6
             *** if sparse GRM was used in step 1, do specify --sparseGRMFile and --sparseGRMSampleIDFile in step 2 
-
- Rscript step2_SPAtests.R        \
+    ```
+    Rscript step2_SPAtests.R        \
      --bgenFile=./input/genotype_100markers.bgen    \
      --bgenFileIndex=./input/genotype_100markers.bgen.bgi \
      --SAIGEOutputFile=./output/genotype_100markers_bgen_groupTest_out_sparseGRMforStep1_withWeights.txt \
@@ -191,6 +191,9 @@ __*WARNING*__
      --LOCO=FALSE       \
      --varianceRatioFile=./output/example_binary_sparseGRM.varianceRatio.txt    \
      --is_fastTest=TRUE
+
+     ```
+
 
 7. Use PLINK file as input for genotypes/dosages (--bedFile=, --bimFile=, --famFile=, --AlleleOrder=)
     * --AlleleOrder can be alt-first or ref-first. It has to be correctly specified, otherwise, the variants in the PLINK file will not be matched with the markers in the groupFile
