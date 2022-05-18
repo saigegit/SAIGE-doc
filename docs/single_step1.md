@@ -13,7 +13,7 @@ parent: Single-variant test
 * For **quantitative traits**, a null linear mixed model will be fitted (*--traitType=quantitative*) and needs to be inverse normalized (*--invNormalize=TRUE*) <br/>
 * By default, covariates are included as offset in the model, use --isCovariateOffset=FALSE to deactivate this feature. It will cost more computation time with --isCovariateOffset=FALSE 
 
-* The example scripts are located in the *extdata* folder 
+* The example scripts are located in the *extdata* folder [https://github.com/saigegit/SAIGE/tree/main/extdata]
 
 ```
 #go to the folder
@@ -72,7 +72,7 @@ Rscript step1_fitNULLGLMM.R --help
 * Only one CPU will be used and LOCO won't be applied
 
 
-####Estimating variance ratio with random markers. This will speed up Step 2 with a fast test (set is_fastTest=TRUE in Step 2)
+#### Estimating variance ratio with random markers. This will speed up Step 2 with a fast test (set is_fastTest=TRUE in Step 2)
 * Use --skipVarianceRatioEstimation=FALSE
 * Specify the plink file containing markers that will be used for variance ratio estimation with --plinkFile. e.g. **--plinkFile=./input/nfam_100_nindep_0_step1_includeMoreRareVariants_poly_22chr**
 * Only a small subset of randomly selected markers are needed in the plink file. e.g. **--plinkFile=./input/nfam_100_nindep_0_step1_includeMoreRareVariants_poly_22chr_random1000**. This can reduce the memory usage for reading in plink file.
@@ -102,8 +102,8 @@ Rscript step1_fitNULLGLMM.R --help
         --IsOverwriteVarianceRatioFile=TRUE
 ```
 
-####Do not estiamte the variance ratio. --plinkFile is not specified 
-
+#### Do not estiamte the variance ratio. --plinkFile is not specified 
+#### WARNING: We do not recomment this option, because the computaiton cost is not optimal for Step 2.  
 ```
     Rscript step1_fitNULLGLMM.R     \
         --sparseGRMFile=output/sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx   \
@@ -118,6 +118,8 @@ Rscript step1_fitNULLGLMM.R --help
         --outputPrefix=./output/example_binary_sparseGRMforNull_no_vr \
 	--IsOverwriteVarianceRatioFile=TRUE
 ```
+
+
 
 ### Input files
 1. **(Required)** Phenotype file (contains covariates if any, such as gender and age)

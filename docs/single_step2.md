@@ -14,19 +14,19 @@ parent: Single-variant test
 * To query and test a subset of markers 
 * * both variant IDs (chr:pos:ref:alt) and range of chromosome positions (chr start end) can be specified for BGEN input (--idstoIncludeFile, --rangestoIncludeFile)
 * --markers_per_chunk can be used to specify the number of markers to test and output as one chunk. default=10000. Note that a small number may slow down the job. It is required that this number is >= 1000.  
-* If LOCO=TRUE (by default), --chrom MUST be specified, so only genotype/dosage file should only contain one chromosome 
+* If LOCO=TRUE (by default), --chrom MUST be specified, so genotype/dosage file should only contain one chromosome 
 * For VCF/BCF/SAV input, --vcfField=DS to test dosages and  --vcfField=GT to test genotypes
-* By default, Missing genotypes/dosages will be imputed as the best guessed gentoypes/dosages (as round(2*freq) with --impute_method=best_guess). Note that currently dropping samples with missing genotypes/dosages is not supported
-* --sampleFile is used specify a file with sample IDs for bgen file. Please **DO NOT** include a header in the file. 
+* By default, missing genotypes/dosages will be imputed as the best guessed gentoypes/dosages (as round(2*freq) with --impute_method=best_guess). Note that currently dropping samples with missing genotypes/dosages is not supported
+* --sampleFile is used specify a file with sample IDs for bgen file. 
 
 
 ```
 #check the help info for step 2
 Rscript step2_SPAtests.R --help
 ```
-* For binary traits, use *--is_output_moreDetails=TRUE* to output heterozygous and homozygous counts in cases and controls 
-* For binary traits,, effect sizes can be estimated more accurately through Firth's Bias-Reduced Logistic Regression by setting
---is_Firth_beta=TRUE and --pCutoffforFirth=0.05. The effect sizes of markers with p-value <= pCutoffforFirth will be estimated through the Firth's Bias-Reduced Logistic Regression. 
+* For binary traits, use *--is_output_moreDetails=TRUE* to output heterozygous and homozygous counts as well as allele frequencies in cases and controls
+* For binary traits,, effect sizes can be estimated more accurately through the Firth's Bias-Reduced Logistic Regression by setting
+* --is_Firth_beta=TRUE and --pCutoffforFirth=0.05. The effect sizes of markers with p-value <= pCutoffforFirth will be estimated through the Firth's Bias-Reduced Logistic Regression. 
 
 
 ### full GRM was used for fitting the model in Step 1. Variance ratio MUST be estimated.
@@ -47,7 +47,7 @@ Rscript step2_SPAtests.R        \
         --GMMATmodelFile=./output/example_binary.rda \
         --varianceRatioFile=./output/example_binary.varianceRatio.txt \
         --is_Firth_beta=TRUE    \
-        --pCutoffforFirth=0.1 \
+        --pCutoffforFirth=0.05 \
         --is_output_moreDetails=TRUE    \
         --LOCO=TRUE
 ```
@@ -74,7 +74,7 @@ Rscript step2_SPAtests.R        \
         --pCutoffforFirth=0.1 \
         --is_output_moreDetails=TRUE \
         --sparseGRMFile=output/sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx   \
-        --sparseGRMSampleIDFile=output/sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx.sampleIDs.txt
+        --sparseGRMSampleIDFile=output/sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx.sampleIDs.txt \
         --is_fastTest=TRUE
 ```
 
@@ -121,6 +121,7 @@ Rscript step2_SPAtests.R        \
 
 
 * Using *--vcfFile， --vcfFileIndex， --vcfField, --chrom* for VCF, BCF, and SAV input
+* Pleas refer to the Set-based test step 2 (example #8) for more example codes when using VCF files as input
 
 ```
 Rscript step2_SPAtests.R        \

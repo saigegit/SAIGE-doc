@@ -46,13 +46,13 @@ parent: Set-based test
         --traitType=binary        \
         --isCateVarianceRatio=TRUE	\
         --outputPrefix=./output/example_binary_sparseGRM	\
-	--IsOverwriteVarianceRatioFile=TRUE	
+        --IsOverwriteVarianceRatioFile=TRUE	
 
     ```
 
 2. When a full GRM is used to fit the null model (GRM is constructed on-the-fly using genotypes in the PLINK file, **--plinkfile=**)
    
-   * Use a full GRM to fit the null model(by default, *--useSparseGRMtoFitNULL=FALSE*)
+   * Use a full GRM to fit the null model(by default, --useSparseGRMtoFitNULL=FALSE) with multiple CPUs ( --nThreads)
    * Use both a full GRM (to be constrcuted using genotypes in the PLINK file) and a sparse GRM with *--useSparseGRMforVarRatio=TRUE* to estimate the variance ratio(s)
        ** Use *--sparseGRMFile* for the file containing the sparse GRM
        ** Use *--sparseGRMSampleIDFile* for the file containing the IDs for samples in the sparse GRM
@@ -69,8 +69,8 @@ parent: Set-based test
         --sparseGRMSampleIDFile=output/sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx.sampleIDs.txt     \
         --phenoFile=./input/pheno_1000samples.txt_withdosages_withBothTraitTypes.txt \
         --phenoCol=y_binary \
-        --covarColList=x1,x2,a9,a10 \
-        --qCovarColList=a9,a10  \
+        --covarColList=x1,x2 \
+        --qCovarColList=x2  \
         --sampleIDColinphenoFile=IID \
         --traitType=binary        \
         --outputPrefix=./output/example_binary_fullGRM \
@@ -145,8 +145,3 @@ SAIGE takes the PLINK binary file for the genotypes and assumes the file prefix 
     ```
 
 
-3. association result file for the subset of randomly selected markers (**This file will be generated if variance ratio is estiamted in Step 1. It is an intermediate file and won't be needed for next steps.**)
-
-    ```
-    less -S ./output/example_binary_30markers.SAIGE.results.txt
-    ```

@@ -40,29 +40,7 @@ __*WARNING*__
   - if sparse GRM was used in step 1, do specify --sparseGRMFile and --sparseGRMSampleIDFile in step 2
 
 
-1. If a sparse GRM was used for fitting the null model and no variance ratios were estimated, in Step 2, use the same sparse GRM (--sparseGRMFile, --sparseGRMSampleIDFile) as input
-
-    ```
-    Rscript step2_SPAtests.R        \
-        --bgenFile=./input/genotype_100markers.bgen    \
-        --bgenFileIndex=./input/genotype_100markers.bgen.bgi \
-        --SAIGEOutputFile=./output/genotype_100markers_bgen_groupTest_out_sparseGRMforStep1.txt \
-        --chrom=1 \
-        --AlleleOrder=ref-first \
-        --minMAF=0 \
-        --minMAC=0.5 \
-        --sampleFile=./input/samplelist.txt \
-        --GMMATmodelFile=./output/example_binary_sparseGRM.rda \
-        --sparseGRMFile=output/sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx   \
-        --sparseGRMSampleIDFile=output/sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx.sampleIDs.txt     \
-        --groupFile=./input/group_new_chrposa1a2.txt    \
-        --annotation_in_groupTest=lof,missense:lof,missense:lof:synonymous        \
-        --maxMAF_in_groupTest=0.0001,0.001,0.01	\
-	--LOCO=FALSE
-    ```
-
-
-2. If a  a sparse GRM was used for fitting the null model and variance ratios were estimated with sparse and null GRMs, in Step 2, the sparse GRM (--sparseGRMFile, --sparseGRMSampleIDFile) and variance ratios (--varianceRatioFile) are used as input. Use --is_output_markerList_in_groupTest=TRUE to output the markers used for each test.
+1. If a  a sparse GRM was used for fitting the null model and variance ratios were estimated with sparse and null GRMs, in Step 2, the sparse GRM (--sparseGRMFile, --sparseGRMSampleIDFile) and variance ratios (--varianceRatioFile) are used as input. Use --is_output_markerList_in_groupTest=TRUE to output the markers used for each test.
     * --LOCO=FALSE
     * WARNING
         ** If step 1 was generated with version <  1.0.6, DO NOT specify --sparseGRMFile and --sparseGRMFile
@@ -87,10 +65,32 @@ __*WARNING*__
         --annotation_in_groupTest="lof,missense:lof,missense:lof:synonymous"        \
         --maxMAF_in_groupTest=0.0001,0.001,0.01 \
         --is_output_markerList_in_groupTest=TRUE \
-	--LOCO=FALSE \
+        --LOCO=FALSE \
         --is_fastTest=TRUE
     ```
 
+
+
+2. If a sparse GRM was used for fitting the null model and no variance ratios were estimated, in Step 2, use the same sparse GRM (--sparseGRMFile, --sparseGRMSampleIDFile) as input
+
+    ```
+    Rscript step2_SPAtests.R        \
+        --bgenFile=./input/genotype_100markers.bgen    \
+        --bgenFileIndex=./input/genotype_100markers.bgen.bgi \
+        --SAIGEOutputFile=./output/genotype_100markers_bgen_groupTest_out_sparseGRMforStep1.txt \
+        --chrom=1 \
+        --AlleleOrder=ref-first \
+        --minMAF=0 \
+        --minMAC=0.5 \
+        --sampleFile=./input/samplelist.txt \
+        --GMMATmodelFile=./output/example_binary_sparseGRM.rda \
+        --sparseGRMFile=output/sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx   \
+        --sparseGRMSampleIDFile=output/sparseGRM_relatednessCutoff_0.125_1000_randomMarkersUsed.sparseGRM.mtx.sampleIDs.txt     \
+        --groupFile=./input/group_new_chrposa1a2.txt    \
+        --annotation_in_groupTest=lof,missense:lof,missense:lof:synonymous        \
+        --maxMAF_in_groupTest=0.0001,0.001,0.01	\
+	--LOCO=FALSE
+    ```
 
 
 
