@@ -24,6 +24,17 @@ How to install and run SAIGE and SAIGE-GENE
 
 ### Logs:
 
+## v1.0.9 (May 17, 2022)
+
+Bugs fixed:
+
+Fixed an output missing when the last group in the group file is empty
+
+Improvements:
+
+Get a more accurate variance estimation when the sparse GRM is used for fitting the null model and used for Step 2
+
+
 ## v1.0.7 (May 8, 2022)
 
 Bugs fixed:
@@ -66,7 +77,6 @@ Updated and cleaned the dockerfile (Ubuntu 20.04 with system R, OpenBLAS) and do
 Bugs fixed:
 
 Fixed the issue when SKAT-O is performed with no weights applied to markers and one or more groups have no markers. error message "Error in if (abs(q - m1)/sqrt(var1) < Cutoff) { :"
-
 
 
 ## v1.0.3 (March 30, 2022)
