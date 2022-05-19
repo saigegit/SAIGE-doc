@@ -101,7 +101,7 @@ java -jar dxCompiler-2.10.1.jar compile saige_null_sGRM_vr_withinfo.wdl -project
 ### Prepare input files
 
 - sparse GRM files from Step 0  (`sparseGRM_file` and `sparseGRM_sample_file`)
-- a file containing the phenotype and covariates values (`pheno_file`)
+- a plain text file containing the phenotype and covariates values (`pheno_file`), see the format [here](https://saigegit.github.io//SAIGE-doc/docs/single_step1.html#input-files)
 
 - creating a new PLINK file containing 2,000 randomly selected markers `PLINK_for_vr` using the following scripts from the large PLINK file provided by UKBB with hard called genotypes `PLINK_file_hard_called`
  - 1,000 markers with 10 <= MAC < 20
