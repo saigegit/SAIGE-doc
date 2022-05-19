@@ -74,10 +74,11 @@ Rscript createSparseGRM.R       \
 
 ### Create the workflow using the wdl file
 
-- Download
- -  `dxCompiler-2.10.1.jar` from [here](https://github.com/dnanexus/dxCompiler/releases)
- -  `saige_null_sGRM_vr_withinfo.wdl` from [here](https://github.com/saigegit/UKBB-WES/blob/main/saige_step1_spGRMforNULLModel.wdl) and replace the path to the docker image in the file
-- obtain the `project id` of your current project on DNAnexus
+* Download
+    1. `dxCompiler-2.10.1.jar` from [here](https://github.com/dnanexus/dxCompiler/releases)
+    2. `saige_null_sGRM_vr_withinfo.wdl` from [here](https://github.com/saigegit/UKBB-WES/blob/main/saige_step1_spGRMforNULLModel.wdl) and replace the path to the docker image in the file
+
+* Check the `project id` of your current project on DNAnexus
 
 ```
 ## create a folder to store the workflows
@@ -91,7 +92,6 @@ java -jar dxCompiler-2.10.1.jar compile saige_null_sGRM_vr_withinfo.wdl -project
 
 - sparse GRM files from Step 0  (`sparseGRM_file` and `sparseGRM_sample_file`)
 - a file containing the phenotype and covariates values (`pheno_file`)
- - see [here]() for format
 
 - creating a new PLINK file containing 2,000 randomly selected markers `PLINK_for_vr` using the following scripts from the large PLINK file provided by UKBB with hard called genotypes `PLINK_file_hard_called`
  - 1,000 markers with 10 <= MAC < 20
