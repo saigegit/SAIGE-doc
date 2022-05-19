@@ -209,10 +209,10 @@ done < pheno_list.txt
 
 ### Create the workflow using the wdl file
 
-- Download
- -  `dxCompiler-2.10.1.jar` from [here](https://github.com/dnanexus/dxCompiler/releases)
- -  `saigegene_step2.wdl` from [here](https://github.com/saigegit/UKBB-WES/blob/main/saigegene_step2.wdl) and replace the path to the docker image in the file
-- obtain the `project id` of your current project on DNAnexus
+* Download
+    1. (skip if already done for Step 1) `dxCompiler-2.10.1.jar` from [here](https://github.com/dnanexus/dxCompiler/releases)
+    2. `saigegene_step2.wdl` from [here](https://github.com/saigegit/UKBB-WES/blob/main/saigegene_step2.wdl) and replace the path to the docker image in the file
+* Check the `project id` of your current project on DNAnexus
 
 ```
 ## create the workflow. It will give you a workflow id
