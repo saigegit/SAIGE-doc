@@ -4,7 +4,7 @@ title: Analyze UK Biobank WES data
 nav_order: 8
 description: "Pipeline to analyze the UK Biobank WES data"
 has_children: false
-has_toc: false
+has_toc: true
 ---
 
 
