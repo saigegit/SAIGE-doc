@@ -15,10 +15,7 @@ This documentation describes how to perform the exome-wide association tests wit
 ## Prerequisites
 - [dx command-line client](https://documentation.dnanexus.com/getting-started/cli-quickstart#:~:text=The%20dx%20command%2Dline%20client,along%20step%2Dby%2Dstep.)
 - Access to UK Biobank WES data on DNAnexus
-- Access to UK Biobank hard-called genotypes in PLINK format(`.bed`/`.bim`/`.fam`)
-- Phenotype file
-- [Group file]()
- - This file contains markers with annotations to be included in the tests for each gene by chromosome.
+- Access to UK Biobank hard-called genotypes in PLINK format(`.bed`/`.bim`/`.fam`) for constructing the genetic relationship matrix (GRM)
 - Determination of ancestry groups for participants. The analyses need to be performed separately by ancestry groups.
 
 ## Save SAIGE image to DNAnexus
@@ -47,13 +44,12 @@ dx upload saige_1.0.9.tar.gz
 
 - By default, markers with MAF >= 1% and missing rate <= 0.15 in the specified PLINK file are used to construct the sparse GRM
 
-- Benchmark: when there are 241,660 markers and 459,797 European samples in the PLINK file, the script below takes 7hr:40min with 72 CPUs and 35 Gb of memory to finish.  
+- Benchmark:  with 241,660 markers and 459,797 European samples in the LD pruned PLINK file, the script below takes 7hr:40min with 72 CPUs and 35 Gb of memory to finish.  
 
 ### Preparing input files
 
-- PLINK file for GRM construction using the hard called genotypes
- - keeping markers with MAF >= 1%
- - LD pruning
+ - Perform LD pruning on markers with MAF >= 1% using the PLINK file for GRM construction using the hard called genotypes
+
 
 ### Run the script
 ```
@@ -81,7 +77,7 @@ Rscript createSparseGRM.R       \
 
 - Download
  -  `dxCompiler-2.10.1.jar` from [here](https://github.com/dnanexus/dxCompiler/releases)
- -  `saige_null_sGRM_vr_withinfo.wdl` from [here]() and replace the path to the docker image in the file
+ -  `saige_null_sGRM_vr_withinfo.wdl` from [here](https://github.com/saigegit/UKBB-WES/blob/main/saige_step1_spGRMforNULLModel.wdl) and replace the path to the docker image in the file
 - obtain the `project id` of your current project on DNAnexus
 
 ```
@@ -121,15 +117,24 @@ plink2 --bfile ${PLINK_file_hard_called} --extract ${OUTPUT_prefix_counts}.marke
 
 - replace *saige* with your project name
 - replace the file paths, e.g change */SAIGE_GENE/phenotype/* to the folder there the `pheno_file` is stored
+- replace the variable values with the correct ones
 
 ```
 instance_type="mem1_ssd1_v2_x4"
 traitType=binary
 invNormalize=FALSE
-phenoCol=y
+phenoCol=value
 covariatesList=PC1,PC2,PC3,PC4,PC5,PC6,PC7,PC8,PC9,PC10,PC11,PC12,PC13,PC14,PC15,PC16,PC17,PC18,PC19,PC20,age,age_sex,age2,age2_sex,sex
 qCovarColList=sex
-sampleIDCol=IID
+sampleIDCol=userId
+pheno_file=phecode-250.2-both_sexes_wowithdrawl_with450kWES.tsv
+PLINK_for_vr=ukb.EUR.for_grm.pruned.plink.forvr
+sparseGRMfile=ukb.EUR_relatednessCutoff_0.05_5000_randomMarkersUsed.sparseGRM.mtx
+sparseGRM_sample_file=ukb.EUR_relatednessCutoff_0.05_5000_randomMarkersUsed.sparseGRM.mtx.sampleIDs.txt
+jobname=phecode-250.2_step1
+
+workflow_id=workflow-GB2gx6jJ6y3j4P2f2K60Pfxz
+
 
 dx run ${workflow_id} \
       -istage-common.phenofile=saige:/SAIGE_GENE/phenotype/${pheno_file} \
@@ -160,6 +165,8 @@ dx run ${workflow_id} \
 ### Run the Step 1 job for multiple phenotype
 
 Step 1 can be run for multiple phenotypes, each has a different job name. We can use a file `pheno_list.txt` to store the input information for each phenotype
+
+- Each row in `pheno_list.txt` is for one phenotype with pheno name, trait type (binary or quantitative), invNormalize (FALSE or TRUE), covariates list (e.g. PC1,PC2,PC3,PC4,PC5,PC6,PC7,PC8,PC9,PC10,PC11,PC12,PC13,PC14,PC15,PC16,PC17,PC18,PC19,PC20,age,age_sex,age2,age2_sex,sex ), and categorical covariants list (e.g. sex)
 
 ```
 while read -r pheno traitType invNormalize covariatesList qCovarColList
@@ -205,12 +212,12 @@ done < pheno_list.txt
 
 - Download
  -  `dxCompiler-2.10.1.jar` from [here](https://github.com/dnanexus/dxCompiler/releases)
- -  `saige_gene_step2_nointtype_outputIndex.wdl` from [here]() and replace the path to the docker image in the file
+ -  `saigegene_step2.wdl` from [here](https://github.com/saigegit/UKBB-WES/blob/main/saigegene_step2.wdl) and replace the path to the docker image in the file
 - obtain the `project id` of your current project on DNAnexus
 
 ```
 ## create the workflow. It will give you a workflow id
-java -jar dxCompiler-2.10.1.jar compile saige_gene_step2_nointtype_outputIndex.wdl -project ${project id}  -folder /workflows/ -f
+java -jar dxCompiler-2.10.1.jar compile saigegene_step2.wdl -project ${project id}  -folder /workflows/ -f
 ```
 
 
@@ -221,8 +228,8 @@ java -jar dxCompiler-2.10.1.jar compile saige_gene_step2_nointtype_outputIndex.w
 - variance ratio file output by Step 1: `${outputPrefix}.varianceRatio.txt`
 - Genotype files containing the WES data on DNAnexus in the plink format (`.bed`/`.bim`/`.fam`)
 - Group file containing marker lists and annotations for genes. See [here]() for the format
- - You may download pre-prepared group files by chromosome from [here]()
- - You may prepare the group files from the [ANNOVAR] annotated file using [this script]()
+ - You may download pre-prepared group files by chromosome from [here](https://drive.google.com/file/d/1WvmVXV1NWhS3AbiwEX38yf_9MY9L047h/view?usp=sharing). This file contains loss of function (LoF), missense, and synonymous markers.
+ - You may prepare the group files with more other annotations from the [ANNOVAR](https://annovar.openbioinformatics.org/en/latest/) annotated files from [here](https://drive.google.com/file/d/19RSoVc72k_baDzfZF2Db8LOLiZ3mNiYn/view?usp=sharing) by modifying [this script](https://github.com/saigegit/UKBB-WES/blob/main/make-group-file_use_annovar_output.R)
 
 
 ### Run the Step 2 jobs for a phenotype
@@ -235,7 +242,7 @@ We use 3 annotation masks: LoF, LoF+Missense, and LoF+Missense+Synonymous and 3 
 array=("1" "2" "3" "6" "7" "11" "12" "16" "17" "19")
 
 for chr in {1..22};
-  do
+do
     if [[ " ${array[*]} " =~ " ${chr} " ]]; then
       echo "${chr}"
       echo "chr is large"
@@ -254,9 +261,9 @@ for chr in {1..22};
         -istage-common.varianceRatioFile=saige:/SAIGE_GENE/step1_output/${outputPrefix}.varianceRatio.txt \
         -istage-common.spGRMfile=saige:/SAIGE_GENE/spGRM/${sparseGRM_file} \
         -istage-common.spGRMSamplefile=saige:/SAIGE_GENE/spGRM/${sparseGRM_sample_file} \
-        -istage-common.bed=saige:/Bulk/Exome\ sequences/Population\ level\ exome\ OQFE\ variants,\ PLINK\ format\ -\ interim\ 450k\ release/ukb_c${chr}_b0_v1.bed \
-        -istage-common.bim=saige:/Bulk/Exome\ sequences/Population\ level\ exome\ OQFE\ variants,\ PLINK\ format\ -\ interim\ 450k\ release/ukb_c${chr}_b0_v1.bim \
-        -istage-common.fam=saige:/Bulk/Exome\ sequences/Population\ level\ exome\ OQFE\ variants,\ PLINK\ format\ -\ interim\ 450k\ release/ukb_c${chr}_b0_v1.fam \
+        -istage-common.bed=saige:/Bulk/Exome\ sequences/ukb_c${chr}_b0_v1.bed \
+        -istage-common.bim=saige:/Bulk/Exome\ sequences/ukb_c${chr}_b0_v1.bim \
+        -istage-common.fam=saige:/Bulk/Exome\ sequences/ukb_c${chr}_b0_v1.fam \
         -istage-common.grpfile=saige:/SAIGE_GENE/group_files/${group}_chr${chr}.txt \
         -istage-common.chrom=${chr} \
         -istage-common.annotation_in_groupTest=lof,missense:lof,missense:lof:synonymous \
@@ -268,7 +275,7 @@ for chr in {1..22};
         --yes \
         --instance-type=${instance_type}
 
-   done
+done
 
 ```
 ### Output files
@@ -277,7 +284,7 @@ for chr in {1..22};
 - Index file: `${outputPrefix}_${pheno}_${chr}.txt.index`
 - Job summary file (showing time and memory usage for the job): `${outputPrefix}_${pheno}_${chr}.txt.runinfo.txt`
 
-## Benchmark on the cost for jobs on Dnanexus
+## Benchmark on the cost for jobs on DNAnexus
 
 - 2 quantitative traits: LDL, bone marrow density
 - 2 binary traits: T2D and Glaucoma(for Glaucoma, sample relatedness cutoff 0.125 was used)
