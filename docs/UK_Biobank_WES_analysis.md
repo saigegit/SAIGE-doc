@@ -13,12 +13,12 @@ This documentation describes how to perform the exome-wide association tests wit
 
 <!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
 
-[Prerequisites](#prerequisites)
-[Save SAIGE image to DNAnexus](#save-saige-image-to-dnanexus)
-[Step 0: constructing a sparse GRM using the LD pruned hard-called genotypes.](#step-0-constructing-a-sparse-grm-using-the-ld-pruned-hard-called-genotypes)
-[Step 1: fitting the null linear/logistic mixed model using the sparse GRM and estimating variance ratios](#step-1-fitting-the-null-linearlogistic-mixed-model-using-the-sparse-grm-and-estimating-variance-ratios)
-[Step 2: Performing exome-wide gene-based tests](#step-2-performing-exome-wide-gene-based-tests)
-[Benchmark on the cost for jobs on DNAnexus](#benchmark-on-the-cost-for-jobs-on-dnanexus)
+- [Prerequisites](#prerequisites)
+- [Save SAIGE image to DNAnexus](#save-saige-image-to-dnanexus)
+- [Step 0: constructing a sparse GRM using the LD pruned hard-called genotypes.](#step-0-constructing-a-sparse-grm-using-the-ld-pruned-hard-called-genotypes)
+- [Step 1: fitting the null linear/logistic mixed model using the sparse GRM and estimating variance ratios](#step-1-fitting-the-null-linearlogistic-mixed-model-using-the-sparse-grm-and-estimating-variance-ratios)
+- [Step 2: Performing exome-wide gene-based tests](#step-2-performing-exome-wide-gene-based-tests)
+- [Benchmark on the cost for jobs on DNAnexus](#benchmark-on-the-cost-for-jobs-on-dnanexus)
 
 <!-- /TOC -->
 
