@@ -222,13 +222,13 @@ java -jar dxCompiler-2.10.1.jar compile saigegene_step2.wdl -project ${project i
 
 ### Prepare input files
 
-- sparse GRM files from Step 0 and used in Step 1  (`sparseGRM_file` and `sparseGRM_sample_file`)
-- model file output by Step 1: `${outputPrefix}.rda`
-- variance ratio file output by Step 1: `${outputPrefix}.varianceRatio.txt`
-- Genotype files containing the WES data on DNAnexus in the plink format (`.bed`/`.bim`/`.fam`)
-- Group file containing marker lists and annotations for genes. See [here]() for the format
- - You may download pre-prepared group files by chromosome from [here](https://drive.google.com/file/d/1WvmVXV1NWhS3AbiwEX38yf_9MY9L047h/view?usp=sharing). This file contains loss of function (LoF), missense, and synonymous markers.
- - You may prepare the group files with more other annotations from the [ANNOVAR](https://annovar.openbioinformatics.org/en/latest/) annotated files from [here](https://drive.google.com/file/d/19RSoVc72k_baDzfZF2Db8LOLiZ3mNiYn/view?usp=sharing) by modifying [this script](https://github.com/saigegit/UKBB-WES/blob/main/make-group-file_use_annovar_output.R)
+* sparse GRM files from Step 0 and used in Step 1  (`sparseGRM_file` and `sparseGRM_sample_file`)
+* model file output by Step 1: `${outputPrefix}.rda`
+* variance ratio file output by Step 1: `${outputPrefix}.varianceRatio.txt`
+* Genotype files containing the WES data on DNAnexus in the plink format (`.bed`/`.bim`/`.fam`)
+* Group file containing marker lists and annotations for genes. See [here]() for the format
+    * You may download pre-prepared group files by chromosome from [here](https://drive.google.com/file/d/1WvmVXV1NWhS3AbiwEX38yf_9MY9L047h/view?usp=sharing). This file contains loss of function (LoF), missense, and synonymous markers.
+    * You may prepare the group files with more other annotations from the [ANNOVAR](https://annovar.openbioinformatics.org/en/latest/) annotated files from [here](https://drive.google.com/file/d/19RSoVc72k_baDzfZF2Db8LOLiZ3mNiYn/view?usp=sharing) by modifying [this script](https://github.com/saigegit/UKBB-WES/blob/main/make-group-file_use_annovar_output.R)
 
 
 ### Run the Step 2 jobs for a phenotype
