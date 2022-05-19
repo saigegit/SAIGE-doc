@@ -42,13 +42,9 @@ dx upload saige_1.0.9.tar.gz
 
 - You need to first conduct LD pruning for the hard-called genotypes in the plink file (`.bed`/`.bim`/`.fam`).
 
-- By default, markers with MAF >= 1% and missing rate <= 0.15 in the specified PLINK file are used to construct the sparse GRM
-
-- Benchmark:  with 241,660 markers and 459,797 European samples in the LD pruned PLINK file, the script below takes 7hr:40min with 72 CPUs and 35 Gb of memory to finish.  
-
 ### Preparing input files
 
- - Perform LD pruning on markers with MAF >= 1% using the PLINK file for GRM construction using the hard called genotypes
+ - Perform LD pruning using PLINK2 with the parameters *--indep-pairwise 50 5 0.05* using the PLINK file for GRM construction using the hard called genotypes
 
 
 ### Run the script
@@ -60,6 +56,9 @@ Rscript createSparseGRM.R       \
     --numRandomMarkerforSparseKin=5000      \
     --relatednessCutoff=0.05
 ```
+
+- Benchmark:  with 241,660 markers and 459,797 European samples in the LD pruned PLINK file, the script below takes 7hr:40min with 72 CPUs and 35 Gb of memory to finish.  
+
 
 ### Output
   1. file containing the sparse GRM. It can be read using the *readMM* function in the *Matrix* package in R
