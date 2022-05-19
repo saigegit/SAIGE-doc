@@ -62,12 +62,12 @@ Rscript createSparseGRM.R       \
 ```
 
 ### Output
-1. file containing the sparse GRM. It can be read using the *readMM* function in the *Matrix* package in R
+  1. file containing the sparse GRM. It can be read using the *readMM* function in the *Matrix* package in R
 
- `${OUTNAME}_relatednessCutoff_0.05_5000_randomMarkersUsed.sparseGRM.mtx`
+      `${OUTNAME}_relatednessCutoff_0.05_5000_randomMarkersUsed.sparseGRM.mtx`
 
-2. file containing sample IDs in the sparse GRM.
- `${OUTNAME}_relatednessCutoff_0.05_5000_randomMarkersUsed.sparseGRM.mtx.sampleIDs.txt`
+  2. file containing sample IDs in the sparse GRM.
+      `${OUTNAME}_relatednessCutoff_0.05_5000_randomMarkersUsed.sparseGRM.mtx.sampleIDs.txt`
 
 
 ## Step 1: fitting the null linear/logistic mixed model using the sparse GRM and estimating variance ratios
@@ -289,12 +289,12 @@ done
 - 2 quantitative traits: LDL, bone marrow density
 - 2 binary traits: T2D and Glaucoma(for Glaucoma, sample relatedness cutoff 0.125 was used)
 
-1. Step 1: Fit the model with a sparse GRM with sample relatedness cutoff 0.05
- - instance used: mem1_ssd1_v2_x4
- - Jobs were all finished within 10 mins and costed < £0.003
+* Step 1: Fit the model with a sparse GRM with sample relatedness cutoff 0.05
+    - instance used: mem1_ssd1_v2_x4
+    - Jobs were all finished within 10 mins and costed < £0.003
 
-2. Step 2:
- - LDL, N = 375670, cost £3.03
- - bone marrow density, N = 125298, cost £1.27
- - T2D, 21279 cases and 371629 controls, cost  £3.18
- - Glaucoma: 6244 cases and 407632 controls, cost  £3.01
+* Step 2:
+    - LDL, N = 375670, cost £3.03
+    - bone marrow density, N = 125298, cost £1.27
+    - T2D, 21279 cases and 371629 controls, cost  £3.18
+    - Glaucoma: 6244 cases and 407632 controls, cost  £3.01
