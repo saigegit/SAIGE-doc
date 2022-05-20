@@ -46,8 +46,6 @@ dx upload saige_1.0.9.tar.gz
 
 ## Step 0: constructing a sparse GRM using the LD pruned hard-called genotypes.
 
-- This step can be done locally instead of on DNAnexus because it only needs the hard called genotypes.
-
 - Once the sparse GRM is constructed, it can be used for all phenotypes
 
 - You need to first conduct LD pruning for the hard-called genotypes in the plink file (`.bed`/`.bim`/`.fam`).
