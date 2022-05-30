@@ -111,8 +111,8 @@ java -jar dxCompiler-2.10.1.jar compile saige_null_sGRM_vr_withinfo.wdl -project
 plink2 --bfile ${PLINK_file_hard_called} --freq count --out ${OUTPUT_prefix_counts}
 
 #2 randomly extract IDs for markers falling in the two MAC categories
-cat <(tail -n +2 ${OUTPUT_prefix_counts}.acount | awk '((2*$6-$5) < 20 && (2*$6-$5) >= 10) || ($5 < 20 && $5 >= 10) {print $2}' | shuf -n 1000) \
-<(tail -n +2 ${OUTPUT_prefix_counts}.acount | awk ' $5 >= 20 && (2*$6-$5)>= 20 {print $2}' | shuf -n 1000) > ${OUTPUT_prefix_counts}.markerid.list
+cat <(tail -n +2 ${OUTPUT_prefix_counts}.acount | awk '(($6-$5) < 20 && ($6-$5) >= 10) || ($5 < 20 && $5 >= 10) {print $2}' | shuf -n 1000) \
+<(tail -n +2 ${OUTPUT_prefix_counts}.acount | awk ' $5 >= 20 && ($6-$5)>= 20 {print $2}' | shuf -n 1000) > ${OUTPUT_prefix_counts}.markerid.list
 
 
 #3. extract markers from the large plink file
