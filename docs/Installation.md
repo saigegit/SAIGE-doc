@@ -10,7 +10,7 @@ has_toc: false
 How to install and run SAIGE and SAIGE-GENE
 
 
-## Install SAIGE/SAIGE-GENE (current version 1.0.9 (updated on May 17 2022))
+## Install SAIGE/SAIGE-GENE (current version 1.1.2 (updated on June 23 2022))
 
 ### List of dependencies:
 
@@ -23,6 +23,21 @@ How to install and run SAIGE and SAIGE-GENE
 -  [cget](https://cget.readthedocs.io/en/latest/src/intro.html#installing-cget), [savvy](https://github.com/statgen/savvy)
 
 ### Logs:
+
+
+## v1.1.2 (June 23, 2022)
+Improvements:
+
+Rewritten codes to obtain sample subset who are in the sparse GRM, plink file and phenotype file. 
+
+Support the sparse matrix with 1s
+
+## v1.1.1 (June 8, 2022)
+
+Bugs fixed:
+
+fixed the redudant output for single-variant conditional analysis for quantitative traits.
+
 
 ## v1.0.9 (May 17, 2022)
 
