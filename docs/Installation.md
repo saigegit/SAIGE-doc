@@ -10,7 +10,7 @@ has_toc: false
 How to install and run SAIGE and SAIGE-GENE
 
 
-## Install SAIGE/SAIGE-GENE (current version 1.1.2 (updated on June 23 2022))
+## Install SAIGE/SAIGE-GENE (current version 1.1.3 (updated on July 9 2022))
 
 ### List of dependencies:
 
