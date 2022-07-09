@@ -25,6 +25,21 @@ How to install and run SAIGE and SAIGE-GENE
 ### Logs:
 
 
+## v1.1.3 (July 9, 2022)
+
+Bugs fixed:
+
+Fixed the bug for computating imputation scores in bgen files. 
+
+Improvements:
+
+Added an option --isLowMemLOCO=TRUE to output the null model results by chromosome in different files in Step 1 when LOCO=TRUE. This can reduce memory usage in Step 1 and later in Step 2 when LOCO is TRUE. 
+
+Implemented the efficient resampling in C++ and added an option --max_MAC_for_ER to specify the maximum MAC to conduct ER. p-values of genetic variants with MAC <= max_MAC_for_ER will be calculated via efficient resampling. The default value is 4. 
+
+Implemented functions to output "LD matrices" for variant sets. This feature is under evaluation and will be used for set-based meta-analyses.  
+
+
 ## v1.1.2 (June 23, 2022)
 Improvements:
 
