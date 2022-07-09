@@ -15,7 +15,7 @@ parent: Single-variant test
 * * both variant IDs (chr:pos:ref:alt) and range of chromosome positions (chr start end) can be specified for BGEN input (--idstoIncludeFile, --rangestoIncludeFile)
 * --markers_per_chunk can be used to specify the number of markers to test and output as one chunk. default=10000. Note that a small number may slow down the job. It is required that this number is >= 1000.  
 * If LOCO=TRUE (by default), --chrom MUST be specified, so genotype/dosage file should only contain one chromosome 
-* For VCF/BCF/SAV input, --vcfField=DS to test dosages and  --vcfField=GT to test genotypes
+* For VCF/BCF/SAV input, --vcfField=DS to test dosages and  --vcfField=GT to test genotypes. Use --vcfFile to specify VCF, BCF or SAV files. For VCF and BCF input, a .csi index file is required in the same directory. For SAV input, a .s1r index file created with savvy is required in the same directory. Index files need to have the same name as the VCF, BCF, or SAV files with suffix: csi or s1r. Note: --vcfFileIndex is used to specify the index file. This option will be removed in the next version (v1.1.4). 
 * By default, missing genotypes/dosages will be imputed as the best guessed gentoypes/dosages (as round(2*freq) with --impute_method=best_guess). Note that currently dropping samples with missing genotypes/dosages is not supported
 * --sampleFile is used specify a file with sample IDs for bgen file. 
 
