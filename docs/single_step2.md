@@ -12,7 +12,8 @@ parent: Single-variant test
 * File formats for dosages/genotypes of genetic variants to be tested can be used: PLINK, VCF, [BGEN](https://bitbucket.org/gavinband/bgen/overview), [SAV](https://github.com/statgen/savvy)
 * Conditional analysis based summary stats can be performed (--condition) can be performed in Step 2 
 * To query and test a subset of markers 
-* * both variant IDs (chr:pos:ref:alt) and range of chromosome positions (chr start end) can be specified for BGEN input (--idstoIncludeFile, --rangestoIncludeFile)
+* * both variant IDs (chr:pos:ref:alt) and range of chromosome positions (chr start end) (--idstoIncludeFile=./input/includeID.list_1, --rangestoIncludeFile=./input/includerange.txt)
+* * for VCF and SAV input, when query with chromosome range,  only one range of chromosome positions can be specified (--rangestoIncludeFile=./input/includerange_oneline.txt)
 * --markers_per_chunk can be used to specify the number of markers to test and output as one chunk. default=10000. Note that a small number may slow down the job. It is required that this number is >= 1000.  
 * If LOCO=TRUE (by default), --chrom MUST be specified, so genotype/dosage file should only contain one chromosome 
 * For VCF/BCF/SAV input, --vcfField=DS to test dosages and  --vcfField=GT to test genotypes. Use --vcfFile to specify VCF, BCF or SAV files. For VCF and BCF input, a .csi index file is required in the same directory. For SAV input, a .s1r index file created with savvy is required in the same directory. Index files need to have the same name as the VCF, BCF, or SAV files with suffix: csi or s1r. Note: --vcfFileIndex is used to specify the index file. This option will be removed in the next version (v1.1.4). 
