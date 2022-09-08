@@ -10,7 +10,7 @@ has_toc: false
 How to install and run SAIGE and SAIGE-GENE
 
 
-## Install SAIGE/SAIGE-GENE (current version 1.1.3 (updated on July 9 2022))
+## Install SAIGE/SAIGE-GENE (current version 1.1.6 (updated on Sep 7 2022))
 
 ### List of dependencies:
 
@@ -23,6 +23,49 @@ How to install and run SAIGE and SAIGE-GENE
 -  [cget](https://cget.readthedocs.io/en/latest/src/intro.html#installing-cget), [savvy](https://github.com/statgen/savvy)
 
 ### Logs:
+
+## v1.1.6 (Updated on Sep 7)
+
+Bugs fixed:
+
+Fixed the issue when SPA does not converge, Is.SPA is output as TRUE
+
+Improvements:
+
+Updated savvy version to v2.1.0
+
+Back calculated se when Firth approx is applied to estimate beta
+
+Added error check when stat is out of range for the double numbers
+
+
+## v1.1.5 (Updated on Aug 17)
+
+Bugs fixed: 
+
+Fixed the sav input option
+
+Improvements: 
+
+Fixed typo
+
+Formatted p-values in single-variant assoc test output so very small p-values will not be 0
+
+Added an option --subSampleFile to allow for using a subset of samples of those in Step 1 for Step 2
+
+## v1.1.4 (Updated on Aug 4, 2022)
+
+Bugs fixed:
+
+Fixed the bug for computing imputation info score with bgen file
+
+Improvements: 
+
+ER is applied only when StdStat is greater than m_SPA_Cutoff
+
+Improve the output with isLowMemLOCO=TRUE in Step 1
+
+Use pinv for pseudo-inverse / generalised inverse when conditioning markers are in high LD
 
 
 ## v1.1.3 (Updated on July 9, 2022)
