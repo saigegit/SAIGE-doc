@@ -303,14 +303,14 @@ __*WARNING*__
         * The second column has var (indicating the line is for marker IDs), anno (indicating the line is for annotations), and weight (indicating the line is for weights of markers used in the set-based tests)    
         * If weights are not included in the group file, the weights will be calcuated as **beta(MAF, 1, 25)** by default
 
-    * group file without weights
+* group file without weights
 
     ```
     less -S ./input/group_new_chrposa1a2.txt
     ``` 
     <img src="{{site.baseurl | prepend: site.url}}/assets/img/groupfilewithnoWeights.png" width="600">
 
-    * group file with weights 
+* group file with weights 
 
     ```
     less -S ./input/group_new_chrposa1a2_withWeights.txt
