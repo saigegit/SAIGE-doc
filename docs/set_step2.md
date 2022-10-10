@@ -308,7 +308,7 @@ __*WARNING*__
     ```
     less -S ./input/group_new_chrposa1a2.txt
     ``` 
-    <img src="{{site.baseurl | prepend: site.url}}/assets/img/groupfilewoWeights.png" width="600">
+    <img src="{{site.baseurl | prepend: site.url}}/assets/img/groupfilewithnoWeights.png" width="600">
 
     * group file with weights 
 
@@ -317,7 +317,6 @@ __*WARNING*__
     ```
 
     <img src="{{site.baseurl | prepend: site.url}}/assets/img/groupfilewithWeights.png" width="600">
-
 
 ## Output files
 
