@@ -294,9 +294,9 @@ __*WARNING*__
 
 ## Input files
 
-    * Please Refer to the SAIGE (Single-variant test) Step 2 input files for details. In addition, there are additonal input files required for the set-based tests
+* Please Refer to the SAIGE (Single-variant test) Step 2 input files for details. In addition, there are additonal input files required for the set-based tests
   
-1.  **(Required. Specific for set-based tests)** Group file containing marker IDs, annotations, and/or weights for each set (gene or region). 
+* (Required. Specific for set-based tests)** Group file containing marker IDs, annotations, and/or weights for each set (gene or region). 
         * The first column contains the set name.
         * Group file has 2 or 3 lines for each set. 
         * marker IDs and annotations are required and weights are optional. 
@@ -317,7 +317,9 @@ __*WARNING*__
     less -S ./input/group_new_chrposa1a2_withWeights.txt
     ```
 
-    <img src="{{site.baseurl | prepend: site.url}}/assets/img/groupfilewithWeights.png" width="600">
+<img src="{{site.baseurl | prepend: site.url}}/assets/img/groupfilewithWeights.png" width="600">
+
+
 
 ## Output files
 
