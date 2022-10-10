@@ -308,7 +308,8 @@ __*WARNING*__
     ```
     less -S ./input/group_new_chrposa1a2.txt
     ``` 
-    <img src="{{site.baseurl | prepend: site.url}}/assets/img/groupfilewithnoWeights.png" width="600">
+    
+<img src="{{site.baseurl | prepend: site.url}}/assets/img/groupfilewithnoWeights.png" width="600">
 
 * group file with weights 
 
@@ -325,7 +326,8 @@ __*WARNING*__
     ```
     head -n 1  ./output/genotype_100markers_bgen_groupTest_out_cond.txt
     ```
-    <img src="{{site.baseurl | prepend: site.url}}/assets/img/SAIGE-GENE-step2-output-header.png" width="700">
+
+<img src="{{site.baseurl | prepend: site.url}}/assets/img/SAIGE-GENE-step2-output-header.png" width="700">
 
 
 ```
