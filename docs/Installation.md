@@ -24,6 +24,41 @@ How to install and run SAIGE and SAIGE-GENE
 
 ### Logs:
 
+## v1.1.6.3 (Updated on Nov 24)
+
+Bugs fixed:
+
+Fixed the LD mat info output to not include monomorphic markers
+
+Corrected the help message for --maxMAF_in_groupTest
+
+## v1.1.6.2 (Updated on Oct 12)
+
+Bugs fixed:
+
+Fixed Step 2 crash if a region is empty
+
+Improvements:
+
+Simplify output message logic to prevent crash
+
+Fixed indentation / formatting
+
+Makes it much clearer which lines are within if/else blocks
+
+
+## v1.1.6.1 (Updated on Sept 8)
+
+Bugs fixed:
+
+Fixed the error when variance value is close to 0 in conditional analysis
+
+Improvements:
+
+Pass p-values as strings instead of double values from C++ to R
+
+Clean and fix add_logp
+
 ## v1.1.6 (Updated on Sep 7)
 
 Bugs fixed:
