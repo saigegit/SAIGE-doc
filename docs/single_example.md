@@ -148,14 +148,14 @@ Rscript step1_fitNULLGLMM.R     \
 
 Rscript step2_SPAtests.R        \
         --vcfFile=./input/nfam_1000_MAF0.2_nMarker1_nseed200.vcf.gz \
-        --vcfFileIndex=./input/nfam_1000_MAF0.2_nMarker1_nseed200.vcf.gz.tbi \
+        --vcfFileIndex=./input/nfam_1000_MAF0.2_nMarker1_nseed200.vcf.gz.csi \
         --vcfField=GT \
         --chrom=1 \
         --minMAF=0.0001 \
         --minMAC=1 \
         --GMMATmodelFile=./output/example_binary_positive_signal.rda \
         --varianceRatioFile=./output/example_binary_positive_signal.varianceRatio.txt \
-        --SAIGEOutputFile=./output/example_binary_positive_signal.assoc.step2.txt	\
+        --SAIGEOutputFile=./output/example_binary_positive_signal.assoc.step2.txt \
 	--is_Firth_beta=TRUE    \
         --pCutoffforFirth=0.05  \
         --LOCO=TRUE

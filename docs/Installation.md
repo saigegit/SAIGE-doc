@@ -10,7 +10,7 @@ has_toc: false
 How to install and run SAIGE and SAIGE-GENE
 
 
-## Install SAIGE/SAIGE-GENE (current version 1.1.6 (updated on Sep 7 2022))
+## Install SAIGE/SAIGE-GENE (current version 1.1.9 (updated on May 11 2023))
 
 ### List of dependencies:
 
@@ -24,7 +24,30 @@ How to install and run SAIGE and SAIGE-GENE
 
 ### Logs:
 
-## v1.1.6.3 (Updated on Nov 24)
+
+## v1.1.9 (Updated on May 11, 2023)
+
+Bugs fixed:
+
+Fixed the error: Crash in step 2 with: mean(): object has no elements
+TImputed ultra rare variants become monomorphic because any dosages <= dosage_zero
+d_cutoff for genetic variants with MAC <= dosage_zerod_MAC_cutoff are set to be 0
+
+
+## v1.1.8 (Updated on Apr 24, 2023)
+
+use SPA_fast only when sparse GRM is not used
+
+
+## v1.1.7 (Updated on Mar 23, 2023)
+
+Bugs fixed:
+
+Fixed the issue when MAC in a gene or a set is 10
+Corrected the help message for --maxMAF_in_groupTest
+Replace SPAtest:::Saddle_Prob with SPA_pval
+
+## v1.1.6.3 (Updated on Nov 24, 2022)
 
 Bugs fixed:
 
@@ -32,7 +55,7 @@ Fixed the LD mat info output to not include monomorphic markers
 
 Corrected the help message for --maxMAF_in_groupTest
 
-## v1.1.6.2 (Updated on Oct 12)
+## v1.1.6.2 (Updated on Oct 12, 2022)
 
 Bugs fixed:
 
