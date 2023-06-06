@@ -27,11 +27,18 @@ How to install and run SAIGE and SAIGE-GENE
 
 ## v1.1.9 (Updated on May 11, 2023)
 
+
+Merge pull request #90 from belowlab/vectors-for-safer-memory
+
+Update ComputeExact to use vectors rather than raw memory where easy
+
 Bugs fixed:
 
 Fixed the error: Crash in step 2 with: mean(): object has no elements
 TImputed ultra rare variants become monomorphic because any dosages <= dosage_zero
 d_cutoff for genetic variants with MAC <= dosage_zerod_MAC_cutoff are set to be 0
+
+
 
 
 ## v1.1.8 (Updated on Apr 24, 2023)
