@@ -19,7 +19,7 @@ parent: Single-variant test
 * For VCF/BCF/SAV input, --vcfField=DS to test dosages and  --vcfField=GT to test genotypes. Use --vcfFile to specify VCF, BCF or SAV files. For VCF and BCF input, a .csi index file is required in the same directory. For SAV input, a .s1r index file created with savvy is required in the same directory. Index files need to have the same name as the VCF, BCF, or SAV files with suffix: csi or s1r. Note: --vcfFileIndex is used to specify the index file. This option will be removed in the next version (v1.1.4). 
 * By default, missing genotypes/dosages will be imputed as the best guessed gentoypes/dosages (as round(2*freq) with --impute_method=best_guess). Note that currently dropping samples with missing genotypes/dosages is not supported
 * --sampleFile is used specify a file with sample IDs for bgen file. 
-
+* When --sparseGRMFile and --sparseGRMSampleIDFile are specified in Step 2, Please use version >= 1.1.8 for association tests
 
 ```
 #check the help info for step 2
@@ -53,10 +53,10 @@ Rscript step2_SPAtests.R        \
         --LOCO=TRUE
 ```
 
+
 ### Sparse GRM was used for fitting the model in Step 1. Variance ratio is estimated
 * For Step 1 generated with version < 1.0.6, DO NOT specify --sparseGRMFile and --sparseGRMSampleIDFile
 * For Step 1 generated with version >= 1.0.6. Please specify --sparseGRMFile and --sparseGRMSampleIDFile. Specify --is_fastTest=TRUE for fast run
-
 
 ```
 Rscript step2_SPAtests.R        \
