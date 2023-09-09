@@ -25,8 +25,31 @@ How to install and run SAIGE and SAIGE-GENE
 ### Logs:
 
 
-## v1.1.9 (Updated on May 11, 2023)
+## v1.3.0 (Updated on Sept 09, 2023)
 
+Bug fixed: 
+
+fix the bug that causes overestimation of SE for markers when SPA is applied. This bug was introduced since v1.1.6 when the function R::qnorm is used due to the logp argument. 
+
+To correct the SE estimation without re-run the association tests with v1.3.0, please use the following R to re-estimate the SE for markers with SPA applied
+
+```
+SE = abs(BETA/qnorm(p.value/2))
+```
+
+## v1.2.0 (Updated on Jun 12, 2023)
+
+Merge pull request #90 from belowlab/vectors-for-safer-memory
+
+Update ComputeExact to use vectors rather than raw memory where easy
+
+When PLINK files are used as input, marker IDs in the group file must match the ID column in PLINK files
+
+Bug fixed: 
+
+fix the bug that rewrite the list of marker IDs when the first chunk is empty
+
+## v1.1.9 (Updated on May 11, 2023)
 
 Merge pull request #90 from belowlab/vectors-for-safer-memory
 
