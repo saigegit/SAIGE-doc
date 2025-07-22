@@ -38,7 +38,7 @@ curl -L https://github.com/chrchang/plink-ng/archive/refs/tags/v2.0.0-a.6.16.tar
 3. Install the SAIGE package
 
 ```
-pixi run  --manifest-path=./SAIGE/pixi.toml  R CMD INSTALL SAIGE --library=<path_to_final_SAIGE_library>
+pixi run  --manifest-path=./SAIGE/pixi.toml  R CMD INSTALL SAIGE --library=path_to_final_SAIGE_library
 
 ```
 
