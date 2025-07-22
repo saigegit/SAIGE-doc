@@ -8,7 +8,7 @@ parent: Installation
 
 ###  Install SAIGE using pixi 
 
-Note: These steps can be found in the [Dockerfile](https://github.com/saigegit/SAIGE/docker/Dockerfile).  
+Note: These steps can be found in the [Dockerfile](https://github.com/saigegit/SAIGE/blob/main/docker/Dockerfile).  
 
 0. Download the SAIGE package from github
 
