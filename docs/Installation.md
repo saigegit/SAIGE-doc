@@ -12,6 +12,9 @@ How to install and run SAIGE and SAIGE-GENE
 
 ## Install SAIGE/SAIGE-GENE (current version 1.5.0 (updated on July 21 2025))
 
+### Please [use pixi to install the package](https://saigegit.github.io/SAIGE-doc/docs/Installation_pixi.html)
+
+
 ### List of dependencies:
 
 * R >= 3.6.1, gcc >= 5.4.0, cmake 3.14.1, [cget](https://cget.readthedocs.io/en/latest/src/intro.html#installing-cget), [savvy](https://github.com/statgen/savvy)

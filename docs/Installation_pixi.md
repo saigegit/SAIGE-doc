@@ -1,7 +1,7 @@
 ---
 layout: default
 title: pixi
-nav_order: 2
+nav_order: 1
 description: "Just the Docs is a responsive Jekyll theme with built-in search that is easily customizable and hosted on GitHub Pages."
 parent: Installation
 ---
@@ -36,11 +36,14 @@ curl -L https://github.com/chrchang/plink-ng/archive/refs/tags/v2.0.0-a.6.16.tar
 ```
 
 3. Install the SAIGE package
+
 ```
 pixi run  --manifest-path=./SAIGE/pixi.toml  R CMD INSTALL SAIGE --library=<path_to_final_SAIGE_library>
 
 ```
+
 When call SAIGE in R, set lib.loc=path_to_final_SAIGE_library
+
 
 ```
     library(SAIGE, lib.loc=path_to_final_SAIGE_library)
