@@ -10,7 +10,7 @@ has_toc: false
 How to install and run SAIGE and SAIGE-GENE
 
 
-## Install SAIGE/SAIGE-GENE (current version 1.1.9 (updated on May 11 2023))
+## Install SAIGE/SAIGE-GENE (current version 1.5.0 (updated on July 21 2025))
 
 ### List of dependencies:
 
@@ -23,6 +23,11 @@ How to install and run SAIGE and SAIGE-GENE
 -  [cget](https://cget.readthedocs.io/en/latest/src/intro.html#installing-cget), [savvy](https://github.com/statgen/savvy)
 
 ### Logs:
+
+## v1.5.0 (Updated on July 21, 2025) 
+
+Updates: 
+Pgen is supported
 
 
 ## v1.3.0 (Updated on Sept 09, 2023)
@@ -60,8 +65,6 @@ Bugs fixed:
 Fixed the error: Crash in step 2 with: mean(): object has no elements
 TImputed ultra rare variants become monomorphic because any dosages <= dosage_zero
 d_cutoff for genetic variants with MAC <= dosage_zerod_MAC_cutoff are set to be 0
-
-
 
 
 ## v1.1.8 (Updated on Apr 24, 2023)
