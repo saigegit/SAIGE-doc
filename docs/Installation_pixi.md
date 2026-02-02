@@ -8,7 +8,7 @@ parent: Installation
 
 ###  Install SAIGE using pixi 
 
-Note: These steps can be found in the [Dockerfile](https://github.com/saigegit/SAIGE/blob/main/docker/Dockerfile).  
+Note: These steps are similar to what is used by [Dockerfile](https://github.com/saigegit/SAIGE/blob/main/docker/Dockerfile).
 
 0. Download the SAIGE package from github
 
@@ -22,29 +22,37 @@ git clone -b $src_branch $repo_src_url
 1. Install pixi and the R package lintools
 ```
 curl -fsSL https://pixi.sh/install.sh | sh && \
-    mv /root/.pixi/bin/pixi /bin && pixi install && \
-    rm -rf /root/.cache && \
+    . ~/.$(basename $SHELL)rc && \
+    cd SAIGE && \
+    pixi install && \
+    rm -rf ~/.cache && \
     pixi run Rscript -e 'install.packages("lintools", repos="https://cloud.r-project.org")'
 ```
 
-2. Download plink source code for reading pgen files in Step 2 association tests
+2. Download and compile plink for reading pgen files in Step 2 association tests
 ```
 curl -L https://github.com/chrchang/plink-ng/archive/refs/tags/v2.0.0-a.6.16.tar.gz | tar -zx && \
     mv plink-ng-2.0.0-a.6.16 plink-ng && \
-    pixi run x86_64-conda-linux-gnu-cc -std=c++14 -fPIC -O3 -I.pixi/envs/default/include -L.pixi/envs/default/lib -o plink2_includes.a plink-ng/2.0/include/*.cc -shared -lz -lzstd -lpthread -lm -ldeflate && \
-    mv plink2_includes.a .pixi/envs/default/lib
+    pixi run x86_64-conda-linux-gnu-cc -std=c++14 -fPIC -O3 -I.pixi/envs/default/include -L.pixi/envs/default/lib -o libplink2_includes.a plink-ng/2.0/include/*.cc -shared -lz -lzstd -lpthread -lm -ldeflate && \
+    mv libplink2_includes.a .pixi/envs/default/lib
+```
+On osx-arm64 hardware, the clang compiler is used and the previous step is slightly different:
+```
+curl -L https://github.com/chrchang/plink-ng/archive/refs/tags/v2.0.0-a.6.16.tar.gz | tar -zx && \
+    mv plink-ng-2.0.0-a.6.16 plink-ng && \
+    pixi run cc -shared -std=c++14 -fPIC -O3 -I.pixi/envs/default/include -L.pixi/envs/default/lib -o libplink2_includes.so plink-ng/2.0/include/*.cc -lz -lzstd -lpthread -lm -ldeflate -lc++ && \
+    mv libplink2_includes.so .pixi/envs/default/lib
 ```
 
 3. Install the SAIGE package
 
 ```
-pixi run  --manifest-path=./SAIGE/pixi.toml  R CMD INSTALL SAIGE --library=path_to_final_SAIGE_library
-
+pixi run R CMD INSTALL .
 ```
 
-When call SAIGE in R, set lib.loc=path_to_final_SAIGE_library
+SAIGE can now be used in the pixi environment (`pixi run R`):
 
 
 ```
-    library(SAIGE, lib.loc=path_to_final_SAIGE_library)
+    library(SAIGE)
 ```
